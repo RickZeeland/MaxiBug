@@ -6,19 +6,19 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// Contains the main <see cref="SoftwareProject"/> with issues and tasks shared between forms.
     /// </summary>
     static class Program
     {
-        public static string myName = "MiniBug v2 Issue Tracker";
+        public static string myName = "MaxiBug beta Issue Tracker";
 
         /// <summary>
         /// Postgres database name in lower case.
         /// </summary>
-        public static string databaseName = "minibug1";
+        public static string databaseName = "maxibug1";
 
         /// <summary>
         /// A software project that this application will work with, contains issues and tasks.

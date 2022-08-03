@@ -1,7 +1,7 @@
 ﻿// Copyright(c) João Martiniano. All rights reserved.
 // Licensed under the MIT license.
 
-namespace MiniBug
+namespace MaxiBug
 {
     public class ComboBoxItem
     {

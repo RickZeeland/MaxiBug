@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EF183892-A316-466B-B997-2BA7FAD4DB45}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MiniBug</RootNamespace>
-    <AssemblyName>MiniBug</AssemblyName>
+    <RootNamespace>MaxiBug</RootNamespace>
+    <AssemblyName>MaxiBug</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -64,7 +64,8 @@
     <ApplicationIcon>Resources\Minibug.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>MiniBug.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>852D857E27DDEA62D68AC324F7FAE8C071C7E390</ManifestCertificateThumbprint>

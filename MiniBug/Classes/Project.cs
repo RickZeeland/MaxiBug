@@ -7,7 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 using CsvHelper;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// Stores the issues and tasks of a software project in memory.

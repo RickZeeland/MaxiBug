@@ -4,7 +4,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// Create a new project, or edit existing project settings.
@@ -14,7 +14,7 @@ namespace MiniBug
         /// <summary>
         /// Gets the current operation.
         /// </summary>
-        public MiniBug.OperationType Operation { get; private set; } = OperationType.None;
+        public MaxiBug.OperationType Operation { get; private set; } = OperationType.None;
 
         /// <summary>
         /// Gets the name of the project.

@@ -3,7 +3,6 @@
 // Create single exe with Fody.Costura https://github.com/Fody/Costura
 // Licensed under the MIT license.
 
-using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,7 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class MainForm : Form
     {
@@ -1237,13 +1236,13 @@ namespace MiniBug
             switch (priority)
             {
                 case IssuePriority.High:
-                    return MiniBug.Properties.Resources.Priority_High;
+                    return MaxiBug.Properties.Resources.Priority_High;
 
                 case IssuePriority.Urgent:
-                    return MiniBug.Properties.Resources.Priority_Urgent;
+                    return MaxiBug.Properties.Resources.Priority_Urgent;
 
                 case IssuePriority.Immediate:
-                    return MiniBug.Properties.Resources.Priority_Immediate;
+                    return MaxiBug.Properties.Resources.Priority_Immediate;
 
                 default:
                     return null;
@@ -1887,13 +1886,13 @@ namespace MiniBug
             switch (priority)
             {
                 case TaskPriority.High:
-                    return MiniBug.Properties.Resources.Priority_High;
+                    return MaxiBug.Properties.Resources.Priority_High;
 
                 case TaskPriority.Urgent:
-                    return MiniBug.Properties.Resources.Priority_Urgent;
+                    return MaxiBug.Properties.Resources.Priority_Urgent;
 
                 case TaskPriority.Immediate:
-                    return MiniBug.Properties.Resources.Priority_Immediate;
+                    return MaxiBug.Properties.Resources.Priority_Immediate;
 
                 default:
                     return null;

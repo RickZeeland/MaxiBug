@@ -1,4 +1,4 @@
-﻿namespace MiniBug
+﻿namespace MaxiBug
 {
     partial class AboutForm
     {

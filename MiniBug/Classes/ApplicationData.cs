@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using Newtonsoft.Json;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public enum OperationType { None = 0, New, Edit, Delete };
 

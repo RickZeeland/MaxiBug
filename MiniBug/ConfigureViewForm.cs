@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class ConfigureViewForm : Form
     {

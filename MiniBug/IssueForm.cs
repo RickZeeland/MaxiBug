@@ -12,7 +12,7 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class IssueForm : Form
     {
@@ -51,7 +51,7 @@ namespace MiniBug
         /// </summary>
         private List<ComboBoxItem> ModifiedByList = new List<ComboBoxItem>();
 
-        public IssueForm(OperationType operation, MiniBug.Issue issue = null)
+        public IssueForm(OperationType operation, MaxiBug.Issue issue = null)
         {
             InitializeComponent();
             this.Font = ApplicationSettings.AppFont;
@@ -105,7 +105,7 @@ namespace MiniBug
             // Suspend the layout logic for the form, while the application is initializing
             this.SuspendLayout();
             this.Font = ApplicationSettings.AppFont;
-            this.Icon = MiniBug.Properties.Resources.Minibug;
+            this.Icon = MaxiBug.Properties.Resources.Minibug;
             Point startPosition = Properties.Settings.Default.IssueFormStartPosition;
             Size formSize = Properties.Settings.Default.IssueFormSize;
 
@@ -280,8 +280,8 @@ namespace MiniBug
             if (txtSummary.Text != string.Empty)
             {
                 CurrentIssue.Summary = txtSummary.Text;
-                CurrentIssue.Status = ((IssueStatus)((MiniBug.ComboBoxItem)cboStatus.SelectedItem).Value);
-                CurrentIssue.Priority = ((IssuePriority)((MiniBug.ComboBoxItem)cboPriority.SelectedItem).Value);
+                CurrentIssue.Status = ((IssueStatus)((MaxiBug.ComboBoxItem)cboStatus.SelectedItem).Value);
+                CurrentIssue.Priority = ((IssuePriority)((MaxiBug.ComboBoxItem)cboPriority.SelectedItem).Value);
                 CurrentIssue.Version = txtVersion.Text;
                 CurrentIssue.TargetVersion = txtTargetVersion.Text;
                 CurrentIssue.Description = txtDescription.Text;

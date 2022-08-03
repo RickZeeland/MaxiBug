@@ -5,7 +5,7 @@ using System;
 using System.Reflection;
 using System.ComponentModel;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public static class ExtensionMethods
     {

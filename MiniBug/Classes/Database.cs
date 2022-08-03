@@ -3,7 +3,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// Postgres database routines.

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// A column in the issues or tasks DataGridView.

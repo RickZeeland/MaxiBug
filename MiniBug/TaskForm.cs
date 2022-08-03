@@ -11,19 +11,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class TaskForm : Form
     {
         /// <summary>
         /// The current operation.
         /// </summary>
-        public MiniBug.OperationType Operation { get; private set; } = OperationType.None;
+        public MaxiBug.OperationType Operation { get; private set; } = OperationType.None;
 
         /// <summary>
         /// The current task (being created or edited).
         /// </summary>
-        public MiniBug.Task CurrentTask { get; private set; } = null;
+        public MaxiBug.Task CurrentTask { get; private set; } = null;
 
         /// <summary>
         /// List of status options.
@@ -35,7 +35,7 @@ namespace MiniBug
         /// </summary>
         private List<ComboBoxItem> PriorityList = new List<ComboBoxItem>();
 
-        public TaskForm(OperationType operation, MiniBug.Task task = null)
+        public TaskForm(OperationType operation, MaxiBug.Task task = null)
         {
             InitializeComponent();
             this.Font = ApplicationSettings.AppFont;
@@ -77,7 +77,7 @@ namespace MiniBug
             // Suspend the layout logic for the form, while the application is initializing
             this.SuspendLayout();
 
-            this.Icon = MiniBug.Properties.Resources.Minibug;
+            this.Icon = MaxiBug.Properties.Resources.Minibug;
             this.AcceptButton = btOk;
             this.CancelButton = btCancel;
             this.MinimumSize = new Size(690, 351);
@@ -165,8 +165,8 @@ namespace MiniBug
             if (txtSummary.Text != string.Empty)
             {
                 CurrentTask.Summary = txtSummary.Text;
-                CurrentTask.Status = ((TaskStatus)((MiniBug.ComboBoxItem)cboStatus.SelectedItem).Value);
-                CurrentTask.Priority = ((TaskPriority)((MiniBug.ComboBoxItem)cboPriority.SelectedItem).Value);
+                CurrentTask.Status = ((TaskStatus)((MaxiBug.ComboBoxItem)cboStatus.SelectedItem).Value);
+                CurrentTask.Priority = ((TaskPriority)((MaxiBug.ComboBoxItem)cboPriority.SelectedItem).Value);
                 CurrentTask.TargetVersion = txtTargetVersion.Text;
                 CurrentTask.Description = txtDescription.Text;
 

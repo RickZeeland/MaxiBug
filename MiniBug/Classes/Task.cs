@@ -4,7 +4,7 @@
 using System;
 using System.ComponentModel;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     ///  Status of a task.

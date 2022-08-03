@@ -1,4 +1,4 @@
-﻿namespace MiniBug
+﻿namespace MaxiBug
 {
     partial class IssueForm
     {
@@ -308,7 +308,7 @@
             // buttonCopy
             // 
             this.buttonCopy.BackColor = System.Drawing.Color.White;
-            this.buttonCopy.Image = global::MiniBug.Properties.Resources.Clipboard_64x64;
+            this.buttonCopy.Image = global::MaxiBug.Properties.Resources.Clipboard_64x64;
             this.buttonCopy.Location = new System.Drawing.Point(733, 66);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(58, 58);
@@ -320,7 +320,7 @@
             // buttonPdf
             // 
             this.buttonPdf.BackColor = System.Drawing.Color.White;
-            this.buttonPdf.Image = global::MiniBug.Properties.Resources.pdf_64x64;
+            this.buttonPdf.Image = global::MaxiBug.Properties.Resources.pdf_64x64;
             this.buttonPdf.Location = new System.Drawing.Point(814, 66);
             this.buttonPdf.Name = "buttonPdf";
             this.buttonPdf.Size = new System.Drawing.Size(58, 58);

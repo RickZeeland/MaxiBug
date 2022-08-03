@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MiniBug.Properties {
+namespace MaxiBug.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -271,7 +271,7 @@ namespace MiniBug.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("MiniBug issue")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MaxiBug issue")]
         public string PdfTitle {
             get {
                 return ((string)(this["PdfTitle"]));

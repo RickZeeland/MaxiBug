@@ -1,4 +1,4 @@
-﻿namespace MiniBug
+﻿namespace MaxiBug
 {
     partial class MainForm
     {
@@ -215,7 +215,7 @@
             // 
             // IconNewIssue
             // 
-            this.IconNewIssue.Image = global::MiniBug.Properties.Resources.NewBug_32x32;
+            this.IconNewIssue.Image = global::MaxiBug.Properties.Resources.NewBug_32x32;
             this.IconNewIssue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconNewIssue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconNewIssue.Name = "IconNewIssue";
@@ -227,7 +227,7 @@
             // 
             // IconEditIssue
             // 
-            this.IconEditIssue.Image = global::MiniBug.Properties.Resources.EditBug_32x32;
+            this.IconEditIssue.Image = global::MaxiBug.Properties.Resources.EditBug_32x32;
             this.IconEditIssue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconEditIssue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconEditIssue.Name = "IconEditIssue";
@@ -240,7 +240,7 @@
             // 
             // IconDeleteIssue
             // 
-            this.IconDeleteIssue.Image = global::MiniBug.Properties.Resources.DeleteBug_32x32;
+            this.IconDeleteIssue.Image = global::MaxiBug.Properties.Resources.DeleteBug_32x32;
             this.IconDeleteIssue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconDeleteIssue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconDeleteIssue.Name = "IconDeleteIssue";
@@ -252,7 +252,7 @@
             // 
             // IconCloneIssue
             // 
-            this.IconCloneIssue.Image = global::MiniBug.Properties.Resources.CloneBug_32x32;
+            this.IconCloneIssue.Image = global::MaxiBug.Properties.Resources.CloneBug_32x32;
             this.IconCloneIssue.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconCloneIssue.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconCloneIssue.Name = "IconCloneIssue";
@@ -269,7 +269,7 @@
             // 
             // IconNewTask
             // 
-            this.IconNewTask.Image = global::MiniBug.Properties.Resources.NewTask_32x32;
+            this.IconNewTask.Image = global::MaxiBug.Properties.Resources.NewTask_32x32;
             this.IconNewTask.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconNewTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconNewTask.Name = "IconNewTask";
@@ -281,7 +281,7 @@
             // 
             // IconEditTask
             // 
-            this.IconEditTask.Image = global::MiniBug.Properties.Resources.EditTask_32x32;
+            this.IconEditTask.Image = global::MaxiBug.Properties.Resources.EditTask_32x32;
             this.IconEditTask.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconEditTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconEditTask.Name = "IconEditTask";
@@ -293,7 +293,7 @@
             // 
             // IconDeleteTask
             // 
-            this.IconDeleteTask.Image = global::MiniBug.Properties.Resources.DeleteTask_32x32;
+            this.IconDeleteTask.Image = global::MaxiBug.Properties.Resources.DeleteTask_32x32;
             this.IconDeleteTask.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.IconDeleteTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconDeleteTask.Name = "IconDeleteTask";
@@ -305,7 +305,7 @@
             // 
             // IconCloneTask
             // 
-            this.IconCloneTask.Image = global::MiniBug.Properties.Resources.CloneTask_32x32;
+            this.IconCloneTask.Image = global::MaxiBug.Properties.Resources.CloneTask_32x32;
             this.IconCloneTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconCloneTask.Name = "IconCloneTask";
             this.IconCloneTask.Size = new System.Drawing.Size(41, 49);
@@ -322,7 +322,7 @@
             // IconPieChart
             // 
             this.IconPieChart.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.IconPieChart.Image = global::MiniBug.Properties.Resources.Chart_32x32;
+            this.IconPieChart.Image = global::MaxiBug.Properties.Resources.Chart_32x32;
             this.IconPieChart.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconPieChart.Name = "IconPieChart";
             this.IconPieChart.Size = new System.Drawing.Size(36, 49);
@@ -334,7 +334,7 @@
             // IconShowClosed
             // 
             this.IconShowClosed.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.IconShowClosed.Image = global::MiniBug.Properties.Resources.Filter_32x32;
+            this.IconShowClosed.Image = global::MaxiBug.Properties.Resources.Filter_32x32;
             this.IconShowClosed.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconShowClosed.Name = "IconShowClosed";
             this.IconShowClosed.Size = new System.Drawing.Size(36, 49);
@@ -346,7 +346,7 @@
             // IconConfigureColumns
             // 
             this.IconConfigureColumns.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.IconConfigureColumns.Image = global::MiniBug.Properties.Resources.ConfigureView_32x32;
+            this.IconConfigureColumns.Image = global::MaxiBug.Properties.Resources.ConfigureView_32x32;
             this.IconConfigureColumns.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.IconConfigureColumns.Name = "IconConfigureColumns";
             this.IconConfigureColumns.Size = new System.Drawing.Size(36, 49);
@@ -398,7 +398,7 @@
             // 
             // newProjectToolStripMenuItem
             // 
-            this.newProjectToolStripMenuItem.Image = global::MiniBug.Properties.Resources.NewProject_32x32;
+            this.newProjectToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.NewProject_32x32;
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
             this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.newProjectToolStripMenuItem.Text = "&New Project...";
@@ -406,7 +406,7 @@
             // 
             // openProjectToolStripMenuItem
             // 
-            this.openProjectToolStripMenuItem.Image = global::MiniBug.Properties.Resources.OpenProject_32x32;
+            this.openProjectToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.OpenProject_32x32;
             this.openProjectToolStripMenuItem.Name = "openProjectToolStripMenuItem";
             this.openProjectToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.openProjectToolStripMenuItem.Text = "&Open Project...";
@@ -433,7 +433,7 @@
             // 
             // configureColumnsToolStripMenuItem
             // 
-            this.configureColumnsToolStripMenuItem.Image = global::MiniBug.Properties.Resources.ConfigureView_32x32;
+            this.configureColumnsToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.ConfigureView_32x32;
             this.configureColumnsToolStripMenuItem.Name = "configureColumnsToolStripMenuItem";
             this.configureColumnsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.configureColumnsToolStripMenuItem.Text = "Confi&gure Columns";
@@ -441,7 +441,7 @@
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Image = global::MiniBug.Properties.Resources.Settings_32x32;
+            this.settingsToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.Settings_32x32;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.settingsToolStripMenuItem.Text = "&Settings...";
@@ -460,7 +460,7 @@
             // 
             // clearRecentProjectsListToolStripMenuItem
             // 
-            this.clearRecentProjectsListToolStripMenuItem.Image = global::MiniBug.Properties.Resources.Delete_32x32;
+            this.clearRecentProjectsListToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.Delete_32x32;
             this.clearRecentProjectsListToolStripMenuItem.Name = "clearRecentProjectsListToolStripMenuItem";
             this.clearRecentProjectsListToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.clearRecentProjectsListToolStripMenuItem.Text = "&Clear Recent Projects";
@@ -491,7 +491,7 @@
             // 
             // newIssueToolStripMenuItem
             // 
-            this.newIssueToolStripMenuItem.Image = global::MiniBug.Properties.Resources.NewBug_32x32;
+            this.newIssueToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.NewBug_32x32;
             this.newIssueToolStripMenuItem.Name = "newIssueToolStripMenuItem";
             this.newIssueToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.newIssueToolStripMenuItem.Text = "&New Issue...";
@@ -499,7 +499,7 @@
             // 
             // editIssueToolStripMenuItem
             // 
-            this.editIssueToolStripMenuItem.Image = global::MiniBug.Properties.Resources.EditBug_32x32;
+            this.editIssueToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.EditBug_32x32;
             this.editIssueToolStripMenuItem.Name = "editIssueToolStripMenuItem";
             this.editIssueToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.editIssueToolStripMenuItem.Text = "&Edit Issue...";
@@ -507,7 +507,7 @@
             // 
             // deleteIssueToolStripMenuItem
             // 
-            this.deleteIssueToolStripMenuItem.Image = global::MiniBug.Properties.Resources.DeleteBug_32x32;
+            this.deleteIssueToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.DeleteBug_32x32;
             this.deleteIssueToolStripMenuItem.Name = "deleteIssueToolStripMenuItem";
             this.deleteIssueToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.deleteIssueToolStripMenuItem.Text = "&Delete Issue";
@@ -515,7 +515,7 @@
             // 
             // cloneIssueToolStripMenuItem
             // 
-            this.cloneIssueToolStripMenuItem.Image = global::MiniBug.Properties.Resources.CloneBug_32x32;
+            this.cloneIssueToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.CloneBug_32x32;
             this.cloneIssueToolStripMenuItem.Name = "cloneIssueToolStripMenuItem";
             this.cloneIssueToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.cloneIssueToolStripMenuItem.Text = "&Clone Issue";
@@ -534,7 +534,7 @@
             // 
             // newTaskToolStripMenuItem
             // 
-            this.newTaskToolStripMenuItem.Image = global::MiniBug.Properties.Resources.NewTask_32x32;
+            this.newTaskToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.NewTask_32x32;
             this.newTaskToolStripMenuItem.Name = "newTaskToolStripMenuItem";
             this.newTaskToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.newTaskToolStripMenuItem.Text = "&New Task...";
@@ -542,7 +542,7 @@
             // 
             // editTaskToolStripMenuItem
             // 
-            this.editTaskToolStripMenuItem.Image = global::MiniBug.Properties.Resources.EditTask_32x32;
+            this.editTaskToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.EditTask_32x32;
             this.editTaskToolStripMenuItem.Name = "editTaskToolStripMenuItem";
             this.editTaskToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.editTaskToolStripMenuItem.Text = "&Edit Task...";
@@ -550,7 +550,7 @@
             // 
             // deleteTaskToolStripMenuItem
             // 
-            this.deleteTaskToolStripMenuItem.Image = global::MiniBug.Properties.Resources.DeleteTask_32x32;
+            this.deleteTaskToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.DeleteTask_32x32;
             this.deleteTaskToolStripMenuItem.Name = "deleteTaskToolStripMenuItem";
             this.deleteTaskToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.deleteTaskToolStripMenuItem.Text = "&Delete Task";
@@ -558,7 +558,7 @@
             // 
             // cloneTaskToolStripMenuItem
             // 
-            this.cloneTaskToolStripMenuItem.Image = global::MiniBug.Properties.Resources.CloneTask_32x32;
+            this.cloneTaskToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.CloneTask_32x32;
             this.cloneTaskToolStripMenuItem.Name = "cloneTaskToolStripMenuItem";
             this.cloneTaskToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.cloneTaskToolStripMenuItem.Text = "&Clone Task";
@@ -574,7 +574,7 @@
             // 
             // aboutMiniBugToolStripMenuItem
             // 
-            this.aboutMiniBugToolStripMenuItem.Image = global::MiniBug.Properties.Resources.About_32x32;
+            this.aboutMiniBugToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.About_32x32;
             this.aboutMiniBugToolStripMenuItem.Name = "aboutMiniBugToolStripMenuItem";
             this.aboutMiniBugToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.aboutMiniBugToolStripMenuItem.Text = "&About MiniBug";

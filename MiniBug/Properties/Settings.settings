@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MiniBug.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MaxiBug.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="GridShowBorders" Type="System.Boolean" Scope="User">
@@ -66,7 +66,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PdfTitle" Type="System.String" Scope="User">
-      <Value Profile="(Default)">MiniBug issue</Value>
+      <Value Profile="(Default)">MaxiBug issue</Value>
     </Setting>
     <Setting Name="PostgresIpaddress" Type="System.String" Scope="User">
       <Value Profile="(Default)">127.0.0.1</Value>

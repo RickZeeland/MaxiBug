@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace MiniBug
+namespace MaxiBug
 {
     /// <summary>
     /// Application settings.

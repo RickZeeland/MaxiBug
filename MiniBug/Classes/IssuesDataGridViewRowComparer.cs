@@ -4,7 +4,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public class IssuesDataGridViewRowComparer : System.Collections.IComparer
     {

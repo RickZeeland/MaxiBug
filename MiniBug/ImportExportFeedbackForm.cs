@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class ImportExportFeedbackForm : Form
     {
@@ -103,19 +103,19 @@ namespace MiniBug
                 {
                     // Completely unable to export the project
                     lblDescription.Text = "One or more errors occurred while trying to export the project.";
-                    IconDescription.Image = MiniBug.Properties.Resources.StatusCriticalError_16x16;
+                    IconDescription.Image = MaxiBug.Properties.Resources.StatusCriticalError_16x16;
                 }
                 else if (success == 1)
                 {
                     // Partially able to export the project
                     lblDescription.Text = "An error occurred while exporting the project.";
-                    IconDescription.Image = MiniBug.Properties.Resources.StatusWarning_16x16;
+                    IconDescription.Image = MaxiBug.Properties.Resources.StatusWarning_16x16;
                 }
                 else if (success == 2)
                 {
                     // Export completed successfully
                     lblDescription.Text = "The project was successfully exported.";
-                    IconDescription.Image = MiniBug.Properties.Resources.StatusOK_16x16;
+                    IconDescription.Image = MaxiBug.Properties.Resources.StatusOK_16x16;
                 }
 
                 // Issues: details

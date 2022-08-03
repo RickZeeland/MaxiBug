@@ -1,4 +1,4 @@
-﻿namespace MiniBug
+﻿namespace MaxiBug
 {
     partial class ExportForm
     {
@@ -170,7 +170,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::MiniBug.Properties.Resources.Info_16x16;
+            this.pictureBox1.Image = global::MaxiBug.Properties.Resources.Info_16x16;
             this.pictureBox1.Location = new System.Drawing.Point(17, 85);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(16, 16);

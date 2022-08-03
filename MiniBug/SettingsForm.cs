@@ -9,7 +9,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 
-namespace MiniBug
+namespace MaxiBug
 {
     public partial class SettingsForm : Form
     {
