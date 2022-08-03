@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MiniBug v3 - Fork")]
+[assembly: AssemblyTitle("MaxiBug v0.1")]
 [assembly: AssemblyDescription("Issue Tracker and Todo List")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Martiniano-RickZeeland")]
-[assembly: AssemblyProduct("MiniBug - Fork by RickZeeland")]
+[assembly: AssemblyProduct("Forked by RickZeeland")]
 [assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -33,7 +33,7 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.0.0")]
-[assembly: AssemblyFileVersion("3.0.0.0")]
+[assembly: AssemblyVersion("0.1.0.0")]
+[assembly: AssemblyFileVersion("0.1.0.0")]
 [assembly: NeutralResourcesLanguage("")]
 

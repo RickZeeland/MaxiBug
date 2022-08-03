@@ -58,7 +58,7 @@
             this.lblApplicationName.Name = "lblApplicationName";
             this.lblApplicationName.Size = new System.Drawing.Size(372, 31);
             this.lblApplicationName.TabIndex = 1;
-            this.lblApplicationName.Text = "MiniBug Issue Tracker";
+            this.lblApplicationName.Text = "MaxiBug Issue Tracker";
             // 
             // pictureBox1
             // 
@@ -94,7 +94,7 @@
             this.linkLabel1.Size = new System.Drawing.Size(372, 29);
             this.linkLabel1.TabIndex = 5;
             this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "https://github.com/RickZeeland/MiniBug.git";
+            this.linkLabel1.Text = "https://github.com/RickZeeland/MaxiBug.git";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // linkLabelIcons8

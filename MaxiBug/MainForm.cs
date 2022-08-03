@@ -441,7 +441,6 @@ namespace MaxiBug
         private void NewProject()
         {
             //var status = FileSystemOperationStatus.None;
-            string message = string.Empty;
             var frmProject = new ProjectForm(OperationType.New);
 
             try
@@ -474,22 +473,15 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                message = ex.Message;
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            // If there was an error creating the new project, show feedback
-            if (!string.IsNullOrEmpty(message))
-            {
-                MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            else
-            {
-                // Set the main form title bar text
-                this.Text = $"{frmProject.ProjectName} - {Program.myName}";
+            // Set the main form title bar text
+            this.Text = $"{frmProject.ProjectName} - {Program.myName}";
 
-                // Add this project to the recent projects submenu and application settings
-                AddRecentProject(Program.SoftwareProject.Name);
-            }
+            // Add this project to the recent projects submenu and application settings
+            AddRecentProject(Program.SoftwareProject.Name);
 
             SetControlsState();
         }
@@ -618,7 +610,7 @@ namespace MaxiBug
 
                 stopwatch.Stop();
                 Debug.Print($"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds");
-                File.AppendAllText("MiniBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
+                File.AppendAllText("MaxiBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
 
                 this.Cursor = Cursors.Default;
             }

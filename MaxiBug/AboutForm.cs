@@ -15,7 +15,8 @@ namespace MaxiBug
 
         private void AboutForm_Load(object sender, EventArgs e)
         {
-            this.Text = "About MiniBug";
+            this.Text = "About MaxiBug";
+            this.lblApplicationName.Text = Program.myName;
             this.AcceptButton = btOK;
 
             pictureBox1.Left = (lblApplicationName.Left / 2) - (pictureBox1.Width / 2);

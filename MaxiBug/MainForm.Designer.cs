@@ -577,7 +577,7 @@
             this.aboutMiniBugToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.About_32x32;
             this.aboutMiniBugToolStripMenuItem.Name = "aboutMiniBugToolStripMenuItem";
             this.aboutMiniBugToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.aboutMiniBugToolStripMenuItem.Text = "&About MiniBug";
+            this.aboutMiniBugToolStripMenuItem.Text = "&About MaxiBug";
             this.aboutMiniBugToolStripMenuItem.Click += new System.EventHandler(this.aboutMiniBugToolStripMenuItem_Click);
             // 
             // openFileDialog1
