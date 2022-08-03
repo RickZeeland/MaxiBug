@@ -2,24 +2,23 @@
 ![Windows Badge](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=fff&style=flat-square)
 ![.NET Badge](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff&style=flat-square)
 ![Visual Studio Badge](https://img.shields.io/badge/Visual%20Studio-5C2D91?logo=visualstudio&logoColor=fff&style=flat-square)
-![JSON Badge](https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff&style=flat-square)
 
 This is a fork of MiniBug2 for VS2022 and .NET 4.8.
 
 Some of the changes:
-- Use a PostgreSQL database
+- Uses a PostgreSQL database
 
 ------------------------------------
 MaxiBug is a simple issue tracker and to-do list, it is a Windows desktop multi-user application. 
  
 <img src="Screenshots/main-window.png" alt="MiniBug main window">
 
-MaxiBug uses a Postgres database to store data.
+MaxiBug uses a Postgres database (9.4 or higher) to store data.
 
 Attached images are stored with their file name only, it is recommended to keep them in the same folder as the application.
 Preferably keep images in a subfolder "Images", this way all data can be copied easily to another location.
 
-<img src="MiniBug/Resources/Clipboard_64x64.png" alt="Clipboard button">
+<img src="MaxiBug/Resources/Clipboard_64x64.png" alt="Clipboard button">
 
 When using the "Copy to clipboard" button, text and images can be pasted into office applications by using "Paste special".
 
