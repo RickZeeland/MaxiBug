@@ -136,6 +136,7 @@ namespace MaxiBug
             if (!result)
             {
                 MessageBox.Show("Could not load recent project", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ClearRecentProjects();
             }
         }
 
@@ -460,6 +461,7 @@ namespace MaxiBug
                     GridTasks.Refresh();
 
                     Program.SoftwareProject = new Project(frmProject.ProjectName);
+                    Program.SoftwareProject.Users.Add(Environment.UserName);
 
                     ////status = ApplicationData.SaveProjectToFile(Program.SoftwareProject);
                     Program.databaseName = frmProject.ProjectName.ToLower();
@@ -488,6 +490,7 @@ namespace MaxiBug
 
         /// <summary>
         /// Open an existing project.
+        /// TODO: select a database dialog.
         /// </summary>
         /// <param name="dbName">(optional) The database to open. If present, the project is opened directly.</param>
         private bool OpenProject(string dbName = "")

@@ -35,6 +35,11 @@ namespace MaxiBug
                 // Edit existing project settings
                 ProjectName = projectName;
             }
+            else
+            {
+                // New
+                ProjectName = Program.databaseName;
+            }
         }
 
         private void ProjectForm_Load(object sender, EventArgs e)
@@ -53,10 +58,9 @@ namespace MaxiBug
             {
                 this.Text = "Edit Project";
                 lblFormTitle.Text = "Edit the current project";
-
-                // Populate the controls
-                txtName.Text = ProjectName;
             }
+
+            txtName.Text = ProjectName;
 
             // Resume the layout logic
             this.ResumeLayout();

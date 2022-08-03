@@ -121,8 +121,8 @@ namespace MaxiBug
                 lblDateModified.Visible = false;
                 cboStatus.SelectedIndex = 0;
                 cboPriority.SelectedIndex = 0;
-                cboCreatedBy.SelectedIndex = 0;
-                cboModifiedBy.SelectedIndex = 0;
+                //cboCreatedBy.SelectedIndex = 0;
+                //cboModifiedBy.SelectedIndex = 0;
                 lblID.Text = Program.SoftwareProject.IssueIdCounter.ToString();
             }
             else if (Operation == OperationType.Edit)

@@ -312,7 +312,6 @@ namespace MaxiBug
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
