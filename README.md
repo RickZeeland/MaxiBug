@@ -1,30 +1,20 @@
-# MiniBug v2 - Issue Tracker and To-do List
+# MaxiBug - Issue Tracker and To-do List
 ![Windows Badge](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=fff&style=flat-square)
 ![.NET Badge](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff&style=flat-square)
 ![Visual Studio Badge](https://img.shields.io/badge/Visual%20Studio-5C2D91?logo=visualstudio&logoColor=fff&style=flat-square)
 ![JSON Badge](https://img.shields.io/badge/JSON-000?logo=json&logoColor=fff&style=flat-square)
 
-This is a fork of MiniBug for VS2019 and .NET 4.8.
+This is a fork of MiniBug2 for VS2022 and .NET 4.8.
 
 Some of the changes:
-- Removed missing MiniBug_TemporaryKey.pfx and signing from project
-- Default fontsize set to 10
-- Scale forms after changing fontsize in settings
-- Load project on startup if only one project exists
-- Optionally attach an image to an issue
-- Create single exe using Fody.Costura
-- Show a ModernUI.Charting pie chart after loading a project
-- Copy issue and image to Clipboard
-- Search issue
-- Create PDF from issue
+- Use a PostgreSQL database
 
 ------------------------------------
-MiniBug is a simple issue tracker and to-do list, it is a Windows desktop single-user application. 
- 
+MaxiBug is a simple issue tracker and to-do list, it is a Windows desktop multi-user application. 
  
 <img src="Screenshots/main-window.png" alt="MiniBug main window">
 
-MiniBug does not use a database to store data: instead the application stores each project in a .json file. This means that if you need to work on projects, in different computers, you can share a MiniBug project between computers, by putting the .json file in something like Dropbox.
+MaxiBug uses a Postgres database to store data.
 
 Attached images are stored with their file name only, it is recommended to keep them in the same folder as the application.
 Preferably keep images in a subfolder "Images", this way all data can be copied easily to another location.
@@ -40,26 +30,6 @@ When using the "Copy to clipboard" button, text and images can be pasted into of
 - Show/hide/sort columns
 - Some user defined settings
 - Export issues and tasks to CSV format
-
-## Sample project
-
-You can try a small sample project, with bugs and tasks copied from some applications' public bug trackers (Inkscape, Firefox, MariaDB and Kodi).
-
-Download the file <a href="MiniBug Sample Project.json">MiniBug Sample Project.json</a> and open it in MiniBug.
-
-## Benchmarks
-
-MiniBug v2.5.5 compiled with .NET 4.8 versus .NET 6.0.
-A comparison of speed differences loading a test project of 4000 issues on a Windows 10 PC with an SSD gave the following results:
-
-| Version              | Load project | Reload project  |
-| -------------------- | ------------ | --------------- |
-| .NET 4.8 / VS2019    |       1,27 s |          1,78 s |
-| .NET 6.0 / VS2022    |       1,06 s |          1,37 s |
-| .NET 4.8 exe         |       1,08 s |          2,23 s |
-| .NET 6.0 exe         |       0,86 s |          1,74 s |
-
-As the .NET 6.0 speed improvement is not very significant, and the executable is much bigger and not as neatly packed into a single exe, I decided to not publish this version on GitHub for the time being. Also the .NET 6.0 version is not cross-platform, it is purely a Winforms application, so that is no argument to port it either.
 
 # Getting Started
 
