@@ -468,7 +468,8 @@ namespace MaxiBug
         /// </summary>
         public void CreatePdfDocument(string pdfFileName)
         {
-            var lines = PageLines(false);
+            var linesAll = PageLines();
+            var linesLast = PageLines(false);
 
             using (PdfDocument document = new PdfDocument(PaperType.A4, false, UnitOfMeasure.mm, pdfFileName))
             {
@@ -495,40 +496,26 @@ namespace MaxiBug
                 pdfTable.Borders.SetAllBorders(0.01, Color.LightGray, 0.01, Color.LightGray);
                 pdfTable.DefaultCellStyle.Alignment = ContentAlignment.MiddleLeft;
 
-                // Fill table
-                pdfTable.Cell[0].Value = "ID";
-                pdfTable.Cell[1].Value = this.lblID.Text;
-                pdfTable.DrawRow();
+                // Fill header table
+                foreach (var line in linesAll)
+                {
+                    string name = line.Split(':')[0];
+                    string text = line.Split(':')[1].Trim();
+                    pdfTable.Cell[0].Value = name;
+                    pdfTable.Cell[1].Value = text;
+                    pdfTable.DrawRow();
 
-                pdfTable.Cell[0].Value = "Date created";
-                pdfTable.Cell[1].Value = this.lblDateCreated.Text;
-                pdfTable.DrawRow();
-
-                pdfTable.Cell[0].Value = "Date modified";
-                pdfTable.Cell[1].Value = this.lblDateModified.Text;
-                pdfTable.DrawRow();
-
-                pdfTable.Cell[0].Value = "Status";
-                pdfTable.Cell[1].Value = this.cboStatus.Text;
-                pdfTable.DrawRow();
-
-                pdfTable.Cell[0].Value = "Priority";
-                pdfTable.Cell[1].Value = this.cboPriority.Text;
-                pdfTable.DrawRow();
-
-                pdfTable.Cell[0].Value = "Version";
-                pdfTable.Cell[1].Value = this.txtVersion.Text;
-                pdfTable.DrawRow();
-
-                pdfTable.Cell[0].Value = "Target version";
-                pdfTable.Cell[1].Value = this.txtTargetVersion.Text;
-                pdfTable.DrawRow();
+                    if (name.Equals("Target Version"))
+                    {
+                        break;
+                    }
+                }
 
                 pdfTable.Close();
-                yPos = yPos - pdfTable.RowHeight * 11;
+                yPos = yPos - pdfTable.RowHeight * (linesAll.Count() - 2);
 
                 // Print summary and description
-                foreach (var line in lines)
+                foreach (var line in linesLast)
                 {
                     if (line.Trim().Equals(string.Empty))
                     {

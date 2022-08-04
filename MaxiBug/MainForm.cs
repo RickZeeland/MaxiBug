@@ -113,17 +113,24 @@ namespace MaxiBug
 
             try
             {
+                this.panelPie.Visible = false;
                 int projectsCount = Properties.Settings.Default.RecentProjectsNames.Count;
 
                 if (projectsCount == 1)
                 {
                     // Load the only project immediately
-                    result = OpenProject(Properties.Settings.Default.RecentProjectsNames[0].ToLower());
+                    string projectName = Properties.Settings.Default.RecentProjectsNames[0];
+                    string dbName = Properties.Settings.Default.RecentProjectsPaths[0];
+                    result = OpenProject(projectName, dbName);
 
                     if (result)
                     {
                         this.tabPage1.Invalidate();
-                        ShowPieChart();
+
+                        if (this.GridIssues.RowCount > 0)
+                        {
+                            ShowPieChart();
+                        }
                     }
                 }
             }
@@ -344,8 +351,9 @@ namespace MaxiBug
         /// <summary>
         /// Add a project to the recent projects submenu and to the application settings
         /// </summary>
-        /// <param name="projectName">The project name.</param>
-        private void AddRecentProject(string projectName)
+        /// <param name="projectName">The project name</param>
+        /// <param name="dbName">The database name in lower case</param>
+        private void AddRecentProject(string projectName, string dbName)
         {
             recentProjectsToolStripMenuItem.Enabled = true;
             clearRecentProjectsListToolStripMenuItem.Enabled = true;
@@ -364,36 +372,38 @@ namespace MaxiBug
                     // Remove the item from its current position
                     recentProjectsToolStripMenuItem.DropDownItems.RemoveAt(i);
                     Properties.Settings.Default.RecentProjectsNames.RemoveAt(i);
+                    Properties.Settings.Default.RecentProjectsPaths.RemoveAt(i);
 
                     // Insert at the top of the list
-                    AddRecentProjectItem(projectName, projectName);
+                    AddRecentProjectItem(projectName, dbName);
 
                     return;
                 }
             }
-            
+
             // Remove the last item in the menu when the maximum number of items is reached
             if (recentProjectsToolStripMenuItem.DropDownItems.Count == ApplicationSettings.MaxRecentProjects)
             {
                 recentProjectsToolStripMenuItem.DropDownItems.RemoveAt(recentProjectsToolStripMenuItem.DropDownItems.Count - 1);
 
                 Properties.Settings.Default.RecentProjectsNames.RemoveAt(Properties.Settings.Default.RecentProjectsNames.Count - 1);
+                Properties.Settings.Default.RecentProjectsPaths.RemoveAt(Properties.Settings.Default.RecentProjectsPaths.Count - 1);
             }
 
             // Add the new menu item to the top of the submenu
-            AddRecentProjectItem(projectName, projectName);
+            AddRecentProjectItem(projectName, dbName);
         }
 
         /// <summary>
         /// Add the recent project item details to the top of the submenu and to the application settings.
         /// </summary>
-        /// <param name="projectName">The project (database) name</param>
-        /// <param name="fileName">Not used, same as project name</param>
-        private void AddRecentProjectItem(string projectName, string fileName)
+        /// <param name="projectName">The project name</param>
+        /// <param name="dbName">The database name in lower case</param>
+        private void AddRecentProjectItem(string projectName, string dbName)
         {
             ToolStripMenuItem item = new ToolStripMenuItem(projectName)
             {
-                Tag = fileName
+                Tag = dbName
             };
 
             // Add the new menu item to the top of the submenu
@@ -401,6 +411,7 @@ namespace MaxiBug
 
             // Save the project name and path and filename in the application settings
             Properties.Settings.Default.RecentProjectsNames.Insert(0, projectName);
+            Properties.Settings.Default.RecentProjectsPaths.Insert(0, dbName);
             Properties.Settings.Default.Save();
 
             // Add an event handler for the new menu item
@@ -415,8 +426,9 @@ namespace MaxiBug
             // Clear the recent projects submenu
             recentProjectsToolStripMenuItem.DropDownItems.Clear();
 
-            // Clear the recent projects in the application settings
+            // Clear the recent projects (file names and paths) in the application settings
             Properties.Settings.Default.RecentProjectsNames = new System.Collections.Specialized.StringCollection();
+            Properties.Settings.Default.RecentProjectsPaths = new System.Collections.Specialized.StringCollection();
             Properties.Settings.Default.Save();
 
             // Disable the recent projects menu item
@@ -427,11 +439,13 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Occurs when one of the recent projects menu item is clicked.
+        /// Occurs when a recent projects menu item is clicked.
         /// </summary>
         private void FileMenuRecentProjectItem_Click(object sender, EventArgs e)
         {
-            OpenProject(((ToolStripMenuItem)sender).Tag.ToString());
+            string projectName = ((ToolStripMenuItem)sender).Text.ToString();
+            string dbName = ((ToolStripMenuItem)sender).Tag.ToString();
+            OpenProject(projectName, dbName);
         }
         #endregion
 
@@ -464,7 +478,7 @@ namespace MaxiBug
                     Program.SoftwareProject.Users.Add(Environment.UserName);
 
                     ////status = ApplicationData.SaveProjectToFile(Program.SoftwareProject);
-                    Program.databaseName = frmProject.ProjectName.ToLower();
+                    Program.SoftwareProject.DbName = Program.databaseName;
                     Database.CreateProject(Program.databaseName);
                 }
 
@@ -483,43 +497,19 @@ namespace MaxiBug
             this.Text = $"{frmProject.ProjectName} - {Program.myName}";
 
             // Add this project to the recent projects submenu and application settings
-            AddRecentProject(Program.SoftwareProject.Name);
+            AddRecentProject(Program.SoftwareProject.Name, Program.SoftwareProject.DbName);
 
             SetControlsState();
         }
 
         /// <summary>
         /// Open an existing project.
-        /// TODO: select a database dialog.
         /// </summary>
-        /// <param name="dbName">(optional) The database to open. If present, the project is opened directly.</param>
-        private bool OpenProject(string dbName = "")
+        /// <param name="projectName">The full project name</param>
+        /// <param name="dbName">(optional) The database to open, if present, the project is opened directly</param>
+        /// <returns>True on success</returns>
+        private bool OpenProject(string projectName = "", string dbName = "")
         {
-            //bool flagValidFilename = !string.IsNullOrEmpty(fullFilename);
-
-            //if (!flagValidFilename)
-            //{
-            //    // Show file dialog and ask for project name
-            //    openFileDialog1.Title = "Open Project";
-            //    openFileDialog1.Multiselect = false;
-            //    openFileDialog1.Filter = "JSON files (*.json)|*.json";
-            //    openFileDialog1.FilterIndex = 0;
-            //    openFileDialog1.FileName = string.Empty;
-            //    openFileDialog1.InitialDirectory = Application.StartupPath;         // Open in current directory
-
-            //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            //    {
-            //        fullFilename = openFileDialog1.FileName;
-            //        flagValidFilename = true;
-            //    }
-            //}
-
-            //if (!File.Exists(fullFilename))
-            //{
-            //    // Not found
-            //    return false;
-            //}
-
             //if (Program.IsLocked(fullFilename))
             //{
             //    // file is in use
@@ -531,93 +521,117 @@ namespace MaxiBug
             //    }
             //}
 
-            //if (flagValidFilename)
+            if (!string.IsNullOrEmpty(dbName))
             {
-                if (!string.IsNullOrEmpty(dbName))
+                Program.databaseName = dbName.ToLower();
+            }
+
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            //if (Program.SoftwareProject != null)
+            //{
+            //    Program.DeleteLockFile();
+            //}
+
+            var dbNames = Database.GetDbNames();            // Find existing database names
+
+            if (dbNames.Length < 1)
+            {
+                // Ask db name
+                MessageBox.Show("No database found, please use 'New Project'", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            else if (!dbNames.Contains(Program.databaseName))
+            {
+                // Database name not found, select one
+                var selForm = new SelectionForm(dbNames, $"{Program.databaseName} not found, select database");
+
+                if (selForm.ShowDialog() == DialogResult.OK)
                 {
-                    Program.databaseName = dbName.ToLower();
+                    Program.databaseName = selForm.SelectedItem;
+                    Debug.Print("" + Program.databaseName);
+                }
+            }
+
+            Project newProject = new Project(Program.databaseName);
+
+            if (!string.IsNullOrEmpty(projectName))
+            {
+                newProject.Name = projectName;
+            }
+
+            ConnectionString = Database.GetConnectionString(Program.databaseName);
+
+            this.Cursor = Cursors.WaitCursor;
+            var message = Database.LoadProject(ConnectionString, ref newProject);
+
+            //Project newProject = new Project();
+            //var status = ApplicationData.LoadProject(fullFilename, out newProject);
+
+            //// If there was an error loading the project file, show feedback
+            //if (status != FileSystemOperationStatus.OK)
+            //{
+            //    this.Cursor = Cursors.Default;
+                //ShowProjectErrorFeedback(status);
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                // Error, abort the project
+                MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                newProject = null;
+                return false;
+            }
+            else
+            {
+                //// Lock the project file
+                //Program.CreateLockFile(fullFilename);
+
+                Program.SoftwareProject = null;
+                Program.SoftwareProject = newProject;
+
+                // Set the main form title bar text
+                this.Text = $"{Program.SoftwareProject.Name} - {Program.myName}";
+
+                // Clear the issues and tasks grids
+                GridIssues.Rows.Clear();
+                GridIssues.Refresh();
+                GridTasks.Rows.Clear();
+                GridTasks.Refresh();
+
+                // Suspend the layout logic for the form, while the application is initializing
+                this.SuspendLayout();
+
+                PopulateGridIssues();
+                PopulateGridTasks();
+
+                // Add this project to the recent projects submenu and application settings
+                AddRecentProject(Program.SoftwareProject.Name, Program.databaseName);
+
+                // Jump to last row
+                if (Properties.Settings.Default.ScrollToLastRow && this.GridIssues.RowCount > 10)
+                {
+                    this.GridIssues.FirstDisplayedScrollingRowIndex = this.GridIssues.RowCount - 1;
                 }
 
-                this.Cursor = Cursors.WaitCursor;
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
+                // Resume the layout logic
+                this.ResumeLayout();
 
-                //if (Program.SoftwareProject != null)
-                //{
-                //    Program.DeleteLockFile();
-                //}
-
-                Project newProject = new Project();
-                newProject.Name = Program.databaseName;                         // Temp
-
-                if (string.IsNullOrEmpty(ConnectionString))
+                if (this.GridIssues.RowCount > 0)
                 {
-                    ConnectionString = Database.GetConnectionString(Program.databaseName);
-                }
-
-                var message = Database.LoadProject(ConnectionString, ref newProject);
-
-                //Project newProject = new Project();
-                //var status = ApplicationData.LoadProject(fullFilename, out newProject);
-
-                //// If there was an error loading the project file, show feedback
-                //if (status != FileSystemOperationStatus.OK)
-                //{
-                //    this.Cursor = Cursors.Default;
-                    //ShowProjectErrorFeedback(status);
-
-                if (!string.IsNullOrEmpty(message))
-                {
-                    // Error, abort the project
-                    MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    newProject = null;
-                    return false;
+                    ShowPieChart();
                 }
                 else
                 {
-                    //// Lock the project file
-                    //Program.CreateLockFile(fullFilename);
-
-                    Program.SoftwareProject = null;
-                    Program.SoftwareProject = newProject;
-
-                    // Set the main form title bar text
-                    this.Text = $"{Program.SoftwareProject.Name} - {Program.myName}";
-
-                    // Clear the issues and tasks grids
-                    GridIssues.Rows.Clear();
-                    GridIssues.Refresh();
-                    GridTasks.Rows.Clear();
-                    GridTasks.Refresh();
-
-                    // Suspend the layout logic for the form, while the application is initializing
-                    this.SuspendLayout();
-
-                    PopulateGridIssues();
-                    PopulateGridTasks();
-
-                    // Add this project to the recent projects submenu and application settings
-                    AddRecentProject(Program.SoftwareProject.Name);
-
-                    // Jump to last row
-                    if (Properties.Settings.Default.ScrollToLastRow && this.GridIssues.RowCount > 10)
-                    {
-                        this.GridIssues.FirstDisplayedScrollingRowIndex = this.GridIssues.RowCount - 1;
-                    }
-
-                    // Resume the layout logic
-                    this.ResumeLayout();
-
-                    ShowPieChart();
+                    this.panelPie.Visible = false;
                 }
-
-                stopwatch.Stop();
-                Debug.Print($"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds");
-                File.AppendAllText("MaxiBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
-
-                this.Cursor = Cursors.Default;
             }
 
+            stopwatch.Stop();
+            Debug.Print($"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds");
+            File.AppendAllText("MaxiBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
+
+            this.Cursor = Cursors.Default;
             SetControlsState();
             return true;
         }
@@ -634,11 +648,10 @@ namespace MaxiBug
                 if (frmProject.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    // Set the main form title bar text
-                    this.Text = $"{frmProject.ProjectName} - {Program.myName}";
+                    this.Text = $"{frmProject.ProjectName} - {Program.myName}";     // Set the main form title
                     Program.SoftwareProject.Name = frmProject.ProjectName;
                     ClearRecentProjects();
-                    AddRecentProject(frmProject.ProjectName);
+                    AddRecentProject(frmProject.ProjectName, Program.databaseName);
                 }
 
                 frmProject.Dispose();

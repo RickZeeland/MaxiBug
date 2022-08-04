@@ -8,6 +8,7 @@ namespace MaxiBug
 {
     /// <summary>
     /// Create a new project, or edit existing project settings.
+    /// Sets the Program.databaseName.
     /// </summary>
     public partial class ProjectForm : Form
     {
@@ -40,6 +41,8 @@ namespace MaxiBug
                 // New
                 ProjectName = Program.databaseName;
             }
+
+            this.txtDbName.Text = Program.databaseName;
         }
 
         private void ProjectForm_Load(object sender, EventArgs e)
@@ -71,9 +74,10 @@ namespace MaxiBug
         /// </summary>
         private void btOk_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtName.Text))
+            if (!string.IsNullOrWhiteSpace(txtName.Text) && !string.IsNullOrWhiteSpace(txtDbName.Text))
             {
                 ProjectName = txtName.Text;
+                Program.databaseName = txtDbName.Text.Trim().ToLower();
 
                 //if (File.Exists(fullFilename))
                 //{

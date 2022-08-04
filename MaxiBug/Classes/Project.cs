@@ -39,6 +39,11 @@ namespace MaxiBug
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets the database name in lower case.
+        /// </summary>
+        public string DbName { get; set; } = string.Empty;
+
+        /// <summary>
         /// Deprecated: Gets or sets the name of the project file.
         /// </summary>
         [JsonIgnore]
@@ -93,6 +98,7 @@ namespace MaxiBug
         {
             Version = ApplicationSettings.ProjectFileFormatVersion;
             Name = name;
+            DbName = name.ToLower();
             IssueIdCounter = 1;
             TaskIdCounter = 1;
         }
@@ -104,10 +110,9 @@ namespace MaxiBug
         /// <returns>The id of the added issue</returns>
         public int AddIssue(Issue newIssue)
         {
+            IssueIdCounter = Database.SaveIssue(newIssue);
             newIssue.ID = IssueIdCounter;
             Issues.Add(IssueIdCounter, newIssue);
-            Database.SaveIssue(newIssue);
-            IssueIdCounter++;
             return newIssue.ID;
         }
 
@@ -118,10 +123,9 @@ namespace MaxiBug
         /// <returns>The id of the added task.</returns>
         public int AddTask(Task newTask)
         {
+            TaskIdCounter = Database.SaveTask(newTask);
             newTask.ID = TaskIdCounter;
             Tasks.Add(TaskIdCounter, newTask);
-            Database.SaveTask(newTask);
-            TaskIdCounter++;
             return newTask.ID;
         }
 

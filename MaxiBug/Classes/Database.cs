@@ -1,7 +1,9 @@
 ﻿using Npgsql;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.ServiceProcess;
 
 namespace MaxiBug
 {
@@ -256,6 +258,26 @@ namespace MaxiBug
             {
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
+                    string query = "SELECT name FROM project;";         // Get the full project name
+                    conn.Open();
+
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            if (!reader.IsDBNull(reader.GetOrdinal("name")))
+                            {
+                                string projectName = reader.GetString(reader.GetOrdinal("name"));
+                                softwareProject.Name = projectName;
+                            }
+                        }
+                    }
+                }
+
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    softwareProject.IssueIdCounter = 0;
                     string query = "SELECT * FROM issues;";
                     conn.Open();
 
@@ -293,6 +315,9 @@ namespace MaxiBug
                 }
 
                 softwareProject.IssueIdCounter++;
+                Debug.Print($"softwareProject.IssueIdCounter = {softwareProject.IssueIdCounter}");
+
+                // TODO: load tasks
 
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
@@ -350,10 +375,12 @@ namespace MaxiBug
         /// Save an issue in the database.
         /// </summary>
         /// <param name="newIssue">The issue</param>
-        public static void SaveIssue(Issue newIssue)
+        /// <returns>Returns the new serial id</returns>
+        public static int SaveIssue(Issue newIssue)
         {
             string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, imagefilename) " +
-                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@imagefilename);";
+                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@imagefilename) " +
+                        "RETURNING id;";
 
             string connString = GetConnectionString(Program.databaseName);
 
@@ -374,7 +401,8 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("summary", newIssue.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", newIssue.Description ?? string.Empty);
                     cmd.Parameters.AddWithValue("imagefilename", newIssue.ImageFilename ?? string.Empty);
-                    cmd.ExecuteNonQuery();
+                    var result = cmd.ExecuteScalar();
+                    return int.Parse(result.ToString());
                 }
             }
         }
@@ -383,10 +411,12 @@ namespace MaxiBug
         /// Save a task in the database.
         /// </summary>
         /// <param name="newTask">The task</param>
-        public static void SaveTask(Task newTask)
+        /// <returns>Returns the new serial id</returns>
+        public static int SaveTask(Task newTask)
         {
             string sql = $@"INSERT INTO tasks (datecreated, datemodified, createdby, modifiedby, targetversion, priority, status, summary, description) " +
-                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@targetversion,@priority,@status,@summary,@description);";
+                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@targetversion,@priority,@status,@summary,@description) " +
+                        "RETURNING id;";
 
             string connString = GetConnectionString(Program.databaseName);
 
@@ -405,13 +435,14 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("status", (short)newTask.Status);
                     cmd.Parameters.AddWithValue("summary", newTask.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", newTask.Description ?? string.Empty);
-                    cmd.ExecuteNonQuery();
+                    var result = cmd.ExecuteScalar();
+                    return int.Parse(result.ToString());
                 }
             }
         }
 
         /// <summary>
-        /// Update an issue in the database.
+        /// Update an issue in the database by its id.
         /// </summary>
         /// <param name="issue">The issue</param>
         public static void UpdateIssue(Issue issue)
@@ -521,5 +552,88 @@ namespace MaxiBug
                 }
             }
         }
+
+        /// <summary>
+        /// Get local PostgreSQL servers.
+        /// </summary>
+        /// <returns>A string array</returns>
+        public static string[] GetLocalServers()
+        {
+            var results = new List<string>();
+            bool postgresFound = false;
+            var scs = ServiceController.GetServices();
+
+            foreach (var sc in scs)
+            {
+                if (sc.DisplayName.ToLower().StartsWith("postgresql"))
+                {
+                    postgresFound = true;
+                }
+            }
+
+            var prc = Process.GetProcessesByName("PostgreSQLPortable");
+
+            if (prc.Length > 0)
+            {
+                postgresFound = true;
+            }
+
+            if (postgresFound)
+            {
+                results.Add("127.0.0.1");
+            }
+
+            results.Sort();
+
+            return results.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the database names from the PostgreSQL server.
+        /// </summary>
+        /// <returns>Database names (sorted)</returns>
+        public static string[] GetDbNames()
+        {
+            var databaseNames = new List<string>();
+            string connectionString = GetConnectionString("postgres");     // Connect to main db
+            //NpgsqlConnection.ClearAllPools();
+
+            for (var tries = 0; tries < 3; tries++)
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    using (var command = new NpgsqlCommand("SELECT datname FROM pg_database WHERE NOT datistemplate;", conn))
+                    {
+                        using (var dr = command.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                var databaseName = dr.GetValue(0).ToString();
+
+                                if (!databaseName.Equals("postgres"))           // Skip the default database
+                                {
+                                    databaseNames.Add(databaseName);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (databaseNames.Count > 0)
+                {
+                    databaseNames.Sort();
+                    //NpgsqlConnection.ClearAllPools();
+                    return databaseNames.ToArray();
+                }
+
+                Debug.Print("GetDbNames() retry " + tries);
+            }
+
+            // Empty array.
+            return databaseNames.ToArray();
+        }
+
     }
 }
