@@ -454,6 +454,7 @@ namespace MaxiBug
         private void NewProject()
         {
             //var status = FileSystemOperationStatus.None;
+            this.panelPie.Visible = false;
             var frmProject = new ProjectForm(OperationType.New);
 
             try
