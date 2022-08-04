@@ -167,41 +167,39 @@ namespace MaxiBug
         /// </summary>
         private void InitializeRecentProjects()
         {
-            bool flag = false;
+            bool flagNoRecentProjects = true;
 
-            // Initialize the settings for recent projects
-            if (Properties.Settings.Default.RecentProjectsNames == null)
+            if ((Properties.Settings.Default.RecentProjectsNames == null) || (Properties.Settings.Default.RecentProjectsPaths == null))
             {
                 Properties.Settings.Default.RecentProjectsNames = new System.Collections.Specialized.StringCollection();
+                Properties.Settings.Default.RecentProjectsPaths = new System.Collections.Specialized.StringCollection();
                 Properties.Settings.Default.Save();
-
-                flag = true;
             }
-            else if (Properties.Settings.Default.RecentProjectsNames.Count > 0)
+            else if ((Properties.Settings.Default.RecentProjectsNames.Count > 0) && (Properties.Settings.Default.RecentProjectsPaths.Count > 0))
             {
                 // Load the recent projects from the application settings and insert them in the recent projects submenu
                 for (int i = 0, n = Properties.Settings.Default.RecentProjectsNames.Count - 1; i <= n; ++i)
                 {
                     ToolStripMenuItem item = new ToolStripMenuItem(Properties.Settings.Default.RecentProjectsNames[i])
                     {
-                        Tag = Properties.Settings.Default.RecentProjectsNames[i].ToLower()
+                        Tag = Properties.Settings.Default.RecentProjectsPaths[i]        // Database name
                     };
-
                     recentProjectsToolStripMenuItem.DropDownItems.Add(item);
 
                     // Add an event handler for the new menu item
                     item.Click += new System.EventHandler(this.FileMenuRecentProjectItem_Click);
                 }
-            }
-            else
-            {
-                flag = true;
+
+                flagNoRecentProjects = false;
             }
 
             // If there are no recent projects, disable menu items
-            if (flag)
+            if (flagNoRecentProjects)
             {
+                // Disable the recent projects menu item
                 recentProjectsToolStripMenuItem.Enabled = false;
+
+                // Disable the clear recent projects list menu item
                 clearRecentProjectsListToolStripMenuItem.Enabled = false;
             }
         }
@@ -500,6 +498,7 @@ namespace MaxiBug
             AddRecentProject(Program.SoftwareProject.Name, Program.SoftwareProject.DbName);
 
             SetControlsState();
+            MessageBox.Show($"Created {Program.SoftwareProject.Name}", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>
