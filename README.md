@@ -32,6 +32,17 @@ When using the "Copy to clipboard" button, text and images can be pasted into of
 
 # Getting Started
 
+For security reasons, PostgreSQL does not listen on all available IP addresses on the server machine initially. 
+In order to access the server over the network, you need to enable listening on the address first. 
+
+For PostgreSQL servers starting with version 8.0, this is controlled using the **listen_addresses** parameter in the data\postgresql.conf file. 
+Here, you can enter a list of IP addresses the server should listen on, or simply use '*' to listen on all available IP addresses.
+Also see: https://www.postgresql.org/docs/current/runtime-config-connection.html
+
+If your Postgres server is exposed to the internet the default user and password should be changed and Postgres should preferably be using a non-default port.
+As MaxiBug does not offer user authentication itself, the users and their passwords should be managed in Postgres.
+In the MaxiBug settings the connection settings for a user can be configured.
+
 ## Prerequisites
 
 - Microsoft Windows 7 or higher
