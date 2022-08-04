@@ -275,6 +275,7 @@ namespace MaxiBug
                     }
                 }
 
+                // Load Issues
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
                     softwareProject.IssueIdCounter = 0;
@@ -317,8 +318,48 @@ namespace MaxiBug
                 softwareProject.IssueIdCounter++;
                 Debug.Print($"softwareProject.IssueIdCounter = {softwareProject.IssueIdCounter}");
 
-                // TODO: load tasks
+                // Load tasks
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    softwareProject.TaskIdCounter = 0;
+                    string query = "SELECT * FROM tasks;";
+                    conn.Open();
 
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var task = new Task();
+                            task.ID = reader.GetInt32(reader.GetOrdinal("id"));
+                            task.DateCreated = reader.GetDateTime(reader.GetOrdinal("datecreated"));
+                            task.DateModified = reader.GetDateTime(reader.GetOrdinal("datemodified"));
+                            task.Description = reader.GetString(reader.GetOrdinal("description"));
+                            task.Priority = (TaskPriority)reader.GetInt16(reader.GetOrdinal("priority"));
+                            task.Status = (TaskStatus)reader.GetInt16(reader.GetOrdinal("status"));
+                            task.Summary = reader.GetString(reader.GetOrdinal("summary"));
+                            task.TargetVersion = reader.GetString(reader.GetOrdinal("targetversion"));
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("createdby")))
+                            {
+                                task.CreatedBy = reader.GetString(reader.GetOrdinal("createdby"));
+                            }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("modifiedby")))
+                            {
+                                task.ModifiedBy = reader.GetString(reader.GetOrdinal("modifiedby"));
+                            }
+
+                            softwareProject.TaskIdCounter = Math.Max(task.ID, softwareProject.TaskIdCounter);
+                            softwareProject.Tasks.Add(task.ID, task);
+                        }
+                    }
+                }
+
+                softwareProject.TaskIdCounter++;
+                Debug.Print($"softwareProject.TaskIdCounter = {softwareProject.TaskIdCounter}");
+
+                // Load users
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
                     string query = "SELECT name FROM users ORDER BY name;";
@@ -437,6 +478,27 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("description", newTask.Description ?? string.Empty);
                     var result = cmd.ExecuteScalar();
                     return int.Parse(result.ToString());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update project name in the database.
+        /// </summary>
+        /// <param name="name">Project name</param>
+        public static void UpdateProject(string name)
+        {
+            string sql = $@"UPDATE project SET name=@name;";
+            string connString = GetConnectionString(Program.databaseName);
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("name", name ?? string.Empty);
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

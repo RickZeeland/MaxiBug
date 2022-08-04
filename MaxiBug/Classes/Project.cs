@@ -22,16 +22,16 @@ namespace MaxiBug
         public string Version { get; private set; } = string.Empty;
 
         /// <summary>
-        /// Gets the current value of issue ID counter: the next issue created will have this value. This property is incremented automatically.
+        /// Gets the current value of issue ID set by Postgres serial.
         /// </summary>
         [JsonProperty]
         public int IssueIdCounter { get; set; } = 0;
 
         /// <summary>
-        /// Gets the current value of task ID counter: the next task created will have this value. This property is incremented automatically.
+        /// Gets the current value of task ID set by Postgres serial.
         /// </summary>
         [JsonProperty]
-        public int TaskIdCounter { get; private set; } = 0;
+        public int TaskIdCounter { get; set; } = 0;
 
         /// <summary>
         /// Gets or sets the project name.

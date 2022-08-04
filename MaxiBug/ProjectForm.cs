@@ -35,6 +35,7 @@ namespace MaxiBug
             {
                 // Edit existing project settings
                 ProjectName = projectName;
+                this.txtDbName.Enabled = false;
             }
             else
             {

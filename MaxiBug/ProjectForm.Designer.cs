@@ -48,14 +48,14 @@
             this.lblFormTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFormTitle.Name = "lblFormTitle";
             this.lblFormTitle.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.lblFormTitle.Size = new System.Drawing.Size(636, 67);
+            this.lblFormTitle.Size = new System.Drawing.Size(492, 67);
             this.lblFormTitle.TabIndex = 0;
             this.lblFormTitle.Text = "Project";
             this.lblFormTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btOk
             // 
-            this.btOk.Location = new System.Drawing.Point(410, 207);
+            this.btOk.Location = new System.Drawing.Point(254, 228);
             this.btOk.Margin = new System.Windows.Forms.Padding(4);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(88, 30);
@@ -66,7 +66,7 @@
             // 
             // btCancel
             // 
-            this.btCancel.Location = new System.Drawing.Point(517, 207);
+            this.btCancel.Location = new System.Drawing.Point(361, 228);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(88, 30);
@@ -91,7 +91,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(479, 25);
+            this.txtName.Size = new System.Drawing.Size(334, 25);
             this.txtName.TabIndex = 2;
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
@@ -101,7 +101,7 @@
             this.txtDbName.Margin = new System.Windows.Forms.Padding(4);
             this.txtDbName.MaxLength = 50;
             this.txtDbName.Name = "txtDbName";
-            this.txtDbName.Size = new System.Drawing.Size(479, 25);
+            this.txtDbName.Size = new System.Drawing.Size(334, 25);
             this.txtDbName.TabIndex = 12;
             // 
             // labelDbName
@@ -116,10 +116,9 @@
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(124, 172);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(426, 17);
+            this.label2.Size = new System.Drawing.Size(335, 52);
             this.label2.TabIndex = 13;
             this.label2.Text = "* Please use normal characters and underscores for the database name";
             // 
@@ -127,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(636, 260);
+            this.ClientSize = new System.Drawing.Size(492, 280);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDbName);
             this.Controls.Add(this.labelDbName);

@@ -649,6 +649,7 @@ namespace MaxiBug
                     this.Cursor = Cursors.WaitCursor;
                     this.Text = $"{frmProject.ProjectName} - {Program.myName}";     // Set the main form title
                     Program.SoftwareProject.Name = frmProject.ProjectName;
+                    Database.UpdateProject(frmProject.ProjectName);
                     ClearRecentProjects();
                     AddRecentProject(frmProject.ProjectName, Program.databaseName);
                 }
