@@ -1360,6 +1360,19 @@ namespace MaxiBug
             int id = int.Parse(this.GridIssues.SelectedRows[0].Cells["id"].Value.ToString());
             int idOld = id;     // The id can change
 
+            string userlock = Database.IssueLockedBy(id);
+
+            if (!string.IsNullOrEmpty(userlock))
+            {
+                MessageBox.Show($"Issue is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                // Lock the issue by user name
+                Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, id, 0);
+            }
+
             IssueForm frmIssue = new IssueForm(OperationType.Edit, Program.SoftwareProject.Issues[id]);
 
             if (frmIssue.ShowDialog() == DialogResult.OK)
@@ -1406,6 +1419,8 @@ namespace MaxiBug
                 this.GridIssues.Sort(new IssuesDataGridViewRowComparer(SortOrder.Ascending));
             }
 
+            // Remove lock
+            Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, 0, 0);
             frmIssue.Dispose();
         }
 

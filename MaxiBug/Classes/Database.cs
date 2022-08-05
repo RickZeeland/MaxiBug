@@ -131,6 +131,8 @@ namespace MaxiBug
               datecreated timestamp with time zone,
               name character varying(50),
               description text,
+              issuelock integer,
+              tasklock integer,
               CONSTRAINT pk_users PRIMARY KEY (id)
             );";
 
@@ -433,6 +435,36 @@ namespace MaxiBug
         }
 
         /// <summary>
+        /// Check if an issue is locked (in use) by a user.
+        /// </summary>
+        /// <param name="issueId">The issue id</param>
+        /// <returns>The user that locked the issue</returns>
+        public static string IssueLockedBy(int issueId)
+        {
+            string sql = $@"SELECT name FROM users WHERE issuelock=@id;";
+            string connString = GetConnectionString(Program.databaseName);
+            string username = string.Empty;
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", issueId);
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        username = result.ToString();
+                    }
+                }
+            }
+
+            return username;
+        }
+
+        /// <summary>
         /// Save an issue in the database.
         /// </summary>
         /// <param name="newIssue">The issue</param>
@@ -510,7 +542,7 @@ namespace MaxiBug
         /// <returns>Returns the generated serial id</returns>
         public static int SaveImage(Image img, string filename = "")
         {
-            string sql = "INSERT INTO images (name,data) VALUES(@name,@image) RETURNING id;";
+            string sql = "INSERT INTO images (datecreated,name,data) VALUES(CURRENT_TIMESTAMP,@name,@image) RETURNING id;";
             string connString = GetConnectionString(Program.databaseName);
             byte[] bytes = imgToByteArray(img);
 
@@ -598,6 +630,29 @@ namespace MaxiBug
 
                 using (var cmd = new NpgsqlCommand(sql, conn))
                 {
+                    cmd.Parameters.AddWithValue("name", name ?? string.Empty);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update user locks by name in the database.
+        /// </summary>
+        /// <param name="name">Project name</param>
+        public static void UpdateUserLocks(string name, int issueId, int taskId)
+        {
+            string sql = $@"UPDATE users SET issuelock=@issuelock, tasklock=@tasklock WHERE name=@name;";
+            string connString = GetConnectionString(Program.databaseName);
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("issuelock", issueId);
+                    cmd.Parameters.AddWithValue("tasklock", taskId);
                     cmd.Parameters.AddWithValue("name", name ?? string.Empty);
                     cmd.ExecuteNonQuery();
                 }
