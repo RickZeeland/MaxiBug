@@ -108,6 +108,11 @@ namespace MaxiBug
         public string ImageFilename { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets the optional image id.
+        /// </summary>
+        public int ImageId { get; set; }
+
+        /// <summary>
         /// Creates a new issue.
         /// </summary>
         public Issue()
@@ -158,6 +163,7 @@ namespace MaxiBug
             clonedInstance.CreatedBy = this.CreatedBy;
             clonedInstance.ModifiedBy = this.ModifiedBy;
             clonedInstance.ImageFilename = this.ImageFilename;
+            clonedInstance.ImageId = this.ImageId;
         }
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.ServiceProcess;
 
 namespace MaxiBug
@@ -135,6 +137,18 @@ namespace MaxiBug
 
             sql = $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Properties.Settings.Default.PostgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
             ExecuteNonQuery(ConnectionString, sql);
+
+            // images table
+            sql = $@"CREATE TABLE images
+            (
+              id serial,
+              datecreated timestamp with time zone,
+              name character varying(256),
+              data bytea,
+              CONSTRAINT pk_images PRIMARY KEY (id)
+            );";
+
+            CreateTable(ConnectionString, "images", sql);
 
             Debug.Print($"Created database {dbName}");
         }
@@ -309,6 +323,11 @@ namespace MaxiBug
                                 issue.ModifiedBy = reader.GetString(reader.GetOrdinal("modifiedby"));
                             }
 
+                            if (!reader.IsDBNull(reader.GetOrdinal("image_id")))
+                            {
+                                issue.ImageId = reader.GetInt32(reader.GetOrdinal("image_id"));
+                            }
+
                             softwareProject.IssueIdCounter = Math.Max(issue.ID, softwareProject.IssueIdCounter);
                             softwareProject.Issues.Add(issue.ID, issue);
                         }
@@ -419,8 +438,8 @@ namespace MaxiBug
         /// <returns>Returns the new serial id</returns>
         public static int SaveIssue(Issue newIssue)
         {
-            string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, imagefilename) " +
-                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@imagefilename) " +
+            string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, imagefilename, image_id) " +
+                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@imagefilename,@image_id) " +
                         "RETURNING id;";
 
             string connString = GetConnectionString(Program.databaseName);
@@ -442,6 +461,7 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("summary", newIssue.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", newIssue.Description ?? string.Empty);
                     cmd.Parameters.AddWithValue("imagefilename", newIssue.ImageFilename ?? string.Empty);
+                    cmd.Parameters.AddWithValue("image_id", newIssue.ImageId);
                     var result = cmd.ExecuteScalar();
                     return int.Parse(result.ToString());
                 }
@@ -483,6 +503,86 @@ namespace MaxiBug
         }
 
         /// <summary>
+        /// Save an image in the database.
+        /// </summary>
+        /// <param name="bytes">Byte arrray</param>
+        /// <returns>Returns the generated serial id</returns>
+        public static int SaveImage(Image img, string filename = "")
+        {
+            string sql = "INSERT INTO images (name,data) VALUES(@name,@image) RETURNING id;";
+            string connString = GetConnectionString(Program.databaseName);
+            byte[] bytes = imgToByteArray(img);
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("name", filename ?? string.Empty);
+                    cmd.Parameters.AddWithValue("image", NpgsqlTypes.NpgsqlDbType.Bytea, bytes);
+                    var result = cmd.ExecuteScalar();
+                    return int.Parse(result.ToString());
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load an image from the database.
+        /// </summary>
+        /// <param name="id">The image id</param>
+        /// <returns>The Image or null when not found</returns>
+        public static Image LoadImage(int id)
+        {
+            string sql = $"SELECT data from images WHERE id={id}";
+            string connString = GetConnectionString(Program.databaseName);
+            Image imageTemp = null;
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var command = new NpgsqlCommand(sql, conn))
+                {
+                    byte[] bytes = null;
+                    var reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        bytes = (byte[])reader[0];
+                    }
+
+                    reader.Close();
+
+                    if (bytes != null)
+                    {
+                        using (MemoryStream memStream = new MemoryStream(bytes))
+                        {
+                            ImageConverter imageConverter = new ImageConverter();
+                            imageTemp = imageConverter.ConvertFrom(bytes) as Image;
+                        }
+                    }
+                }
+            }
+
+            return imageTemp;
+        }
+
+        /// <summary>
+        /// Convert an Image to a byte array.
+        /// </summary>
+        /// <param name="img">The image</param>
+        /// <returns>A byte array</returns>
+        public static byte[] imgToByteArray(Image img)
+        {
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                img.Save(mStream, img.RawFormat);
+                return mStream.ToArray();
+            }
+        }
+
+        /// <summary>
         /// Update project name in the database.
         /// </summary>
         /// <param name="name">Project name</param>
@@ -510,7 +610,7 @@ namespace MaxiBug
         public static void UpdateIssue(Issue issue)
         {
             string sql = $@"UPDATE issues SET datecreated=@datecreated, datemodified=@datemodified, createdby=@createdby, modifiedby=@modifiedby, version=@version, " +
-                        "targetversion=@targetversion, priority=@priority, status=@status, summary=@summary, description=@description, imagefilename=@imagefilename " +
+                        "targetversion=@targetversion, priority=@priority, status=@status, summary=@summary, description=@description, imagefilename=@imagefilename, image_id=@image_id " +
                         "WHERE id=@id;";
 
             string connString = GetConnectionString(Program.databaseName);
@@ -532,6 +632,7 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("summary", issue.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", issue.Description ?? string.Empty);
                     cmd.Parameters.AddWithValue("imagefilename", issue.ImageFilename ?? string.Empty);
+                    cmd.Parameters.AddWithValue("image_id", issue.ImageId);
                     cmd.Parameters.AddWithValue("id", issue.ID);
                     cmd.ExecuteNonQuery();
                 }

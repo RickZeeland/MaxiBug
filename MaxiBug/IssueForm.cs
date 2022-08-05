@@ -212,7 +212,12 @@ namespace MaxiBug
             this.txtImage.Text = CurrentIssue.ImageFilename;
             this.txtImage.ForeColor = Color.Black;
 
-            if (!string.IsNullOrEmpty(CurrentIssue.ImageFilename))
+            if (CurrentIssue.ImageId > 0)
+            {
+                this.pictureBox1.Image = Database.LoadImage(CurrentIssue.ImageId);
+                this.pictureBox1.Visible = true;
+            }
+            else if (!string.IsNullOrEmpty(CurrentIssue.ImageFilename))
             {
                 // If there is an attached image, display it
                 string fullFilename = CurrentIssue.ImageFilename;
@@ -346,6 +351,7 @@ namespace MaxiBug
                     this.pictureBox1.Image = Image.FromFile(imageFilename);
                     this.pictureBox1.Visible = true;
                     this.txtImage.ForeColor = Color.Black;
+                    CurrentIssue.ImageId = Database.SaveImage(this.pictureBox1.Image, imageFilename);
                 }
             }
         }
