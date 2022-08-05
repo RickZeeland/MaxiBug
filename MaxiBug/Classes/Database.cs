@@ -100,6 +100,7 @@ namespace MaxiBug
               summary character varying(200),
               description text,
               imagefilename character varying(300),
+              image_id integer,
               CONSTRAINT pk_issues PRIMARY KEY (id)
             );";
 

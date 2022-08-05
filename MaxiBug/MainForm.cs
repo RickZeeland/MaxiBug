@@ -526,9 +526,6 @@ namespace MaxiBug
                 Program.databaseName = dbName.ToLower();
             }
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
             //if (Program.SoftwareProject != null)
             //{
             //    Program.DeleteLockFile();
@@ -563,11 +560,13 @@ namespace MaxiBug
 
             ConnectionString = Database.GetConnectionString(Program.databaseName);
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
             var message = Database.LoadProject(ConnectionString, ref newProject);
 
             //Project newProject = new Project();
-            //var status = ApplicationData.LoadProject(fullFilename, out newProject);
+            //var status = ApplicationData.LoadProject(fullFilename, out newProject);       // Old JSON file
 
             //// If there was an error loading the project file, show feedback
             //if (status != FileSystemOperationStatus.OK)
@@ -578,6 +577,7 @@ namespace MaxiBug
             if (!string.IsNullOrEmpty(message))
             {
                 // Error, abort the project
+                this.Cursor = Cursors.Default;
                 MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 newProject = null;
                 return false;
