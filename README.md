@@ -49,10 +49,11 @@ For testing purposes a [portable version of PostgreSQL](https://github.com/garet
 
 - Microsoft Windows 7 or higher
 - Microsoft .NET Framework 4.8
+- [PostgreSQL 9.4 or higher](https://www.postgresql.org/)
 
 # How To Use
 
-First you need to create a new project (File > New Project), define a project name and choose a location to save it:
+First you need to create a new project (File > New Project), define a project name and database name:
 
 <img src="Screenshots/new-project.png" alt="New project window">
 
