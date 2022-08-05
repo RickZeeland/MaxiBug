@@ -43,6 +43,8 @@ If your Postgres server is exposed to the internet the default user and password
 As MaxiBug does not offer user authentication itself, the users and their passwords should be managed in Postgres.
 In the MaxiBug settings the connection settings for a user can be configured.
 
+For testing purposes a [portable version of PostgreSQL](https://github.com/garethflowers/postgresql-portable) can be downloaded.
+
 ## Prerequisites
 
 - Microsoft Windows 7 or higher
