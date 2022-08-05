@@ -474,7 +474,7 @@ namespace MaxiBug
                     GridTasks.Refresh();
 
                     Program.SoftwareProject = new Project(frmProject.ProjectName);
-                    Program.SoftwareProject.Users.Add(Environment.UserName);
+                    Program.SoftwareProject.Users.Add(Properties.Settings.Default.PostgresUser);
 
                     ////status = ApplicationData.SaveProjectToFile(Program.SoftwareProject);
                     Program.SoftwareProject.DbName = Program.databaseName;

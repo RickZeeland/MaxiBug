@@ -133,7 +133,7 @@ namespace MaxiBug
 
             CreateTable(ConnectionString, "users", sql);
 
-            sql = $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Environment.UserName}', '{Environment.MachineName}');";
+            sql = $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Properties.Settings.Default.PostgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
             ExecuteNonQuery(ConnectionString, sql);
 
             Debug.Print($"Created database {dbName}");
