@@ -2,6 +2,7 @@
 ![Windows Badge](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=fff&style=flat-square)
 ![.NET Badge](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=fff&style=flat-square)
 ![Visual Studio Badge](https://img.shields.io/badge/Visual%20Studio-5C2D91?logo=visualstudio&logoColor=fff&style=flat-square)
+![Postgres Badge](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)
 
 This is a fork of MiniBug2 for VS2022 and .NET 4.8.
 
