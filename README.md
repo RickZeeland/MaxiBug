@@ -15,8 +15,7 @@ MaxiBug is a simple issue tracker and to-do list, it is a Windows desktop multi-
 
 MaxiBug uses a Postgres database (9.4 or higher) to store data.
 
-Attached images are stored with their file name only, it is recommended to keep them in the same folder as the application.
-Preferably keep images in a subfolder "Images", this way all data can be copied easily to another location.
+Attached images are stored in the database.
 
 <img src="MaxiBug/Resources/Clipboard_64x64.png" alt="Clipboard button">
 
