@@ -589,6 +589,13 @@ namespace MaxiBug
 
                 Program.SoftwareProject = null;
                 Program.SoftwareProject = newProject;
+                string user = Properties.Settings.Default.PostgresUser;
+
+                if (!Program.SoftwareProject.Users.Contains(user))          // Save current postgres user if not in database
+                {
+                    Program.SoftwareProject.Users.Add(user);
+                    Database.SaveUser(user);
+                }
 
                 // Set the main form title bar text
                 this.Text = $"{Program.SoftwareProject.Name} - {Program.myName}";

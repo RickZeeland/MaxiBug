@@ -214,6 +214,7 @@ namespace MaxiBug
 
             if (CurrentIssue.ImageId > 0)
             {
+                this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;
                 this.pictureBox1.Image = Database.LoadImage(CurrentIssue.ImageId);
                 this.pictureBox1.Visible = true;
             }
