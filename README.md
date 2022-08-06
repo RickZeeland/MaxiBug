@@ -45,6 +45,9 @@ In the MaxiBug settings the connection settings for a user can be configured.
 
 For testing purposes a [portable version of PostgreSQL](https://github.com/garethflowers/postgresql-portable) can be downloaded.
 
+Another option would be to use a Postgres hosting provider like [Heroku](https://www.heroku.com/postgres) as mentioned in this [C# Corner article](https://www.c-sharpcorner.com/article/configuration-postgresql-database-on-heroku/).
+I tried to get the free Postgres option working, but without success.
+
 ## Prerequisites
 
 - Microsoft Windows 7 or higher
