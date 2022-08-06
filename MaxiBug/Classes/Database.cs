@@ -639,8 +639,10 @@ namespace MaxiBug
         /// <summary>
         /// Update user locks by name in the database.
         /// </summary>
-        /// <param name="name">Project name</param>
-        public static void UpdateUserLocks(string name, int issueId, int taskId)
+        /// <param name="username">The user name</param>
+        /// <param name="issueId">The issue id or 0</param>
+        /// <param name="taskId">The task id or 0</param>
+        public static void UpdateUserLocks(string username, int issueId, int taskId)
         {
             string sql = $@"UPDATE users SET issuelock=@issuelock, tasklock=@tasklock WHERE name=@name;";
             string connString = GetConnectionString(Program.databaseName);
@@ -653,7 +655,7 @@ namespace MaxiBug
                 {
                     cmd.Parameters.AddWithValue("issuelock", issueId);
                     cmd.Parameters.AddWithValue("tasklock", taskId);
-                    cmd.Parameters.AddWithValue("name", name ?? string.Empty);
+                    cmd.Parameters.AddWithValue("name", username ?? string.Empty);
                     cmd.ExecuteNonQuery();
                 }
             }

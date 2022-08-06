@@ -341,8 +341,6 @@ namespace MaxiBug
 
             // Save the order of the columns in the issues and tasks DataGridViews
             ApplicationSettings.Save(ApplicationSettings.SaveSettings.ColumnOrderSort);
-
-            //Program.DeleteLockFile();
         }
 
         #region "RecentProject"
@@ -464,7 +462,6 @@ namespace MaxiBug
 
                 if (result == DialogResult.OK)
                 {
-                    //Program.DeleteLockFile();               // Delete .lock file if it exists
                     Program.SoftwareProject = null;
 
                     // Clear the issues and tasks grids
@@ -510,26 +507,10 @@ namespace MaxiBug
         /// <returns>True on success</returns>
         private bool OpenProject(string projectName = "", string dbName = "")
         {
-            //if (Program.IsLocked(fullFilename))
-            //{
-            //    // file is in use
-            //    var result = MessageBox.Show($"Project is in use by another user!\n{fullFilename}\nContinue anyway?", Program.myName, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-
-            //    if (result == DialogResult.Cancel)
-            //    {
-            //        return false;
-            //    }
-            //}
-
             if (!string.IsNullOrEmpty(dbName))
             {
                 Program.databaseName = dbName.ToLower();
             }
-
-            //if (Program.SoftwareProject != null)
-            //{
-            //    Program.DeleteLockFile();
-            //}
 
             var dbNames = Database.GetDbNames();            // Find existing database names
 
@@ -584,9 +565,6 @@ namespace MaxiBug
             }
             else
             {
-                //// Lock the project file
-                //Program.CreateLockFile(fullFilename);
-
                 Program.SoftwareProject = null;
                 Program.SoftwareProject = newProject;
                 string user = Properties.Settings.Default.PostgresUser;

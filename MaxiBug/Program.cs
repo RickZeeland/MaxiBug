@@ -2,7 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -13,7 +12,7 @@ namespace MaxiBug
     /// </summary>
     static class Program
     {
-        public static string myName = "MaxiBug beta Issue Tracker";
+        public static string myName = "MaxiBug Issue Tracker";
 
         /// <summary>
         /// Postgres database name in lower case.
@@ -67,75 +66,6 @@ namespace MaxiBug
 
             // More than one instance
             MessageBox.Show("Only one instance allowed to run!", myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            return false;
-        }
-
-        /// <summary>
-        /// Create project .lock file.
-        /// </summary>
-        /// <param name="fullFilename">The project file name</param>
-        internal static void CreateLockFile(string fullFilename)
-        {
-            //try
-            //{
-            //    File.WriteAllText(fullFilename.Replace(".json", ".lock"), $"{Environment.UserName} {DateTime.Now}");
-            //}
-            //catch
-            //{
-            //}
-        }
-
-        /// <summary>
-        /// Delete project .lock file.
-        /// </summary>
-        /// <param name="fullFilename">The full file name</param>
-        internal static void DeleteLockFile(string fullFilename = "")
-        {
-            //try
-            //{
-            //    if (string.IsNullOrEmpty(fullFilename))
-            //    {
-            //        if (SoftwareProject == null)
-            //        {
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            // Use current project file name
-            //            fullFilename = Path.Combine(SoftwareProject.Location, SoftwareProject.Filename);
-            //        }
-            //    }
-
-            //    if (File.Exists(fullFilename))
-            //    {
-            //        // Delete lock file
-            //        File.Delete(fullFilename.Replace(".json", ".lock"));
-            //    }
-            //}
-            //catch
-            //{
-            //}
-        }
-
-        /// <summary>
-        /// Test if project file is locked.
-        /// </summary>
-        /// <param name="fullFilename">The full file name</param>
-        /// <returns>True when locked</returns>
-        internal static bool IsLocked(string fullFilename)
-        {
-            //try
-            //{
-            //    if (File.Exists(fullFilename.Replace(".json", ".lock")))
-            //    {
-            //        return true;
-            //    }
-            //}
-            //catch
-            //{
-            //    return false;
-            //}
-
             return false;
         }
     }
