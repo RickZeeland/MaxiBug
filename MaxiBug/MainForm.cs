@@ -1297,6 +1297,9 @@ namespace MaxiBug
         {
             try
             {
+                // Lock the issue by user name
+                Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, Program.SoftwareProject.IssueIdCounter, 0);
+
                 IssueForm frmIssue = new IssueForm(OperationType.New);
 
                 if (frmIssue.ShowDialog() == DialogResult.OK)
@@ -1322,6 +1325,9 @@ namespace MaxiBug
             {
                 Debug.Print(ex.Message);
             }
+
+            // Unlock
+            Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, 0, 0);
         }
 
         /// <summary>
