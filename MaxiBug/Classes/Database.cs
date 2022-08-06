@@ -61,7 +61,19 @@ namespace MaxiBug
         /// <param name="dbName">The postgresql database name</param>
         public static void CreateProject(string dbName)
         {
-            bool result = CreateDatabase(dbName);
+            bool result;
+            string host = Properties.Settings.Default.PostgresIpaddress;
+
+            if (host.StartsWith("postgres"))
+            {
+                // Heroku online db already created
+                result = true;
+            }
+            else
+            {
+                result = CreateDatabase(dbName);
+            }
+
             ConnectionString = GetConnectionString(dbName);
 
             if (!result)
