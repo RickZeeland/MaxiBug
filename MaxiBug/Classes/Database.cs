@@ -62,12 +62,22 @@ namespace MaxiBug
         public static void CreateProject(string dbName)
         {
             bool result;
-            string host = Properties.Settings.Default.PostgresIpaddress;
+            string sql;
+            string uri = Properties.Settings.Default.PostgresIpaddress.ToLower();
 
-            if (host.StartsWith("postgres"))
+            if (uri.Contains("amazonaws"))
             {
-                // Heroku online db already created
-                result = true;
+                // Heroku empty db must be already created
+                sql = "set transaction read write; ";
+                sql += $@"INSERT INTO project (datecreated, name, version) VALUES (CURRENT_TIMESTAMP, '{Program.SoftwareProject.Name}', '{Program.SoftwareProject.Version}');";
+                ExecuteNonQuery(ConnectionString, sql);
+
+                sql = "set transaction read write; ";
+                sql += $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Properties.Settings.Default.PostgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
+                ExecuteNonQuery(ConnectionString, sql);
+
+                Debug.Print($"Updated database {dbName}");
+                return;
             }
             else
             {
@@ -83,7 +93,7 @@ namespace MaxiBug
             }
 
             // project table
-            string sql = $@"CREATE TABLE project
+            sql = $@"CREATE TABLE project
             (
               id serial,
               datecreated timestamp with time zone,
