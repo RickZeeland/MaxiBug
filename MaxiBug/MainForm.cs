@@ -513,23 +513,28 @@ namespace MaxiBug
             }
 
             var dbNames = Database.GetDbNames();            // Find existing database names
+            bool result = false;
 
             if (dbNames.Length < 1)
             {
-                // Ask db name
                 MessageBox.Show("No database found, please use 'New Project'", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+            }
+            else if (string.IsNullOrEmpty(dbName))
+            {
+                result = SelectDatabase("Select a database", dbNames);
             }
             else if (!dbNames.Contains(Program.databaseName))
             {
-                // Database name not found, select one
-                var selForm = new SelectionForm(dbNames, $"{Program.databaseName} not found, select database");
+                result = SelectDatabase($"Database {dbName} not found, select another database or close to abort", dbNames);
+            }
+            else
+            {
+                result = true;
+            }
 
-                if (selForm.ShowDialog() == DialogResult.OK)
-                {
-                    Program.databaseName = selForm.SelectedItem;
-                    Debug.Print("" + Program.databaseName);
-                }
+            if (!result)
+            {
+                return false;
             }
 
             Project newProject = new Project(Program.databaseName);
@@ -619,6 +624,26 @@ namespace MaxiBug
             this.Cursor = Cursors.Default;
             SetControlsState();
             return true;
+        }
+
+        /// <summary>
+        /// Shows a database selection form.
+        /// </summary>
+        /// <param name="formTitle">The form title</param>
+        /// <param name="dbNames">Array with database names</param>
+        /// <returns>True when selected, false on close form</returns>
+        private bool SelectDatabase(string formTitle, string[] dbNames)
+        {
+            var selForm = new SelectionForm(dbNames, formTitle);
+
+            if (selForm.ShowDialog() == DialogResult.OK)
+            {
+                Program.databaseName = selForm.SelectedItem;
+                Debug.Print("" + Program.databaseName);
+                return true;
+            }
+
+            return false;
         }
 
         /// <summary>

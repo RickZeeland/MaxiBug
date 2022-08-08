@@ -61,7 +61,7 @@ namespace MaxiBug
             if (Operation == OperationType.New)
             {
                 // Create a new instance of the Issue class
-                CurrentIssue = new Issue();
+                CurrentIssue = new Issue(Program.SoftwareProject.IssueIdCounter);
                 txtImage.Text = string.Empty;
             }
             else if ((Operation == OperationType.Edit) && (issue != null))
