@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.ServiceProcess;
+using System.Windows.Forms;
 
 namespace MaxiBug
 {
@@ -32,25 +33,32 @@ namespace MaxiBug
         /// </summary>
         /// <param name="dbName">Default is 'postgres'</param>
         /// <param name="keepalive">Default is 0</param>
-        /// <returns>The connection string</returns>
+        /// <returns>The connection string, or a string beginning with "Error:"</returns>
         public static string GetConnectionString(string dbName = "postgres", int keepalive = 0)
         {
-            var csb = new NpgsqlConnectionStringBuilder
+            try
             {
-                Host = Properties.Settings.Default.PostgresIpaddress,
-                Database = dbName,
-                Username = Properties.Settings.Default.PostgresUser,
-                Password = Properties.Settings.Default.PostgresPassword,
-                Port = Properties.Settings.Default.PostgresPort
-            };
+                var csb = new NpgsqlConnectionStringBuilder
+                {
+                    Host = Program.postgresIpaddress,
+                    Database = dbName,
+                    Username = Program.postgresUser,
+                    Password = Program.postgresPassword,
+                    Port = Program.postgresPort,
+                };
 
-            if (keepalive > 0)
-            {
-                csb.KeepAlive = keepalive;
+                if (keepalive > 0)
+                {
+                    csb.KeepAlive = keepalive;
+                }
+
+                Debug.Print(csb.ConnectionString);
+                return csb.ConnectionString;
             }
-
-            Debug.Print(csb.ConnectionString);
-            return csb.ConnectionString;
+            catch (Exception ex)
+            {
+                return $"Error: {ex.Message}";
+            }
         }
 
         /// <summary>
@@ -838,45 +846,53 @@ namespace MaxiBug
         public static string[] GetDbNames()
         {
             var databaseNames = new List<string>();
-            string connectionString = GetConnectionString("postgres");     // Connect to main db
-            //NpgsqlConnection.ClearAllPools();
 
-            for (var tries = 0; tries < 3; tries++)
+            try
             {
-                using (var conn = new NpgsqlConnection(connectionString))
+                string connectionString = GetConnectionString("postgres");     // Connect to main db
+                //NpgsqlConnection.ClearAllPools();
+
+                for (var tries = 0; tries < 3; tries++)
                 {
-                    conn.Open();
-
-                    using (var command = new NpgsqlCommand("SELECT datname FROM pg_database WHERE NOT datistemplate;", conn))
+                    using (var conn = new NpgsqlConnection(connectionString))
                     {
-                        using (var dr = command.ExecuteReader())
-                        {
-                            while (dr.Read())
-                            {
-                                var databaseName = dr.GetValue(0).ToString();
+                        conn.Open();
 
-                                if (!databaseName.Equals("postgres"))           // Skip the default database
+                        using (var command = new NpgsqlCommand("SELECT datname FROM pg_database WHERE NOT datistemplate;", conn))
+                        {
+                            using (var dr = command.ExecuteReader())
+                            {
+                                while (dr.Read())
                                 {
-                                    databaseNames.Add(databaseName);
+                                    var databaseName = dr.GetValue(0).ToString();
+
+                                    if (!databaseName.Equals("postgres"))           // Skip the default database
+                                    {
+                                        databaseNames.Add(databaseName);
+                                    }
                                 }
                             }
                         }
                     }
-                }
 
-                if (databaseNames.Count > 0)
-                {
-                    databaseNames.Sort();
-                    //NpgsqlConnection.ClearAllPools();
-                    return databaseNames.ToArray();
-                }
+                    if (databaseNames.Count > 0)
+                    {
+                        databaseNames.Sort();
+                        //NpgsqlConnection.ClearAllPools();
+                        return databaseNames.ToArray();
+                    }
 
-                Debug.Print("GetDbNames() retry " + tries);
+                    Debug.Print("GetDbNames() retry " + tries);
+                }
+            }
+            catch (Exception ex)
+            {
+                databaseNames.Clear();
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             // Empty array.
             return databaseNames.ToArray();
         }
-
     }
 }

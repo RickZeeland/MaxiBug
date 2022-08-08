@@ -61,6 +61,11 @@ namespace MaxiBug
                 //this.modernPieChart1.Size = new Size(400, 300);                     // Do not scale Pie chart with font size
                 this.panelPie.Location = new Point(this.Width - 600, this.Height - 400);
 
+                Program.postgresIpaddress = Properties.Settings.Default.PostgresIpaddress;
+                Program.postgresPort = Properties.Settings.Default.PostgresPort;
+                Program.postgresUser = Properties.Settings.Default.PostgresUser;
+                Program.postgresPassword = Properties.Settings.Default.PostgresPassword;
+
                 // Initialization of the Issues and Tasks grids
                 InitializeGridIssues();
                 InitializeGridTasks();
@@ -545,6 +550,13 @@ namespace MaxiBug
             }
 
             ConnectionString = Database.GetConnectionString(Program.databaseName);
+
+            if (ConnectionString.StartsWith("Error"))
+            {
+                MessageBox.Show(ConnectionString, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ConnectionString = string.Empty;
+                return false;
+            }
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
