@@ -104,7 +104,7 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Add a new issue and save in database.
+        /// Add a new issue, save in database and get the new ID.
         /// </summary>
         /// <param name="newIssue">An instance of the Issue class to add</param>
         /// <returns>The id of the added issue</returns>

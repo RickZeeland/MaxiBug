@@ -71,7 +71,7 @@ namespace MaxiBug
         {
             bool result;
             string sql;
-            string uri = Properties.Settings.Default.PostgresIpaddress.ToLower();
+            string uri = Program.postgresIpaddress.ToLower();
 
             if (uri.Contains("amazonaws"))
             {
@@ -81,7 +81,7 @@ namespace MaxiBug
                 ExecuteNonQuery(ConnectionString, sql);
 
                 sql = "set transaction read write; ";
-                sql += $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Properties.Settings.Default.PostgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
+                sql += $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Program.postgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
                 ExecuteNonQuery(ConnectionString, sql);
 
                 Debug.Print($"Updated database {dbName}");
@@ -103,11 +103,10 @@ namespace MaxiBug
             // project table
             sql = $@"CREATE TABLE project
             (
-              id serial,
+              id serial PRIMARY KEY,
               datecreated timestamp with time zone,
-              name character varying(50),
-              version character varying(20),
-              CONSTRAINT pk_project PRIMARY KEY (id)
+              name VARCHAR(50),
+              version VARCHAR(20)
             );";
 
             CreateTable(ConnectionString, "project", sql);
@@ -118,20 +117,19 @@ namespace MaxiBug
             // issues table
             sql = $@"CREATE TABLE issues
             (
-              id serial,
+              id serial PRIMARY KEY,
               datecreated timestamp with time zone,
               datemodified timestamp with time zone,
-              createdby character varying(50),
-              modifiedby character varying(50),
-              version character varying(20),
-              targetversion character varying(20),
+              createdby VARCHAR(50),
+              modifiedby VARCHAR(50),
+              version VARCHAR(20),
+              targetversion VARCHAR(20),
               priority smallint,
               status smallint,
-              summary character varying(200),
+              summary VARCHAR(200),
               description text,
-              imagefilename character varying(300),
-              image_id integer,
-              CONSTRAINT pk_issues PRIMARY KEY (id)
+              imagefilename VARCHAR(300),
+              image_id integer
             );";
 
             CreateTable(ConnectionString, "issues", sql);
@@ -139,17 +137,16 @@ namespace MaxiBug
             // tasks table
             sql = $@"CREATE TABLE tasks
             (
-              id serial,
+              id serial PRIMARY KEY,
               datecreated timestamp with time zone,
               datemodified timestamp with time zone,
-              createdby character varying(50),
-              modifiedby character varying(50),
-              targetversion character varying(20),
+              createdby VARCHAR(50),
+              modifiedby VARCHAR(50),
+              targetversion VARCHAR(20),
               priority smallint,
               status smallint,
-              summary character varying(50),
-              description text,
-              CONSTRAINT pk_tasks PRIMARY KEY (id)
+              summary VARCHAR(50),
+              description text
             );";
 
             CreateTable(ConnectionString, "tasks", sql);
@@ -157,28 +154,26 @@ namespace MaxiBug
             // users table
             sql = $@"CREATE TABLE users
             (
-              id serial,
+              id serial PRIMARY KEY,
               datecreated timestamp with time zone,
-              name character varying(50),
+              name VARCHAR(50),
               description text,
               issuelock integer,
-              tasklock integer,
-              CONSTRAINT pk_users PRIMARY KEY (id)
+              tasklock integer
             );";
 
             CreateTable(ConnectionString, "users", sql);
 
-            sql = $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Properties.Settings.Default.PostgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
+            sql = $@"INSERT INTO users (datecreated, name, description) VALUES (CURRENT_TIMESTAMP, '{Program.postgresUser}', '{Environment.UserName} - {Environment.MachineName}');";
             ExecuteNonQuery(ConnectionString, sql);
 
             // images table
             sql = $@"CREATE TABLE images
             (
-              id serial,
+              id serial PRIMARY KEY,
               datecreated timestamp with time zone,
-              name character varying(256),
-              data bytea,
-              CONSTRAINT pk_images PRIMARY KEY (id)
+              name VARCHAR(256),
+              data bytea
             );";
 
             CreateTable(ConnectionString, "images", sql);
