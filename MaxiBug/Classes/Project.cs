@@ -113,6 +113,7 @@ namespace MaxiBug
             IssueIdCounter = Database.SaveIssue(newIssue);
             newIssue.ID = IssueIdCounter;
             Issues.Add(IssueIdCounter, newIssue);
+            IssueIdCounter++;
             return newIssue.ID;
         }
 
@@ -126,6 +127,7 @@ namespace MaxiBug
             TaskIdCounter = Database.SaveTask(newTask);
             newTask.ID = TaskIdCounter;
             Tasks.Add(TaskIdCounter, newTask);
+            TaskIdCounter++;
             return newTask.ID;
         }
 
