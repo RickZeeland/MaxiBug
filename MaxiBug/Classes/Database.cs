@@ -863,7 +863,12 @@ namespace MaxiBug
 
                                     if (!databaseName.Equals("postgres"))           // Skip the default database
                                     {
-                                        databaseNames.Add(databaseName);
+                                        var result = ExecuteScalar(connectionString, $"SELECT EXISTS (SELECT * FROM information_schema.tables WHERE table_catalog = '{databaseName}' AND table_name = 'issues');");
+
+                                        if (result)
+                                        {
+                                            databaseNames.Add(databaseName);        // It is a MaxiBug database
+                                        }
                                     }
                                 }
                             }
