@@ -476,7 +476,7 @@ namespace MaxiBug
                     GridTasks.Refresh();
 
                     Program.SoftwareProject = new Project(frmProject.ProjectName);
-                    Program.SoftwareProject.Users.Add(Properties.Settings.Default.PostgresUser);
+                    Program.SoftwareProject.Users.Add(Program.postgresUser);
 
                     ////status = ApplicationData.SaveProjectToFile(Program.SoftwareProject);
                     Program.SoftwareProject.DbName = Program.databaseName;
@@ -584,12 +584,11 @@ namespace MaxiBug
             {
                 Program.SoftwareProject = null;
                 Program.SoftwareProject = newProject;
-                string user = Properties.Settings.Default.PostgresUser;
 
-                if (!Program.SoftwareProject.Users.Contains(user))          // Save current postgres user if not in database
+                if (!Program.SoftwareProject.Users.Contains(Program.postgresUser))          // Save current postgres user if not in database
                 {
-                    Program.SoftwareProject.Users.Add(user);
-                    Database.SaveUser(user);
+                    Program.SoftwareProject.Users.Add(Program.postgresUser);
+                    Database.SaveUser(Program.postgresUser);
                 }
 
                 // Set the main form title bar text
@@ -1364,7 +1363,7 @@ namespace MaxiBug
             }
 
             // Unlock
-            Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, 0, 0);
+            Database.UpdateUserLocks(Program.postgresUser, 0, 0);
         }
 
         /// <summary>
@@ -1391,7 +1390,7 @@ namespace MaxiBug
             else
             {
                 // Lock the issue by user name
-                Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, id, 0);
+                Database.UpdateUserLocks(Program.postgresUser, id, 0);
             }
 
             IssueForm frmIssue = new IssueForm(OperationType.Edit, Program.SoftwareProject.Issues[id]);
@@ -1441,7 +1440,7 @@ namespace MaxiBug
             }
 
             // Remove lock
-            Database.UpdateUserLocks(Properties.Settings.Default.PostgresUser, 0, 0);
+            Database.UpdateUserLocks(Program.postgresUser, 0, 0);
             frmIssue.Dispose();
         }
 
