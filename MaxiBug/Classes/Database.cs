@@ -863,7 +863,8 @@ namespace MaxiBug
 
                                     if (!databaseName.Equals("postgres"))           // Skip the default database
                                     {
-                                        var result = ExecuteScalar(connectionString, $"SELECT EXISTS (SELECT * FROM information_schema.tables WHERE table_catalog = '{databaseName}' AND table_name = 'issues');");
+                                        string conn2 = GetConnectionString($"{databaseName}");
+                                        var result = ExecuteScalar(conn2, "SELECT * FROM pg_tables WHERE schemaname = 'public' AND tablename = 'issues';");
 
                                         if (result)
                                         {
