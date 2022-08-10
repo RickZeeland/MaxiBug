@@ -22,6 +22,12 @@ Attached images are stored in the database.
 
 When using the "Copy to clipboard" button, text and images can be pasted into office applications by using "Paste special".
 
+## Benchmarks
+
+Tested on a Windows 10 machine with PostgreSQL 14 and an SSD.
+For a database with 4000 issues the first loading time will be about 1.5 seconds and subsequent application starts will be faster.
+As Postgres caches data, testing gives varied results.
+
 ## Features
 
 - Issues: create, edit, delete, clone
