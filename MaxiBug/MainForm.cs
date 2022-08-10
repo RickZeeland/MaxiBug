@@ -561,16 +561,17 @@ namespace MaxiBug
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
+
             var message = Database.LoadProject(ConnectionString, ref newProject);
 
-            //Project newProject = new Project();
-            //var status = ApplicationData.LoadProject(fullFilename, out newProject);       // Old JSON file
+            //string message = string.Empty;
+            //var status = ApplicationData.LoadProject("MiniBug Sample Project XL.json", out newProject);       // Old JSON file for testing purposes
 
             //// If there was an error loading the project file, show feedback
             //if (status != FileSystemOperationStatus.OK)
             //{
             //    this.Cursor = Cursors.Default;
-                //ShowProjectErrorFeedback(status);
+            //ShowProjectErrorFeedback(status);
 
             if (!string.IsNullOrEmpty(message))
             {
@@ -604,6 +605,7 @@ namespace MaxiBug
                 this.SuspendLayout();
 
                 PopulateGridIssues();
+                //PopulateGridIssues(true);       // For testing purposes
                 PopulateGridTasks();
 
                 // Add this project to the recent projects submenu and application settings
@@ -1099,7 +1101,7 @@ namespace MaxiBug
         /// <summary>
         /// Populate the issues grid.
         /// </summary>
-        private void PopulateGridIssues()
+        private void PopulateGridIssues(bool createTestDb = false)
         {
             IssuesClosed = 0;
             IssuesInProgress = 0;
@@ -1112,7 +1114,11 @@ namespace MaxiBug
             {
                 foreach (KeyValuePair<int, Issue> issue in Program.SoftwareProject.Issues)
                 {
-                    ////Program.SoftwareProject.SaveIssueDb(issue.Value);               // Create test DB
+                    if (createTestDb)
+                    {
+                        //Program.SoftwareProject.AddIssue(issue.Value);               // Create test DB
+                        Database.SaveIssue(issue.Value);
+                    }
 
                     var issueStatus = Program.SoftwareProject.Issues[issue.Key].Status;
 

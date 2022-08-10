@@ -12,16 +12,11 @@ namespace MaxiBug
 {
     /// <summary>
     /// Postgres database routines.
+    /// Note that the users table is not used for authentication purposes, 
+    /// this can be done using Postgres and the Settings for PostgresUser and PostgresPassword.
     /// </summary>
     public static class Database
     {
-        //private const string Server = "127.0.0.1";
-        //private const string User = "postgres";
-        //private const string Password = "postgres";
-        //private static string database = "minibug";
-        //private static string tableName = "project";
-        //private NpgsqlConnection notificationConnection;
-
         /// <summary>
         /// Database connection string.
         /// </summary>
@@ -52,7 +47,7 @@ namespace MaxiBug
                     csb.KeepAlive = keepalive;
                 }
 
-                Debug.Print(csb.ConnectionString);
+                //Debug.Print(csb.ConnectionString);
                 return csb.ConnectionString;
             }
             catch (Exception ex)
@@ -64,7 +59,7 @@ namespace MaxiBug
         /// <summary>
         /// Create database with tables: project, issues, tasks and users.
         /// Note that the users table is not used for authentication purposes, 
-        /// this can be done using Postgres and the Settings PostgresUser and PostgresPassword.
+        /// this can be done using Postgres and the Settings for PostgresUser and PostgresPassword.
         /// </summary>
         /// <param name="dbName">The postgresql database name</param>
         public static void CreateProject(string dbName)
@@ -89,6 +84,7 @@ namespace MaxiBug
             }
             else
             {
+                // Normal Posgres server
                 result = CreateDatabase(dbName);
             }
 
