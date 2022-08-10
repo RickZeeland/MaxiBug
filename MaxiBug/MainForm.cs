@@ -561,17 +561,22 @@ namespace MaxiBug
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
+            string message = string.Empty;
+            bool importJson = false;
 
-            var message = Database.LoadProject(ConnectionString, ref newProject);
+            if (!importJson)
+            {
+                message = Database.LoadProject(ConnectionString, ref newProject);
+            }
+            else
+            {
+                // Load Old JSON file for testing purposes
+                var status = ApplicationData.LoadProject("MiniBug Sample Project XL.json", out newProject);
 
-            //string message = string.Empty;
-            //var status = ApplicationData.LoadProject("MiniBug Sample Project XL.json", out newProject);       // Old JSON file for testing purposes
-
-            //// If there was an error loading the project file, show feedback
-            //if (status != FileSystemOperationStatus.OK)
-            //{
-            //    this.Cursor = Cursors.Default;
-            //ShowProjectErrorFeedback(status);
+                //// If there was an error loading the project file, show feedback
+                //if (status != FileSystemOperationStatus.OK)
+                //    ShowProjectErrorFeedback(status);
+            }
 
             if (!string.IsNullOrEmpty(message))
             {
@@ -604,8 +609,7 @@ namespace MaxiBug
                 // Suspend the layout logic for the form, while the application is initializing
                 this.SuspendLayout();
 
-                PopulateGridIssues();
-                //PopulateGridIssues(true);       // For testing purposes
+                PopulateGridIssues(importJson);
                 PopulateGridTasks();
 
                 // Add this project to the recent projects submenu and application settings
