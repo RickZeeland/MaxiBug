@@ -125,6 +125,7 @@ namespace MaxiBug
                 cboPriority.SelectedIndex = 0;
                 //cboCreatedBy.SelectedIndex = 0;
                 //cboModifiedBy.SelectedIndex = 0;
+                cboCreatedBy.Text = Program.postgresUser;
                 lblID.Text = Program.SoftwareProject.IssueIdCounter.ToString();
             }
             else if (Operation == OperationType.Edit)
