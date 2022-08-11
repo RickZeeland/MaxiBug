@@ -75,7 +75,7 @@ namespace MaxiBug
         /// <summary>
         /// The PDF title.
         /// </summary>
-        public static string PdfTitle = "MiniBug issue";
+        public static string PdfTitle = "MaxiBug issue";
 
         /// <summary>
         /// Application font name and size.
@@ -217,6 +217,11 @@ namespace MaxiBug
             OpenPdf = Properties.Settings.Default.OpenPdf;
             PdfTitle = Properties.Settings.Default.PdfTitle;
 
+            Program.postgresIpaddress = Properties.Settings.Default.PostgresIpaddress;
+            Program.postgresPort = Properties.Settings.Default.PostgresPort;
+            Program.postgresUser = Properties.Settings.Default.PostgresUser;
+            Program.postgresPassword = Properties.Settings.Default.PostgresPassword;
+
             // Load the settings for the issues DataGridView columns
             if (Properties.Settings.Default.GridIssuesColumnsSettings != null)
             {
@@ -306,6 +311,11 @@ namespace MaxiBug
         /// </summary>
         public static void Save(SaveSettings settingsSelection = SaveSettings.All)
         {
+            Properties.Settings.Default.PostgresIpaddress = Program.postgresIpaddress;
+            Properties.Settings.Default.PostgresPort = Program.postgresPort;
+            Properties.Settings.Default.PostgresUser = Program.postgresUser;
+            Properties.Settings.Default.PostgresPassword = Program.postgresPassword;
+
             // User modifiable settings
             if ((settingsSelection == SaveSettings.All) || (settingsSelection == SaveSettings.UserModifiable))
             {
@@ -321,11 +331,6 @@ namespace MaxiBug
                 Properties.Settings.Default.SearchCaseInsensitive = SearchCaseInsensitive;
                 Properties.Settings.Default.OpenPdf = OpenPdf;
                 Properties.Settings.Default.PdfTitle = PdfTitle;
-
-                Properties.Settings.Default.PostgresIpaddress = Program.postgresIpaddress;
-                Properties.Settings.Default.PostgresPort = Program.postgresPort;
-                Properties.Settings.Default.PostgresUser = Program.postgresUser;
-                Properties.Settings.Default.PostgresPassword = Program.postgresPassword;
             }
 
             // Save some settings for the issues and tasks DataGridView columns

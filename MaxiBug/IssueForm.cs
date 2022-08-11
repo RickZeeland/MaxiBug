@@ -89,7 +89,9 @@ namespace MaxiBug
                 }
             }
 
-            int userCount = 0;
+            CreatedByList.Add(new ComboBoxItem(0, string.Empty));
+            ModifiedByList.Add(new ComboBoxItem(0, string.Empty));
+            int userCount = 1;
 
             // Populate the Userlist
             foreach (var user in Program.SoftwareProject.Users)
@@ -251,8 +253,8 @@ namespace MaxiBug
             lblID.Text = CurrentIssue.ID.ToString();
             cboStatus.SelectedValue = Convert.ToInt32(CurrentIssue.Status);
             cboPriority.SelectedValue = Convert.ToInt32(CurrentIssue.Priority);
-            cboCreatedBy.SelectedValue = Program.SoftwareProject.Users.IndexOf(CurrentIssue.CreatedBy);
-            cboModifiedBy.SelectedValue = Program.SoftwareProject.Users.IndexOf(CurrentIssue.ModifiedBy);
+            cboCreatedBy.SelectedValue = Program.SoftwareProject.Users.IndexOf(CurrentIssue.CreatedBy) + 1;
+            cboModifiedBy.SelectedValue = Program.SoftwareProject.Users.IndexOf(CurrentIssue.ModifiedBy) + 1;
         }
 
         /// <summary>
@@ -302,20 +304,32 @@ namespace MaxiBug
                 CurrentIssue.ModifiedBy = cboModifiedBy.Text;
                 CurrentIssue.ImageFilename = this.txtImage.Text;
 
-                if (!string.IsNullOrEmpty(CurrentIssue.CreatedBy) && !Program.SoftwareProject.Users.Contains(CurrentIssue.CreatedBy))
-                {
-                    Program.SoftwareProject.Users.Add(CurrentIssue.CreatedBy);
-                    Database.SaveUser(CurrentIssue.CreatedBy);
-                }
-
-                if (!string.IsNullOrEmpty(CurrentIssue.ModifiedBy) && !Program.SoftwareProject.Users.Contains(CurrentIssue.ModifiedBy))
-                {
-                    Program.SoftwareProject.Users.Add(CurrentIssue.ModifiedBy);
-                    Database.SaveUser(CurrentIssue.ModifiedBy);
-                }
+                AddUser(CurrentIssue.CreatedBy);
+                AddUser(CurrentIssue.ModifiedBy);
 
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+        }
+
+        /// <summary>
+        /// Add a user to Program.SoftwareProject.Users and to the Postgres users table.
+        /// </summary>
+        /// <param name="userName">The user name</param>
+        private void AddUser(string userName)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(userName) &&!Program.SoftwareProject.Users.Contains(userName))
+                {
+                    Program.SoftwareProject.Users.Add(userName);
+                    Program.SoftwareProject.Users.Sort();
+                    Database.SaveUser(userName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
