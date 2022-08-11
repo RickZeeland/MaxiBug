@@ -2005,6 +2005,9 @@ namespace MaxiBug
         /// </summary>
         private void NewTask()
         {
+            // Lock the task by user name
+            Database.UpdateUserLocks(Program.postgresUser, 0, Program.SoftwareProject.TaskIdCounter);
+
             TaskForm frmTask = new TaskForm(OperationType.New);
 
             if (frmTask.ShowDialog() == DialogResult.OK)
@@ -2033,6 +2036,9 @@ namespace MaxiBug
                 GridTasks.Sort(new TasksDataGridViewRowComparer(SortOrder.Ascending));
             }
 
+            // Remove lock
+            Database.UpdateUserLocks(Program.postgresUser, 0, 0);
+
             frmTask.Dispose();
         }
 
@@ -2045,6 +2051,18 @@ namespace MaxiBug
             {
                 // Get the key of the task in the selected row 
                 int id = int.Parse(GridTasks.SelectedRows[0].Cells["id"].Value.ToString());
+                string userlock = Database.TaskLockedBy(id);
+
+                if (!string.IsNullOrEmpty(userlock))
+                {
+                    MessageBox.Show($"Task is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                else
+                {
+                    // Lock the task by user name
+                    Database.UpdateUserLocks(Program.postgresUser, 0, id);
+                }
 
                 TaskForm frmTask = new TaskForm(OperationType.Edit, Program.SoftwareProject.Tasks[id]);
 
@@ -2065,6 +2083,9 @@ namespace MaxiBug
                     // Sort the contents according to the sort criteria
                     GridTasks.Sort(new TasksDataGridViewRowComparer(SortOrder.Ascending));
                 }
+
+                // Remove lock
+                Database.UpdateUserLocks(Program.postgresUser, 0, 0);
 
                 frmTask.Dispose();
             }

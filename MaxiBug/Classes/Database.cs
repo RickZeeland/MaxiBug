@@ -486,6 +486,36 @@ namespace MaxiBug
         }
 
         /// <summary>
+        /// Check if a task is locked (in use) by a user.
+        /// </summary>
+        /// <param name="taskId">The task id</param>
+        /// <returns>The user that locked the task</returns>
+        public static string TaskLockedBy(int taskId)
+        {
+            string sql = $@"SELECT name FROM users WHERE tasklock=@id;";
+            string connString = GetConnectionString(Program.databaseName);
+            string username = string.Empty;
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("id", taskId);
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        username = result.ToString();
+                    }
+                }
+            }
+
+            return username;
+        }
+
+        /// <summary>
         /// Save an issue in the database.
         /// </summary>
         /// <param name="newIssue">The issue</param>
