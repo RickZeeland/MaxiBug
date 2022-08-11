@@ -46,7 +46,11 @@ Here, you can enter a list of IP addresses the server should listen on, or simpl
 Also see: https://www.postgresql.org/docs/current/runtime-config-connection.html
 
 If your Postgres server is exposed to the internet the default user and password should be changed and Postgres should preferably be using a non-default port.
+
 As MaxiBug does not offer user authentication itself, the users and their passwords should be managed in Postgres.
+
+See: [How to Create User in PostgreSQL (Postgres) Using PgAdmin](https://www.guru99.com/postgresql-create-alter-add-user.html).
+
 In the MaxiBug settings the connection settings for a user can be configured.
 
 For testing purposes a [portable version of PostgreSQL](https://github.com/garethflowers/postgresql-portable) can be downloaded.
@@ -62,7 +66,8 @@ I tried to get the free Postgres option working, but without success.
 
 # How To Use
 
-First you need to create a new project (File > New Project), define a project name and database name:
+First set the Postgres user name and password in the Settings screen.
+If the user has the rights to create a database, create a new project (File > New Project), by defining a project name and database name:
 
 <img src="Screenshots/new-project.png" alt="New project window">
 
