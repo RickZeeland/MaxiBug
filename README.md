@@ -52,6 +52,7 @@ As MaxiBug does not offer user authentication itself, the users and their passwo
 See: [How to Create User in PostgreSQL (Postgres) Using PgAdmin](https://www.guru99.com/postgresql-create-alter-add-user.html).
 
 In the MaxiBug settings the connection settings for a user can be configured.
+Although multiple users can login with the same user name, this is not recommended. 
 
 For testing purposes a [portable version of PostgreSQL](https://github.com/garethflowers/postgresql-portable) can be downloaded.
 
