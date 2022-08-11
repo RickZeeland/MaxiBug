@@ -60,13 +60,13 @@
             this.txtPdfTitle = new System.Windows.Forms.TextBox();
             this.labelIpaddress = new System.Windows.Forms.Label();
             this.groupBoxPostgres = new System.Windows.Forms.GroupBox();
-            this.txtIpaddress = new System.Windows.Forms.TextBox();
-            this.txtPort = new System.Windows.Forms.TextBox();
-            this.labelPort = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
-            this.labelUser = new System.Windows.Forms.Label();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.txtPort = new System.Windows.Forms.TextBox();
+            this.labelPort = new System.Windows.Forms.Label();
+            this.txtIpaddress = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -77,7 +77,7 @@
             // 
             this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btOk.Location = new System.Drawing.Point(359, 665);
-            this.btOk.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btOk.Margin = new System.Windows.Forms.Padding(4);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(88, 30);
             this.btOk.TabIndex = 8;
@@ -89,7 +89,7 @@
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btCancel.Location = new System.Drawing.Point(454, 664);
-            this.btCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(88, 31);
             this.btCancel.TabIndex = 9;
@@ -99,21 +99,19 @@
             // 
             // lblGridlineColor
             // 
-            this.lblGridlineColor.AutoSize = true;
             this.lblGridlineColor.Location = new System.Drawing.Point(264, 41);
             this.lblGridlineColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGridlineColor.Name = "lblGridlineColor";
-            this.lblGridlineColor.Size = new System.Drawing.Size(92, 17);
+            this.lblGridlineColor.Size = new System.Drawing.Size(110, 17);
             this.lblGridlineColor.TabIndex = 1;
             this.lblGridlineColor.Text = "&Gridline Color:";
             // 
             // chkShowGridlines
             // 
-            this.chkShowGridlines.AutoSize = true;
             this.chkShowGridlines.Location = new System.Drawing.Point(27, 39);
-            this.chkShowGridlines.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkShowGridlines.Margin = new System.Windows.Forms.Padding(4);
             this.chkShowGridlines.Name = "chkShowGridlines";
-            this.chkShowGridlines.Size = new System.Drawing.Size(113, 21);
+            this.chkShowGridlines.Size = new System.Drawing.Size(166, 21);
             this.chkShowGridlines.TabIndex = 0;
             this.chkShowGridlines.Text = "S&how Gridlines";
             this.chkShowGridlines.UseVisualStyleBackColor = true;
@@ -121,11 +119,10 @@
             // 
             // chkAlternateRowColors
             // 
-            this.chkAlternateRowColors.AutoSize = true;
             this.chkAlternateRowColors.Location = new System.Drawing.Point(192, 42);
-            this.chkAlternateRowColors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkAlternateRowColors.Margin = new System.Windows.Forms.Padding(4);
             this.chkAlternateRowColors.Name = "chkAlternateRowColors";
-            this.chkAlternateRowColors.Size = new System.Drawing.Size(161, 21);
+            this.chkAlternateRowColors.Size = new System.Drawing.Size(182, 23);
             this.chkAlternateRowColors.TabIndex = 2;
             this.chkAlternateRowColors.Text = "&Alternating Row Colors";
             this.chkAlternateRowColors.UseVisualStyleBackColor = true;
@@ -156,7 +153,7 @@
             // 
             this.cboFont.FormattingEnabled = true;
             this.cboFont.Location = new System.Drawing.Point(62, 168);
-            this.cboFont.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cboFont.Margin = new System.Windows.Forms.Padding(4);
             this.cboFont.Name = "cboFont";
             this.cboFont.Size = new System.Drawing.Size(359, 25);
             this.cboFont.TabIndex = 1;
@@ -174,7 +171,7 @@
             // txtFontSize
             // 
             this.txtFontSize.Location = new System.Drawing.Point(479, 167);
-            this.txtFontSize.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFontSize.Margin = new System.Windows.Forms.Padding(4);
             this.txtFontSize.Name = "txtFontSize";
             this.txtFontSize.Size = new System.Drawing.Size(55, 25);
             this.txtFontSize.TabIndex = 3;
@@ -182,11 +179,10 @@
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(23, 37);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(116, 17);
+            this.label5.Size = new System.Drawing.Size(125, 21);
             this.label5.TabIndex = 0;
             this.label5.Text = "&Background Color:";
             // 
@@ -203,11 +199,10 @@
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(288, 37);
+            this.label7.Location = new System.Drawing.Point(264, 37);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 17);
+            this.label7.Size = new System.Drawing.Size(105, 21);
             this.label7.TabIndex = 2;
             this.label7.Text = "&Text Color:";
             // 
@@ -218,9 +213,9 @@
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.SelectionBackgroundColor);
             this.groupBox1.Location = new System.Drawing.Point(19, 312);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(517, 86);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
@@ -244,9 +239,9 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.chkAlternateRowColors);
             this.groupBox2.Location = new System.Drawing.Point(19, 406);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(517, 89);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
@@ -276,11 +271,10 @@
             // 
             // label9
             // 
-            this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(23, 43);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 17);
+            this.label9.Size = new System.Drawing.Size(72, 22);
             this.label9.TabIndex = 0;
             this.label9.Text = "&Row Color:";
             // 
@@ -290,9 +284,9 @@
             this.groupBox3.Controls.Add(this.GridlineColor);
             this.groupBox3.Controls.Add(this.chkShowGridlines);
             this.groupBox3.Location = new System.Drawing.Point(19, 215);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(517, 89);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
@@ -302,7 +296,7 @@
             // 
             this.btLoadDefaults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btLoadDefaults.Location = new System.Drawing.Point(51, 664);
-            this.btLoadDefaults.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btLoadDefaults.Margin = new System.Windows.Forms.Padding(4);
             this.btLoadDefaults.Name = "btLoadDefaults";
             this.btLoadDefaults.Size = new System.Drawing.Size(112, 30);
             this.btLoadDefaults.TabIndex = 7;
@@ -312,35 +306,32 @@
             // 
             // chkScrollToLastRow
             // 
-            this.chkScrollToLastRow.AutoSize = true;
             this.chkScrollToLastRow.Checked = true;
             this.chkScrollToLastRow.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkScrollToLastRow.Location = new System.Drawing.Point(45, 520);
-            this.chkScrollToLastRow.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkScrollToLastRow.Margin = new System.Windows.Forms.Padding(4);
             this.chkScrollToLastRow.Name = "chkScrollToLastRow";
-            this.chkScrollToLastRow.Size = new System.Drawing.Size(249, 21);
+            this.chkScrollToLastRow.Size = new System.Drawing.Size(489, 21);
             this.chkScrollToLastRow.TabIndex = 3;
             this.chkScrollToLastRow.Text = "Scroll to last row after loading project";
             this.chkScrollToLastRow.UseVisualStyleBackColor = true;
             // 
             // chkCaseInsensitive
             // 
-            this.chkCaseInsensitive.AutoSize = true;
             this.chkCaseInsensitive.Location = new System.Drawing.Point(45, 562);
-            this.chkCaseInsensitive.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkCaseInsensitive.Margin = new System.Windows.Forms.Padding(4);
             this.chkCaseInsensitive.Name = "chkCaseInsensitive";
-            this.chkCaseInsensitive.Size = new System.Drawing.Size(160, 21);
+            this.chkCaseInsensitive.Size = new System.Drawing.Size(253, 21);
             this.chkCaseInsensitive.TabIndex = 10;
             this.chkCaseInsensitive.Text = "&Case insensitive search";
             this.chkCaseInsensitive.UseVisualStyleBackColor = true;
             // 
             // chkOpenPdf
             // 
-            this.chkOpenPdf.AutoSize = true;
             this.chkOpenPdf.Location = new System.Drawing.Point(45, 604);
-            this.chkOpenPdf.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkOpenPdf.Margin = new System.Windows.Forms.Padding(4);
             this.chkOpenPdf.Name = "chkOpenPdf";
-            this.chkOpenPdf.Size = new System.Drawing.Size(167, 21);
+            this.chkOpenPdf.Size = new System.Drawing.Size(209, 22);
             this.chkOpenPdf.TabIndex = 11;
             this.chkOpenPdf.Text = "&Open PDF after creating";
             this.chkOpenPdf.UseVisualStyleBackColor = true;
@@ -353,7 +344,7 @@
             this.buttonPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPath.Font = new System.Drawing.Font("Wingdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
             this.buttonPath.Location = new System.Drawing.Point(188, 663);
-            this.buttonPath.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonPath.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(38, 30);
             this.buttonPath.TabIndex = 12;
@@ -364,18 +355,17 @@
             // 
             // labelPdfTitle
             // 
-            this.labelPdfTitle.AutoSize = true;
             this.labelPdfTitle.Location = new System.Drawing.Point(269, 605);
             this.labelPdfTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPdfTitle.Name = "labelPdfTitle";
-            this.labelPdfTitle.Size = new System.Drawing.Size(55, 17);
+            this.labelPdfTitle.Size = new System.Drawing.Size(79, 21);
             this.labelPdfTitle.TabIndex = 13;
             this.labelPdfTitle.Text = "PDF title";
             // 
             // txtPdfTitle
             // 
             this.txtPdfTitle.Location = new System.Drawing.Point(356, 601);
-            this.txtPdfTitle.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPdfTitle.Margin = new System.Windows.Forms.Padding(4);
             this.txtPdfTitle.Name = "txtPdfTitle";
             this.txtPdfTitle.Size = new System.Drawing.Size(179, 25);
             this.txtPdfTitle.TabIndex = 14;
@@ -383,11 +373,10 @@
             // 
             // labelIpaddress
             // 
-            this.labelIpaddress.AutoSize = true;
             this.labelIpaddress.Location = new System.Drawing.Point(23, 30);
             this.labelIpaddress.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelIpaddress.Name = "labelIpaddress";
-            this.labelIpaddress.Size = new System.Drawing.Size(70, 17);
+            this.labelIpaddress.Size = new System.Drawing.Size(95, 17);
             this.labelIpaddress.TabIndex = 15;
             this.labelIpaddress.Text = "Ip address";
             // 
@@ -408,31 +397,23 @@
             this.groupBoxPostgres.TabStop = false;
             this.groupBoxPostgres.Text = "PostgreSQL";
             // 
-            // txtIpaddress
+            // txtPassword
             // 
-            this.txtIpaddress.Location = new System.Drawing.Point(126, 27);
-            this.txtIpaddress.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIpaddress.Name = "txtIpaddress";
-            this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
-            this.txtIpaddress.TabIndex = 17;
+            this.txtPassword.Location = new System.Drawing.Point(125, 90);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.Size = new System.Drawing.Size(179, 25);
+            this.txtPassword.TabIndex = 23;
             // 
-            // txtPort
+            // labelPassword
             // 
-            this.txtPort.Location = new System.Drawing.Point(370, 27);
-            this.txtPort.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(73, 25);
-            this.txtPort.TabIndex = 19;
-            // 
-            // labelPort
-            // 
-            this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(326, 30);
-            this.labelPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(32, 17);
-            this.labelPort.TabIndex = 18;
-            this.labelPort.Text = "Port";
+            this.labelPassword.Location = new System.Drawing.Point(22, 93);
+            this.labelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(96, 17);
+            this.labelPassword.TabIndex = 22;
+            this.labelPassword.Text = "Password";
             // 
             // txtUsername
             // 
@@ -444,31 +425,37 @@
             // 
             // labelUser
             // 
-            this.labelUser.AutoSize = true;
             this.labelUser.Location = new System.Drawing.Point(23, 61);
             this.labelUser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(71, 17);
+            this.labelUser.Size = new System.Drawing.Size(95, 17);
             this.labelUser.TabIndex = 20;
             this.labelUser.Text = "User name";
             // 
-            // txtPassword
+            // txtPort
             // 
-            this.txtPassword.Location = new System.Drawing.Point(125, 90);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(179, 25);
-            this.txtPassword.TabIndex = 23;
+            this.txtPort.Location = new System.Drawing.Point(376, 27);
+            this.txtPort.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPort.Name = "txtPort";
+            this.txtPort.Size = new System.Drawing.Size(73, 25);
+            this.txtPort.TabIndex = 19;
             // 
-            // labelPassword
+            // labelPort
             // 
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.Location = new System.Drawing.Point(22, 93);
-            this.labelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(64, 17);
-            this.labelPassword.TabIndex = 22;
-            this.labelPassword.Text = "Password";
+            this.labelPort.Location = new System.Drawing.Point(326, 30);
+            this.labelPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPort.Name = "labelPort";
+            this.labelPort.Size = new System.Drawing.Size(44, 17);
+            this.labelPort.TabIndex = 18;
+            this.labelPort.Text = "Port";
+            // 
+            // txtIpaddress
+            // 
+            this.txtIpaddress.Location = new System.Drawing.Point(126, 27);
+            this.txtIpaddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtIpaddress.Name = "txtIpaddress";
+            this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
+            this.txtIpaddress.TabIndex = 17;
             // 
             // SettingsForm
             // 
@@ -494,7 +481,7 @@
             this.Controls.Add(this.btOk);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
@@ -504,11 +491,8 @@
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.groupBoxPostgres.ResumeLayout(false);
             this.groupBoxPostgres.PerformLayout();
             this.ResumeLayout(false);

@@ -90,10 +90,10 @@ namespace MaxiBug
         /// </summary>
         private void InitializeControls()
         {
-            Properties.Settings.Default.PostgresIpaddress = "127.0.0.1";
-            Properties.Settings.Default.PostgresPort = 5432;
-            Properties.Settings.Default.PostgresUser = "postgres";
-            Properties.Settings.Default.PostgresPassword = "postgres";
+            Properties.Settings.Default.PostgresIpaddress = Program.postgresIpaddress;
+            Properties.Settings.Default.PostgresPort = Program.postgresPort;
+            Properties.Settings.Default.PostgresUser = Program.postgresUser;
+            Properties.Settings.Default.PostgresPassword = Program.postgresPassword;
 
             // Set the default font and size
             cboFont.SelectedItem = ApplicationSettings.AppFont.FontFamily.Name;

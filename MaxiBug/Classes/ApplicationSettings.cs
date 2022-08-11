@@ -387,6 +387,11 @@ namespace MaxiBug
         /// </summary>
         public static void SetDefaultValues()
         {
+            Program.postgresIpaddress = "127.0.0.1";
+            Program.postgresPort = 5432;
+            Program.postgresUser = "postgres";
+            Program.postgresPassword = "postgres";
+
             GridShowBorders = true;
             GridBorderColor = ColorTranslator.FromHtml("#C5C5C5");
             GridSelectionBackColor = ColorTranslator.FromHtml("#ACD4FD");
