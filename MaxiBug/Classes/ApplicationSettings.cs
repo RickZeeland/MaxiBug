@@ -403,7 +403,7 @@ namespace MaxiBug
             ScrollToLastRow = true;
             SearchCaseInsensitive = false;
             OpenPdf = false;
-            PdfTitle = "MiniBug issue";
+            PdfTitle = "MaxiBug issue";
         }
     }
 }
