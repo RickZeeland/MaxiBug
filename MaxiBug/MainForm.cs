@@ -2468,7 +2468,7 @@ namespace MaxiBug
             string searchstring = txtSearch.Text;
             var stringComparison = StringComparison.Ordinal;
             int rowCount = 0;
-            bool found = false;
+            int rowsFound = 0;
             dgv.ClearSelection();
 
             if (ApplicationSettings.SearchCaseInsensitive)
@@ -2487,20 +2487,20 @@ namespace MaxiBug
 
                 if (contains)
                 {
-                    if (!found)
+                    if (rowsFound < 1)
                     {
                         // Scroll to first found row
                         dgv.FirstDisplayedScrollingRowIndex = rowCount;
                     }
 
                     dgv.Rows[rowCount].Selected = true;
-                    found = true;
+                    rowsFound++;
                 }
 
                 rowCount++;
             }
 
-            if (!found)
+            if (rowsFound < 1)
             {
                 // Search Description, select first found row and stop searching
                 rowCount = 0;
@@ -2521,20 +2521,22 @@ namespace MaxiBug
 
                     if (description.IndexOf(searchstring, stringComparison) >= 0)
                     {
-                        if (!found)
+                        if (rowsFound < 1)
                         {
                             // Scroll to first found row
                             dgv.FirstDisplayedScrollingRowIndex = rowCount;
                         }
 
                         dgv.Rows[rowCount].Selected = true;
-                        found = true;
+                        rowsFound++;
                         break;
                     }
 
                     rowCount++;
                 }
             }
+
+            this.txtSearch.ToolTipText = $"{rowsFound} rows found";
         }
 
         /// <summary>
