@@ -218,14 +218,11 @@ namespace MaxiBug
         /// </summary>
         private void btOk_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.PostgresIpaddress = txtIpaddress.Text;
-            Properties.Settings.Default.PostgresPort = int.Parse(txtPort.Text);
-            Properties.Settings.Default.PostgresUser = txtUsername.Text;
-            Properties.Settings.Default.PostgresPassword = txtPassword.Text;
             Program.postgresIpaddress = txtIpaddress.Text;
             Program.postgresPort = int.Parse(txtPort.Text);
             Program.postgresUser = txtUsername.Text;
             Program.postgresPassword = txtPassword.Text;
+            Debug.Print("Postgres user = " + Program.postgresUser);
 
             // Font and font size
             float size = 0;

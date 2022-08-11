@@ -321,6 +321,11 @@ namespace MaxiBug
                 Properties.Settings.Default.SearchCaseInsensitive = SearchCaseInsensitive;
                 Properties.Settings.Default.OpenPdf = OpenPdf;
                 Properties.Settings.Default.PdfTitle = PdfTitle;
+
+                Properties.Settings.Default.PostgresIpaddress = Program.postgresIpaddress;
+                Properties.Settings.Default.PostgresPort = Program.postgresPort;
+                Properties.Settings.Default.PostgresUser = Program.postgresUser;
+                Properties.Settings.Default.PostgresPassword = Program.postgresPassword;
             }
 
             // Save some settings for the issues and tasks DataGridView columns
