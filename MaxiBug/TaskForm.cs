@@ -3,16 +3,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaxiBug
 {
+    /// <summary>
+    /// A simple "To-Do list" form.
+    /// </summary>
     public partial class TaskForm : Form
     {
         /// <summary>
@@ -107,10 +105,8 @@ namespace MaxiBug
                 lblDateCreated.Visible = false;
                 lblDateModifiedTitle.Visible = false;
                 lblDateModified.Visible = false;
-
                 cboStatus.SelectedIndex = 0;
                 cboPriority.SelectedIndex = 0;
-
                 lblID.Text = Program.SoftwareProject.TaskIdCounter.ToString();
             }
             else if (Operation == OperationType.Edit)
@@ -123,15 +119,14 @@ namespace MaxiBug
                 txtSummary.Text = CurrentTask.Summary;
                 txtTargetVersion.Text = CurrentTask.TargetVersion;
                 txtDescription.Text = CurrentTask.Description;
-
                 cboStatus.SelectedValue = Convert.ToInt32(CurrentTask.Status);
                 cboPriority.SelectedValue = Convert.ToInt32(CurrentTask.Priority);
-
                 lblID.Text = CurrentTask.ID.ToString();
             }
 
             //txtDescription.Font = ApplicationSettings.FormDescriptionFieldFont;
             txtDescription.Font = ApplicationSettings.AppFont;
+            lblID.Font = new Font(ApplicationSettings.AppFont, FontStyle.Bold);            // Bold
 
             // Resume the layout logic
             this.ResumeLayout();
