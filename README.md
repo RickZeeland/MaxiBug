@@ -142,5 +142,5 @@ This project uses the following libraries:
 
 <a target="_blank" href="https://icons8.com/icon/EQ4HGAcEI0hH/chart">Chart</a>, 
 <a target="_blank" href="https://icons8.com/icon/9u9JUlsiUlgh/clipboard">Clipboard</a>, 
+<a target="_blank" href="https://icons8.com/icon/33936/sync">Sync</a>, 
 <a target="_blank" href="https://icons8.com/icon/57857/pdf">PDF</a> and Filter icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-<a target="_blank" href="https://icons8.com/icon/33936/sync">Sync</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
