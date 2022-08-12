@@ -85,7 +85,7 @@ namespace MaxiBug
         /// </summary>
         public Project()
         {
-            Version = ApplicationSettings.ProjectFileFormatVersion;
+            Version = "1.0";    // ApplicationSettings.ProjectFileFormatVersion;
             IssueIdCounter = 1;
             TaskIdCounter = 1;
         }
@@ -96,7 +96,7 @@ namespace MaxiBug
         /// <param name="name">The project name.</param>
         public Project(string name)
         {
-            Version = ApplicationSettings.ProjectFileFormatVersion;
+            Version = "1.0";      // ApplicationSettings.ProjectFileFormatVersion;
             Name = name;
             DbName = name.ToLower();
             IssueIdCounter = 1;

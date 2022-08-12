@@ -123,7 +123,7 @@ namespace MaxiBug
                 softwareProject = JsonConvert.DeserializeObject<Project>(input);
 
                 // Check the version of the project file: if not supported, abort the operation
-                if (softwareProject.Version != ApplicationSettings.ProjectFileFormatVersion)
+                if (softwareProject.Version != "1.0")   // ApplicationSettings.ProjectFileFormatVersion)
                 {
                     softwareProject = null;
                     return FileSystemOperationStatus.ProjectLoadErrorUnsupportedFormat;
