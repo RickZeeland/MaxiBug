@@ -1,63 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="MiniBug.Project">
-    <Position X="0.5" Y="0.5" Width="2.75" />
+  <Class Name="MaxiBug.Project">
+    <Position X="3.75" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>IgGAAGAAAAAAQAAgQAIABAQAAAAAAAkAAAAIAAAIAAA=</HashCode>
+      <HashCode>IgGEAGAAAAAAQAAgAAIABAQAAAAAAAkAAAAIAAAIAAA=</HashCode>
       <FileName>Classes\Project.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MiniBug.Issue">
-    <Position X="4" Y="0.5" Width="2.5" />
+  <Class Name="MaxiBug.Issue">
+    <Position X="7" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>JACAAAAEAAAggAAEAAIAAAQAAAAAAAAAAAAEAAAAABA=</HashCode>
+      <HashCode>JACACAAEAAAggAAEAAIAAAQAAAAAAAEAAAAEAAAAABE=</HashCode>
       <FileName>Classes\Issue.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MiniBug.Task">
-    <Position X="4" Y="4.75" Width="2.5" />
+  <Class Name="MaxiBug.Task">
+    <Position X="7" Y="5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>BACAAAAEAAAggAAEAAAAAAQAAAAAAAAAAAAEAAAAABA=</HashCode>
+      <HashCode>BACACAAEAAAggAAEAAAAAAQAAAAAAAAAAAAEAAAAABE=</HashCode>
       <FileName>Classes\Task.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Enum Name="MiniBug.IssueStatus">
-    <Position X="7.25" Y="0.75" Width="1.5" />
+  <Class Name="MaxiBug.Database">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAABABAgCAABABAAAAEwFABAAAABDgSAoAAAACBA=</HashCode>
+      <FileName>Classes\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="MaxiBug.IssueStatus">
+    <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAABAAgAAAAAAAAAAAAAAAAAAAAAAAgABGAAAA=</HashCode>
       <FileName>Classes\Issue.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MiniBug.IssuePriority">
-    <Position X="9" Y="0.75" Width="1.5" />
+  <Enum Name="MaxiBug.IssuePriority">
+    <Position X="10" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAABAAAAAAAAgAAAAAAAAgIAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Classes\Issue.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MiniBug.IssueFieldsUI">
-    <Position X="10.75" Y="0.75" Width="1.5" />
+  <Enum Name="MaxiBug.IssueFieldsUI">
+    <Position X="11.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>JACAAAAEAAAggAAEAAAAAAQAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Classes\Issue.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MiniBug.TaskStatus">
-    <Position X="7.25" Y="4.75" Width="1.5" />
+  <Enum Name="MaxiBug.TaskStatus">
+    <Position X="10" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABEAAAA=</HashCode>
       <FileName>Classes\Task.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MiniBug.TaskPriority">
-    <Position X="9" Y="4.75" Width="1.5" />
+  <Enum Name="MaxiBug.TaskPriority">
+    <Position X="10" Y="6.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AQAAAAAABAAAAAAAAgAAAAAAAAgIAAAAAAAAAAEAAAA=</HashCode>
       <FileName>Classes\Task.cs</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="MiniBug.TaskFieldsUI">
-    <Position X="10.75" Y="4.75" Width="1.5" />
+  <Enum Name="MaxiBug.TaskFieldsUI">
+    <Position X="11.75" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BACAAAAEAAAggAAEAAAAAAQAAAAAAAAAAAAEAAAAAAA=</HashCode>
       <FileName>Classes\Task.cs</FileName>
