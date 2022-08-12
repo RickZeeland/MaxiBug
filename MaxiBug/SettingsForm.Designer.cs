@@ -67,6 +67,7 @@
             this.txtPort = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
             this.txtIpaddress = new System.Windows.Forms.TextBox();
+            this.buttonEye = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -382,6 +383,7 @@
             // 
             // groupBoxPostgres
             // 
+            this.groupBoxPostgres.Controls.Add(this.buttonEye);
             this.groupBoxPostgres.Controls.Add(this.txtPassword);
             this.groupBoxPostgres.Controls.Add(this.labelPassword);
             this.groupBoxPostgres.Controls.Add(this.txtUsername);
@@ -402,9 +404,10 @@
             this.txtPassword.Location = new System.Drawing.Point(125, 90);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '*';
+            this.txtPassword.PasswordChar = '●';
             this.txtPassword.Size = new System.Drawing.Size(179, 25);
             this.txtPassword.TabIndex = 23;
+            this.txtPassword.Text = "abc123";
             // 
             // labelPassword
             // 
@@ -456,6 +459,20 @@
             this.txtIpaddress.Name = "txtIpaddress";
             this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
             this.txtIpaddress.TabIndex = 17;
+            // 
+            // buttonEye
+            // 
+            this.buttonEye.BackColor = System.Drawing.Color.Transparent;
+            this.buttonEye.FlatAppearance.BorderSize = 0;
+            this.buttonEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEye.Font = new System.Drawing.Font("Webdings", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.buttonEye.Location = new System.Drawing.Point(308, 89);
+            this.buttonEye.Name = "buttonEye";
+            this.buttonEye.Size = new System.Drawing.Size(32, 27);
+            this.buttonEye.TabIndex = 24;
+            this.buttonEye.Text = "N";
+            this.buttonEye.UseVisualStyleBackColor = false;
+            this.buttonEye.Click += new System.EventHandler(this.buttonEye_Click);
             // 
             // SettingsForm
             // 
@@ -540,5 +557,6 @@
         private System.Windows.Forms.Label labelUser;
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label labelPort;
+        private System.Windows.Forms.Button buttonEye;
     }
 }

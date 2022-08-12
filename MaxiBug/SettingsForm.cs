@@ -293,5 +293,20 @@ namespace MaxiBug
 
             Process.Start(startInfo);
         }
+
+        /// <summary>
+        /// Toggle password char.
+        /// </summary>
+        private void buttonEye_Click(object sender, EventArgs e)
+        {
+            if (this.txtPassword.PasswordChar == '●')
+            {
+                this.txtPassword.PasswordChar = '\0';
+            }
+            else
+            {
+                this.txtPassword.PasswordChar = '●';
+            }
+        }
     }
 }
