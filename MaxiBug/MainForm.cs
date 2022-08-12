@@ -631,7 +631,7 @@ namespace MaxiBug
 
             stopwatch.Stop();
             Debug.Print($"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds");
-            File.AppendAllText("MaxiBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
+            //File.AppendAllText("MaxiBug.log", $"Loaded project in {stopwatch.Elapsed.TotalSeconds} seconds\n");
 
             this.Cursor = Cursors.Default;
             SetControlsState();
@@ -2612,6 +2612,51 @@ namespace MaxiBug
         {
             // Do not allow switching tabs with e.g. Ctrl-Home or Ctrl-End
             this.GridIssues.Focus();
+        }
+
+        /// <summary>
+        /// Synchronize with Postgres database.
+        /// </summary>
+        private void IconSync_Click(object sender, EventArgs e)
+        {
+            int selected = -1;
+
+            if (this.TabControl.SelectedTab == this.tabPage1)
+            {
+                selected = this.GridIssues.SelectedRows[0].Index;
+            }
+            if (this.TabControl.SelectedTab == this.tabPage2)
+            {
+                selected = this.GridTasks.SelectedRows[0].Index;
+            }
+
+            Debug.Print($"selected row = {selected}");
+
+            bool result = OpenProject(Program.SoftwareProject.Name, Program.SoftwareProject.DbName);
+
+            if (result)
+            {
+                // Scroll to selected row
+                if (this.TabControl.SelectedTab == this.tabPage1)
+                {
+                    if (this.GridIssues.RowCount > 10)
+                    {
+                        this.GridIssues.ClearSelection();
+                        this.GridIssues.FirstDisplayedScrollingRowIndex = selected;
+                        this.GridIssues.Rows[selected].Selected = true;
+                        ShowPieChart();
+                    }
+                }
+                else if (this.TabControl.SelectedTab == this.tabPage2)
+                {
+                    if (this.GridTasks.RowCount > 10)
+                    {
+                        this.GridTasks.ClearSelection();
+                        this.GridTasks.FirstDisplayedScrollingRowIndex = selected;
+                        this.GridTasks.Rows[selected].Selected = true;
+                    }
+                }
+            }
         }
     }
 }

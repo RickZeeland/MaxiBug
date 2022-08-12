@@ -373,6 +373,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\sync_32x32.png" />
     <None Include="Resources\Filter_clear_32x32.png" />
     <None Include="Resources\Filter_32x32.png" />
     <None Include="Resources\pdf_64x64.png" />

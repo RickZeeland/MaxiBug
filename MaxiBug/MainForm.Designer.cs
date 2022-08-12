@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.GridIssues = new System.Windows.Forms.DataGridView();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -45,6 +46,7 @@
             this.IconDeleteTask = new System.Windows.Forms.ToolStripButton();
             this.IconCloneTask = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.IconSync = new System.Windows.Forms.ToolStripButton();
             this.IconPieChart = new System.Windows.Forms.ToolStripButton();
             this.IconShowClosed = new System.Windows.Forms.ToolStripButton();
             this.IconConfigureColumns = new System.Windows.Forms.ToolStripButton();
@@ -203,6 +205,7 @@
             this.IconDeleteTask,
             this.IconCloneTask,
             this.toolStripSeparator5,
+            this.IconSync,
             this.IconPieChart,
             this.IconShowClosed,
             this.IconConfigureColumns,
@@ -318,6 +321,17 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 52);
+            // 
+            // IconSync
+            // 
+            this.IconSync.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.IconSync.Image = ((System.Drawing.Image)(resources.GetObject("IconSync.Image")));
+            this.IconSync.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.IconSync.Name = "IconSync";
+            this.IconSync.Size = new System.Drawing.Size(36, 49);
+            this.IconSync.Text = "Sync";
+            this.IconSync.ToolTipText = "Sync with database";
+            this.IconSync.Click += new System.EventHandler(this.IconSync_Click);
             // 
             // IconPieChart
             // 
@@ -576,7 +590,7 @@
             // 
             this.aboutMiniBugToolStripMenuItem.Image = global::MaxiBug.Properties.Resources.About_32x32;
             this.aboutMiniBugToolStripMenuItem.Name = "aboutMiniBugToolStripMenuItem";
-            this.aboutMiniBugToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.aboutMiniBugToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.aboutMiniBugToolStripMenuItem.Text = "&About MaxiBug";
             this.aboutMiniBugToolStripMenuItem.Click += new System.EventHandler(this.aboutMiniBugToolStripMenuItem_Click);
             // 
@@ -695,6 +709,7 @@
         private System.Windows.Forms.Panel panelPie;
         private System.Windows.Forms.Button buttonPieClose;
         private System.Windows.Forms.ToolStripButton IconShowClosed;
+        private System.Windows.Forms.ToolStripButton IconSync;
     }
 }
 
