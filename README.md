@@ -36,6 +36,14 @@ As Postgres caches data, testing gives varied results.
 - Some user defined settings
 - Export issues and tasks to CSV format
 
+## Class diagram
+
+An overview of the main classes and enumerations:
+
+<img src="Screenshots/class_diagram.png" alt="Class diagram">
+
+(note: to open the diagram in Visual Studio you must have the "Class diagram" option enabled in the VS installer)
+
 # Getting Started
 
 For security reasons, PostgreSQL does not listen on all available IP addresses on the server machine initially. 
