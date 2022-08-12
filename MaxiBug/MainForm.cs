@@ -250,6 +250,7 @@ namespace MaxiBug
                     IconCloneIssue.Enabled = true;
                     IconPieChart.Enabled = true;
                     IconShowClosed.Enabled = true;
+                    IconSync.Enabled = true;
                 }
                 else
                 {
@@ -262,6 +263,7 @@ namespace MaxiBug
                     IconCloneIssue.Enabled = false;
                     IconPieChart.Enabled = false;
                     IconShowClosed.Enabled = false;
+                    IconSync.Enabled = false;
                 }
 
                 // Disable tasks menu items
@@ -290,16 +292,18 @@ namespace MaxiBug
                     IconEditTask.Enabled = true;
                     IconDeleteTask.Enabled = true;
                     IconCloneTask.Enabled = true;
+                    IconSync.Enabled = true;
                 }
                 else
                 {
-                    // DISABLE these controls if there are no issues
+                    // DISABLE these controls if there are no tasks
                     editTaskToolStripMenuItem.Enabled = false;
                     deleteTaskToolStripMenuItem.Enabled = false;
                     cloneTaskToolStripMenuItem.Enabled = false;
                     IconEditTask.Enabled = false;
                     IconDeleteTask.Enabled = false;
                     IconCloneTask.Enabled = false;
+                    IconSync.Enabled = false;
                 }
 
                 // Pie chart is only for issues at the moment
@@ -2625,12 +2629,16 @@ namespace MaxiBug
             {
                 selected = this.GridIssues.SelectedRows[0].Index;
             }
-            if (this.TabControl.SelectedTab == this.tabPage2)
+            else if (this.TabControl.SelectedTab == this.tabPage2)
             {
                 selected = this.GridTasks.SelectedRows[0].Index;
             }
 
             Debug.Print($"selected row = {selected}");
+            if (selected < 0)
+            {
+                selected = 0;
+            }
 
             bool result = OpenProject(Program.SoftwareProject.Name, Program.SoftwareProject.DbName);
 
@@ -2639,7 +2647,7 @@ namespace MaxiBug
                 // Scroll to selected row
                 if (this.TabControl.SelectedTab == this.tabPage1)
                 {
-                    if (this.GridIssues.RowCount > 10)
+                    if (this.GridIssues.RowCount > 1)
                     {
                         this.GridIssues.ClearSelection();
                         this.GridIssues.FirstDisplayedScrollingRowIndex = selected;
@@ -2649,7 +2657,7 @@ namespace MaxiBug
                 }
                 else if (this.TabControl.SelectedTab == this.tabPage2)
                 {
-                    if (this.GridTasks.RowCount > 10)
+                    if (this.GridTasks.RowCount > 1)
                     {
                         this.GridTasks.ClearSelection();
                         this.GridTasks.FirstDisplayedScrollingRowIndex = selected;
