@@ -19,7 +19,7 @@ namespace MaxiBug
         /// <summary>
         /// The simulated time in millisecondes that testbot works on an issue.
         /// </summary>
-        private int IntervalMs { get; set; } = 2000;
+        private int IntervalMs { get; set; } = 10000;
 
         public Form1()
         {
@@ -59,6 +59,7 @@ namespace MaxiBug
                 Database.UpdateUserLocks(userName, Program.SoftwareProject.IssueIdCounter, 0);
                 Issue testIssue = new Issue(Program.SoftwareProject.IssueIdCounter);
                 testIssue.CreatedBy = userName;
+                testIssue.Status = IssueStatus.Unconfirmed;
                 testIssue.Summary = $"Test issue created by {userName}";
                 testIssue.Version = Program.SoftwareProject.IssueIdCounter.ToString();
                 Program.SoftwareProject.AddIssue(testIssue);        // Add and save in database
