@@ -8,6 +8,8 @@ using System.Windows.Forms;
 namespace MaxiBug
 {
     /// <summary>
+    /// This TestBot inserts new issues in a MaxiBug database.
+    /// It also simulates the issue being worked on by locking the issue.
     /// Before using this TestBot, matching user names and passwords must be added in Postgres.
     /// </summary>
     public partial class Form1 : Form
@@ -35,6 +37,18 @@ namespace MaxiBug
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            try
+            {
+                this.Run();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Run()
+        {
             Running = true;
             Program.postgresIpaddress = txtIpaddress.Text;
             Program.postgresPort = int.Parse(txtPort.Text);
@@ -49,7 +63,7 @@ namespace MaxiBug
                 this.panel1.Enabled = false;
                 this.progressBar1.Visible = true;
                 this.progressBar1.Maximum = (int)this.numericUpDownRecords.Value;
-                this.progressBar1.Value = 1;
+                this.progressBar1.Value = 0;
                 Task newTask = Task.Factory.StartNew(NewTestIssue);
 
                 // Enter the loop, when task has finished, start a new one
@@ -58,32 +72,33 @@ namespace MaxiBug
                     if (newTask.IsCompleted)
                     {
                         Debug.Print($"Task {recordCount} completed");
-                        recordCount++;
                         this.progressBar1.Value = recordCount;
+                        recordCount++;
                         newTask.Dispose();
-                        newTask = Task.Factory.StartNew(NewTestIssue);        // Spin up a new Task
-                    }
 
-                    if (recordCount >= this.numericUpDownRecords.Value)
-                    {
-                        break;
+                        if (recordCount > this.numericUpDownRecords.Value)
+                        {
+                            break;
+                        }
+
+                        newTask = Task.Factory.StartNew(NewTestIssue);        // Spin up a new Task
                     }
 
                     Application.DoEvents();         // Keep UI responsive
                 }
             }
 
-            this.progressBar1.Visible = false;
-            this.Cursor = Cursors.Default;
-            this.panel1.Enabled = true;
-
             // Make sure locks are released
             Database.UpdateUserLocks(Program.postgresUser, 0, 0);
+            this.Cursor = Cursors.Default;
+            this.panel1.Enabled = true;
 
             if (Running)
             {
                 MessageBox.Show("Testbot completed adding records!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            this.progressBar1.Visible = false;
         }
 
         /// <summary>
