@@ -124,7 +124,7 @@
     <Compile Include="Classes\GridIssuesSortSettings.cs" />
     <Compile Include="Classes\Project.cs" />
     <Compile Include="Classes\Issue.cs" />
-    <Compile Include="Classes\Task.cs" />
+    <Compile Include="Classes\MaxiTask.cs" />
     <Compile Include="Classes\TasksDataGridViewRowComparer.cs" />
     <Compile Include="ConfigureViewForm.cs">
       <SubType>Form</SubType>

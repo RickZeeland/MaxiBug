@@ -68,11 +68,11 @@
     <Compile Include="..\MaxiBug\Classes\Issue.cs">
       <Link>Issue.cs</Link>
     </Compile>
+    <Compile Include="..\MaxiBug\Classes\MaxiTask.cs">
+      <Link>MaxiTask.cs</Link>
+    </Compile>
     <Compile Include="..\MaxiBug\Classes\Project.cs">
       <Link>Project.cs</Link>
-    </Compile>
-    <Compile Include="..\MaxiBug\Classes\Task.cs">
-      <Link>Task.cs</Link>
     </Compile>
     <Compile Include="..\MaxiBug\SelectionForm.cs">
       <Link>SelectionForm.cs</Link>
