@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaxiBug
@@ -11,6 +12,12 @@ namespace MaxiBug
     /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Indicates that tasks are running.
+        /// Declared volatile as it can be used by multiple threads.
+        /// </summary>
+        public static volatile bool Running;
+
         /// <summary>
         /// Database connection string.
         /// </summary>
@@ -28,40 +35,67 @@ namespace MaxiBug
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            Running = true;
             Program.postgresIpaddress = txtIpaddress.Text;
             Program.postgresPort = int.Parse(txtPort.Text);
             Program.postgresUser = txtUsername.Text;
             Program.postgresPassword = txtPassword.Text;
             Debug.Print("Postgres user = " + Program.postgresUser);
+            int recordCount = 1;
 
             if (this.OpenProject())
             {
                 this.Cursor = Cursors.WaitCursor;
+                this.panel1.Enabled = false;
+                this.progressBar1.Visible = true;
+                this.progressBar1.Maximum = (int)this.numericUpDownRecords.Value;
+                this.progressBar1.Value = 1;
+                Task newTask = Task.Factory.StartNew(NewTestIssue);
 
-                for (int i = 0; i < this.numericUpDownRecords.Value; i++)
+                // Enter the loop, when task has finished, start a new one
+                while (Running)
                 {
-                    this.NewTestIssue(Program.postgresUser);
-                    //System.Threading.Tasks.Task.Run(() => NewTestIssue(Program.postgresUser));
+                    if (newTask.IsCompleted)
+                    {
+                        Debug.Print($"Task {recordCount} completed");
+                        recordCount++;
+                        this.progressBar1.Value = recordCount;
+                        newTask.Dispose();
+                        newTask = Task.Factory.StartNew(NewTestIssue);        // Spin up a new Task
+                    }
+
+                    if (recordCount >= this.numericUpDownRecords.Value)
+                    {
+                        break;
+                    }
+
+                    Application.DoEvents();         // Keep UI responsive
                 }
             }
 
+            this.progressBar1.Visible = false;
             this.Cursor = Cursors.Default;
-            MessageBox.Show("Testbot completed adding records!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.panel1.Enabled = true;
+
+            if (Running)
+            {
+                MessageBox.Show("Testbot completed adding records!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>
         /// Create a new test issue and save in database.
         /// </summary>
-        private void NewTestIssue(string userName = "testbot1")
+        private void NewTestIssue()
         {
             try
             {
                 // Lock the issue by user name
-                Database.UpdateUserLocks(userName, Program.SoftwareProject.IssueIdCounter, 0);
+                Database.UpdateUserLocks(Program.postgresUser, Program.SoftwareProject.IssueIdCounter, 0);
                 Issue testIssue = new Issue(Program.SoftwareProject.IssueIdCounter);
-                testIssue.CreatedBy = userName;
+                testIssue.CreatedBy = Program.postgresUser;
                 testIssue.Status = IssueStatus.Unconfirmed;
-                testIssue.Summary = $"Test issue created by {userName}";
+                testIssue.Summary = $"Test issue created by {Program.postgresUser}";
                 testIssue.Version = Program.SoftwareProject.IssueIdCounter.ToString();
                 Program.SoftwareProject.AddIssue(testIssue);        // Add and save in database
 
@@ -74,7 +108,7 @@ namespace MaxiBug
             }
 
             // Unlock
-            Database.UpdateUserLocks(userName, 0, 0);
+            Database.UpdateUserLocks(Program.postgresUser, 0, 0);
         }
 
         /// <summary>
@@ -200,6 +234,12 @@ namespace MaxiBug
             {
                 this.txtPassword.PasswordChar = '●';
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Abort running tasks
+            Running = false;
         }
     }
 }
