@@ -63,7 +63,7 @@ namespace MaxiBug
         /// <summary>
         /// Gets or sets the project tasks.
         /// </summary>
-        public Dictionary<int, Task> Tasks { get; set; } = new Dictionary<int, Task>();
+        public Dictionary<int, MaxiTask> Tasks { get; set; } = new Dictionary<int, MaxiTask>();
 
         /// <summary>
         /// Gets or sets the user names.
@@ -122,7 +122,7 @@ namespace MaxiBug
         /// </summary>
         /// <param name="newTask">An instance of the Task class to add.</param>
         /// <returns>The id of the added task.</returns>
-        public int AddTask(Task newTask)
+        public int AddTask(MaxiTask newTask)
         {
             TaskIdCounter = Database.SaveTask(newTask);
             newTask.ID = TaskIdCounter;

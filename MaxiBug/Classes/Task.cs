@@ -43,7 +43,7 @@ namespace MaxiBug
     };
 
     [Serializable]
-    public class Task
+    public class MaxiTask
     {
         /// <summary>
         /// Gets the ID of this task.
@@ -98,7 +98,7 @@ namespace MaxiBug
         /// <summary>
         /// Creates a new task.
         /// </summary>
-        public Task()
+        public MaxiTask()
         {
             ;
         }
@@ -107,7 +107,7 @@ namespace MaxiBug
         /// Creates a new task.
         /// </summary>
         /// <param name="id">The ID of this task.</param>
-        public Task(int id)
+        public MaxiTask(int id)
         {
             ID = id;
         }
@@ -115,7 +115,7 @@ namespace MaxiBug
         /// <summary>
         /// Creates a new task.
         /// </summary>
-        public Task(TaskStatus status, TaskPriority priority, string summary, string description, string targetVersion)
+        public MaxiTask(TaskStatus status, TaskPriority priority, string summary, string description, string targetVersion)
         {
             Status = status;
             Priority = priority;
@@ -131,7 +131,7 @@ namespace MaxiBug
         /// Create a clone of an instance of the Task class.
         /// </summary>
         /// <param name="clonedInstance">The instance of the Task class that will get the cloned instance's data.</param>
-        public void Clone(ref Task clonedInstance)
+        public void Clone(ref MaxiTask clonedInstance)
         {
             clonedInstance.Status = this.Status;
             clonedInstance.Priority = this.Priority;

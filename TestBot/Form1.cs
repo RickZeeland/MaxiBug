@@ -41,6 +41,7 @@ namespace MaxiBug
                 for (int i = 0; i < this.numericUpDownRecords.Value; i++)
                 {
                     this.NewTestIssue(Program.postgresUser);
+                    //System.Threading.Tasks.Task.Run(() => NewTestIssue(Program.postgresUser));
                 }
             }
 

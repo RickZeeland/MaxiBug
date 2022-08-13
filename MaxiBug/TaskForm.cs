@@ -21,7 +21,7 @@ namespace MaxiBug
         /// <summary>
         /// The current task (being created or edited).
         /// </summary>
-        public MaxiBug.Task CurrentTask { get; private set; } = null;
+        public MaxiBug.MaxiTask CurrentTask { get; private set; } = null;
 
         /// <summary>
         /// List of status options.
@@ -33,7 +33,7 @@ namespace MaxiBug
         /// </summary>
         private List<ComboBoxItem> PriorityList = new List<ComboBoxItem>();
 
-        public TaskForm(OperationType operation, MaxiBug.Task task = null)
+        public TaskForm(OperationType operation, MaxiBug.MaxiTask task = null)
         {
             InitializeComponent();
             this.Font = ApplicationSettings.AppFont;
@@ -43,7 +43,7 @@ namespace MaxiBug
             if (Operation == OperationType.New)
             {
                 // Create a new instance of the Task class
-                CurrentTask = new Task();
+                CurrentTask = new MaxiTask();
             }
             else if ((Operation == OperationType.Edit) && (task != null))
             {

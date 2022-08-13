@@ -373,7 +373,7 @@ namespace MaxiBug
                     {
                         while (reader.Read())
                         {
-                            var task = new Task();
+                            var task = new MaxiTask();
                             task.ID = reader.GetInt32(reader.GetOrdinal("id"));
                             task.DateCreated = reader.GetDateTime(reader.GetOrdinal("datecreated"));
                             task.DateModified = reader.GetDateTime(reader.GetOrdinal("datemodified"));
@@ -557,7 +557,7 @@ namespace MaxiBug
         /// </summary>
         /// <param name="newTask">The task</param>
         /// <returns>Returns the new serial id</returns>
-        public static int SaveTask(Task newTask)
+        public static int SaveTask(MaxiTask newTask)
         {
             string sql = $@"INSERT INTO tasks (datecreated, datemodified, createdby, modifiedby, targetversion, priority, status, summary, description) " +
                         "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@targetversion,@priority,@status,@summary,@description) " +
@@ -752,7 +752,7 @@ namespace MaxiBug
         /// Update a task in the database.
         /// </summary>
         /// <param name="task">The task</param>
-        public static void UpdateTask(Task task)
+        public static void UpdateTask(MaxiTask task)
         {
             string sql = $@"UPDATE tasks SET datecreated=@datecreated, datemodified=@datemodified, createdby=@createdby, modifiedby=@modifiedby, " +
                         "targetversion=@targetversion, priority=@priority, status=@status, summary=@summary, description=@description " +

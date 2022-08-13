@@ -1808,7 +1808,7 @@ namespace MaxiBug
         {
             if ((Program.SoftwareProject != null) && (Program.SoftwareProject.Tasks != null))
             {
-                foreach (KeyValuePair<int, Task> item in Program.SoftwareProject.Tasks)
+                foreach (KeyValuePair<int, MaxiTask> item in Program.SoftwareProject.Tasks)
                 {
                     AddTaskToGrid(item.Value);
                 }
@@ -1963,7 +1963,7 @@ namespace MaxiBug
         /// Add a new task to the grid.
         /// </summary>
         /// <param name="newTask">The task to add to the grid.</param>
-        private void AddTaskToGrid(Task newTask)
+        private void AddTaskToGrid(MaxiTask newTask)
         {
             GridTasks.Rows.Add(new object[] {
                 newTask.ID.ToString(),
@@ -2137,7 +2137,7 @@ namespace MaxiBug
                 // Get the key of the task in the selected row 
                 int id = int.Parse(GridTasks.SelectedRows[0].Cells["id"].Value.ToString());
 
-                Task newTask = new Task();
+                MaxiTask newTask = new MaxiTask();
                 Program.SoftwareProject.Tasks[id].Clone(ref newTask);
                 Program.SoftwareProject.AddTask(newTask);           // Add to project and save in database
                 AddTaskToGrid(newTask);                             // Add the new task to the grid
