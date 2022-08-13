@@ -77,6 +77,9 @@ namespace MaxiBug
             this.Cursor = Cursors.Default;
             this.panel1.Enabled = true;
 
+            // Make sure locks are released
+            Database.UpdateUserLocks(Program.postgresUser, 0, 0);
+
             if (Running)
             {
                 MessageBox.Show("Testbot completed adding records!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -99,7 +102,7 @@ namespace MaxiBug
                 testIssue.Version = Program.SoftwareProject.IssueIdCounter.ToString();
                 Program.SoftwareProject.AddIssue(testIssue);        // Add and save in database
 
-                // Simulate user working on issue
+                // Simulate user working, issue remains locked during IntervalMs
                 Thread.Sleep(IntervalMs);
             }
             catch (Exception ex)

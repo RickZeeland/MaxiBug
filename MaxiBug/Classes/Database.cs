@@ -691,8 +691,8 @@ namespace MaxiBug
         /// Update user locks by name in the database.
         /// </summary>
         /// <param name="username">The user name</param>
-        /// <param name="issueId">The issue id or 0</param>
-        /// <param name="taskId">The task id or 0</param>
+        /// <param name="issueId">The issue id or 0 to release</param>
+        /// <param name="taskId">The task id or 0 to release</param>
         public static void UpdateUserLocks(string username, int issueId, int taskId)
         {
             string sql = $@"UPDATE users SET issuelock=@issuelock, tasklock=@tasklock WHERE name=@name;";
