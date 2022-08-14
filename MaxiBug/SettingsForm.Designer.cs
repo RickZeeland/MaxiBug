@@ -60,6 +60,7 @@
             this.txtPdfTitle = new System.Windows.Forms.TextBox();
             this.labelIpaddress = new System.Windows.Forms.Label();
             this.groupBoxPostgres = new System.Windows.Forms.GroupBox();
+            this.buttonEye = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.TextBox();
@@ -67,17 +68,24 @@
             this.txtPort = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
             this.txtIpaddress = new System.Windows.Forms.TextBox();
-            this.buttonEye = new System.Windows.Forms.Button();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.tabPageUi = new System.Windows.Forms.TabPage();
+            this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxPostgres.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPageConnection.SuspendLayout();
+            this.tabPageUi.SuspendLayout();
+            this.tabPageMisc.SuspendLayout();
             this.SuspendLayout();
             // 
             // btOk
             // 
             this.btOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btOk.Location = new System.Drawing.Point(359, 665);
+            this.btOk.Location = new System.Drawing.Point(368, 414);
             this.btOk.Margin = new System.Windows.Forms.Padding(4);
             this.btOk.Name = "btOk";
             this.btOk.Size = new System.Drawing.Size(88, 30);
@@ -89,7 +97,7 @@
             // btCancel
             // 
             this.btCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btCancel.Location = new System.Drawing.Point(454, 664);
+            this.btCancel.Location = new System.Drawing.Point(463, 413);
             this.btCancel.Margin = new System.Windows.Forms.Padding(4);
             this.btCancel.Name = "btCancel";
             this.btCancel.Size = new System.Drawing.Size(88, 31);
@@ -100,7 +108,7 @@
             // 
             // lblGridlineColor
             // 
-            this.lblGridlineColor.Location = new System.Drawing.Point(264, 41);
+            this.lblGridlineColor.Location = new System.Drawing.Point(264, 32);
             this.lblGridlineColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGridlineColor.Name = "lblGridlineColor";
             this.lblGridlineColor.Size = new System.Drawing.Size(110, 17);
@@ -109,7 +117,7 @@
             // 
             // chkShowGridlines
             // 
-            this.chkShowGridlines.Location = new System.Drawing.Point(27, 39);
+            this.chkShowGridlines.Location = new System.Drawing.Point(27, 30);
             this.chkShowGridlines.Margin = new System.Windows.Forms.Padding(4);
             this.chkShowGridlines.Name = "chkShowGridlines";
             this.chkShowGridlines.Size = new System.Drawing.Size(166, 21);
@@ -120,10 +128,10 @@
             // 
             // chkAlternateRowColors
             // 
-            this.chkAlternateRowColors.Location = new System.Drawing.Point(192, 42);
+            this.chkAlternateRowColors.Location = new System.Drawing.Point(206, 35);
             this.chkAlternateRowColors.Margin = new System.Windows.Forms.Padding(4);
             this.chkAlternateRowColors.Name = "chkAlternateRowColors";
-            this.chkAlternateRowColors.Size = new System.Drawing.Size(182, 23);
+            this.chkAlternateRowColors.Size = new System.Drawing.Size(166, 23);
             this.chkAlternateRowColors.TabIndex = 2;
             this.chkAlternateRowColors.Text = "&Alternating Row Colors";
             this.chkAlternateRowColors.UseVisualStyleBackColor = true;
@@ -133,7 +141,7 @@
             // 
             this.GridlineColor.BackColor = System.Drawing.Color.White;
             this.GridlineColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.GridlineColor.Location = new System.Drawing.Point(382, 39);
+            this.GridlineColor.Location = new System.Drawing.Point(382, 30);
             this.GridlineColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.GridlineColor.Name = "GridlineColor";
             this.GridlineColor.Size = new System.Drawing.Size(40, 28);
@@ -143,7 +151,7 @@
             // labelFont
             // 
             this.labelFont.AutoSize = true;
-            this.labelFont.Location = new System.Drawing.Point(15, 173);
+            this.labelFont.Location = new System.Drawing.Point(12, 31);
             this.labelFont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFont.Name = "labelFont";
             this.labelFont.Size = new System.Drawing.Size(36, 17);
@@ -153,16 +161,16 @@
             // cboFont
             // 
             this.cboFont.FormattingEnabled = true;
-            this.cboFont.Location = new System.Drawing.Point(62, 168);
+            this.cboFont.Location = new System.Drawing.Point(59, 26);
             this.cboFont.Margin = new System.Windows.Forms.Padding(4);
             this.cboFont.Name = "cboFont";
-            this.cboFont.Size = new System.Drawing.Size(359, 25);
+            this.cboFont.Size = new System.Drawing.Size(339, 25);
             this.cboFont.TabIndex = 1;
             // 
             // labelFontsize
             // 
             this.labelFontsize.AutoSize = true;
-            this.labelFontsize.Location = new System.Drawing.Point(437, 173);
+            this.labelFontsize.Location = new System.Drawing.Point(420, 31);
             this.labelFontsize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFontsize.Name = "labelFontsize";
             this.labelFontsize.Size = new System.Drawing.Size(34, 17);
@@ -171,7 +179,7 @@
             // 
             // txtFontSize
             // 
-            this.txtFontSize.Location = new System.Drawing.Point(479, 167);
+            this.txtFontSize.Location = new System.Drawing.Point(473, 26);
             this.txtFontSize.Margin = new System.Windows.Forms.Padding(4);
             this.txtFontSize.Name = "txtFontSize";
             this.txtFontSize.Size = new System.Drawing.Size(55, 25);
@@ -213,11 +221,11 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.SelectionBackgroundColor);
-            this.groupBox1.Location = new System.Drawing.Point(19, 312);
+            this.groupBox1.Location = new System.Drawing.Point(18, 156);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(517, 86);
+            this.groupBox1.Size = new System.Drawing.Size(510, 73);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Selection";
@@ -239,11 +247,11 @@
             this.groupBox2.Controls.Add(this.RowColor);
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Controls.Add(this.chkAlternateRowColors);
-            this.groupBox2.Location = new System.Drawing.Point(19, 406);
+            this.groupBox2.Location = new System.Drawing.Point(18, 249);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(517, 89);
+            this.groupBox2.Size = new System.Drawing.Size(510, 73);
             this.groupBox2.TabIndex = 6;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Row Colors";
@@ -252,7 +260,7 @@
             // 
             this.AlternateRowColor.BackColor = System.Drawing.Color.White;
             this.AlternateRowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AlternateRowColor.Location = new System.Drawing.Point(382, 37);
+            this.AlternateRowColor.Location = new System.Drawing.Point(382, 30);
             this.AlternateRowColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.AlternateRowColor.Name = "AlternateRowColor";
             this.AlternateRowColor.Size = new System.Drawing.Size(40, 28);
@@ -263,7 +271,7 @@
             // 
             this.RowColor.BackColor = System.Drawing.Color.White;
             this.RowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.RowColor.Location = new System.Drawing.Point(107, 37);
+            this.RowColor.Location = new System.Drawing.Point(107, 30);
             this.RowColor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.RowColor.Name = "RowColor";
             this.RowColor.Size = new System.Drawing.Size(40, 28);
@@ -272,7 +280,7 @@
             // 
             // label9
             // 
-            this.label9.Location = new System.Drawing.Point(23, 43);
+            this.label9.Location = new System.Drawing.Point(23, 36);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 22);
@@ -284,11 +292,11 @@
             this.groupBox3.Controls.Add(this.lblGridlineColor);
             this.groupBox3.Controls.Add(this.GridlineColor);
             this.groupBox3.Controls.Add(this.chkShowGridlines);
-            this.groupBox3.Location = new System.Drawing.Point(19, 215);
+            this.groupBox3.Location = new System.Drawing.Point(18, 72);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(517, 89);
+            this.groupBox3.Size = new System.Drawing.Size(510, 73);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Gridlines";
@@ -296,7 +304,7 @@
             // btLoadDefaults
             // 
             this.btLoadDefaults.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btLoadDefaults.Location = new System.Drawing.Point(51, 664);
+            this.btLoadDefaults.Location = new System.Drawing.Point(60, 413);
             this.btLoadDefaults.Margin = new System.Windows.Forms.Padding(4);
             this.btLoadDefaults.Name = "btLoadDefaults";
             this.btLoadDefaults.Size = new System.Drawing.Size(112, 30);
@@ -309,7 +317,7 @@
             // 
             this.chkScrollToLastRow.Checked = true;
             this.chkScrollToLastRow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkScrollToLastRow.Location = new System.Drawing.Point(45, 520);
+            this.chkScrollToLastRow.Location = new System.Drawing.Point(27, 39);
             this.chkScrollToLastRow.Margin = new System.Windows.Forms.Padding(4);
             this.chkScrollToLastRow.Name = "chkScrollToLastRow";
             this.chkScrollToLastRow.Size = new System.Drawing.Size(489, 21);
@@ -319,7 +327,7 @@
             // 
             // chkCaseInsensitive
             // 
-            this.chkCaseInsensitive.Location = new System.Drawing.Point(45, 562);
+            this.chkCaseInsensitive.Location = new System.Drawing.Point(27, 81);
             this.chkCaseInsensitive.Margin = new System.Windows.Forms.Padding(4);
             this.chkCaseInsensitive.Name = "chkCaseInsensitive";
             this.chkCaseInsensitive.Size = new System.Drawing.Size(253, 21);
@@ -329,7 +337,7 @@
             // 
             // chkOpenPdf
             // 
-            this.chkOpenPdf.Location = new System.Drawing.Point(45, 604);
+            this.chkOpenPdf.Location = new System.Drawing.Point(27, 123);
             this.chkOpenPdf.Margin = new System.Windows.Forms.Padding(4);
             this.chkOpenPdf.Name = "chkOpenPdf";
             this.chkOpenPdf.Size = new System.Drawing.Size(209, 22);
@@ -344,7 +352,7 @@
             this.buttonPath.FlatAppearance.BorderSize = 0;
             this.buttonPath.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPath.Font = new System.Drawing.Font("Wingdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.buttonPath.Location = new System.Drawing.Point(188, 663);
+            this.buttonPath.Location = new System.Drawing.Point(197, 412);
             this.buttonPath.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPath.Name = "buttonPath";
             this.buttonPath.Size = new System.Drawing.Size(38, 30);
@@ -356,7 +364,7 @@
             // 
             // labelPdfTitle
             // 
-            this.labelPdfTitle.Location = new System.Drawing.Point(269, 605);
+            this.labelPdfTitle.Location = new System.Drawing.Point(251, 124);
             this.labelPdfTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPdfTitle.Name = "labelPdfTitle";
             this.labelPdfTitle.Size = new System.Drawing.Size(79, 21);
@@ -365,7 +373,7 @@
             // 
             // txtPdfTitle
             // 
-            this.txtPdfTitle.Location = new System.Drawing.Point(356, 601);
+            this.txtPdfTitle.Location = new System.Drawing.Point(338, 120);
             this.txtPdfTitle.Margin = new System.Windows.Forms.Padding(4);
             this.txtPdfTitle.Name = "txtPdfTitle";
             this.txtPdfTitle.Size = new System.Drawing.Size(179, 25);
@@ -392,12 +400,26 @@
             this.groupBoxPostgres.Controls.Add(this.labelPort);
             this.groupBoxPostgres.Controls.Add(this.txtIpaddress);
             this.groupBoxPostgres.Controls.Add(this.labelIpaddress);
-            this.groupBoxPostgres.Location = new System.Drawing.Point(18, 22);
+            this.groupBoxPostgres.Location = new System.Drawing.Point(19, 32);
             this.groupBoxPostgres.Name = "groupBoxPostgres";
-            this.groupBoxPostgres.Size = new System.Drawing.Size(516, 130);
+            this.groupBoxPostgres.Size = new System.Drawing.Size(516, 140);
             this.groupBoxPostgres.TabIndex = 16;
             this.groupBoxPostgres.TabStop = false;
             this.groupBoxPostgres.Text = "PostgreSQL";
+            // 
+            // buttonEye
+            // 
+            this.buttonEye.BackColor = System.Drawing.Color.Transparent;
+            this.buttonEye.FlatAppearance.BorderSize = 0;
+            this.buttonEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEye.Font = new System.Drawing.Font("Webdings", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.buttonEye.Location = new System.Drawing.Point(308, 89);
+            this.buttonEye.Name = "buttonEye";
+            this.buttonEye.Size = new System.Drawing.Size(32, 27);
+            this.buttonEye.TabIndex = 24;
+            this.buttonEye.Text = "N";
+            this.buttonEye.UseVisualStyleBackColor = false;
+            this.buttonEye.Click += new System.EventHandler(this.buttonEye_Click);
             // 
             // txtPassword
             // 
@@ -460,40 +482,68 @@
             this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
             this.txtIpaddress.TabIndex = 17;
             // 
-            // buttonEye
+            // tabControl1
             // 
-            this.buttonEye.BackColor = System.Drawing.Color.Transparent;
-            this.buttonEye.FlatAppearance.BorderSize = 0;
-            this.buttonEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonEye.Font = new System.Drawing.Font("Webdings", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.buttonEye.Location = new System.Drawing.Point(308, 89);
-            this.buttonEye.Name = "buttonEye";
-            this.buttonEye.Size = new System.Drawing.Size(32, 27);
-            this.buttonEye.TabIndex = 24;
-            this.buttonEye.Text = "N";
-            this.buttonEye.UseVisualStyleBackColor = false;
-            this.buttonEye.Click += new System.EventHandler(this.buttonEye_Click);
+            this.tabControl1.Controls.Add(this.tabPageConnection);
+            this.tabControl1.Controls.Add(this.tabPageUi);
+            this.tabControl1.Controls.Add(this.tabPageMisc);
+            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(606, 391);
+            this.tabControl1.TabIndex = 17;
+            // 
+            // tabPageConnection
+            // 
+            this.tabPageConnection.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageConnection.Controls.Add(this.groupBoxPostgres);
+            this.tabPageConnection.Location = new System.Drawing.Point(4, 26);
+            this.tabPageConnection.Name = "tabPageConnection";
+            this.tabPageConnection.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageConnection.Size = new System.Drawing.Size(598, 361);
+            this.tabPageConnection.TabIndex = 0;
+            this.tabPageConnection.Text = "Connection";
+            // 
+            // tabPageUi
+            // 
+            this.tabPageUi.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageUi.Controls.Add(this.labelFont);
+            this.tabPageUi.Controls.Add(this.cboFont);
+            this.tabPageUi.Controls.Add(this.labelFontsize);
+            this.tabPageUi.Controls.Add(this.txtFontSize);
+            this.tabPageUi.Controls.Add(this.groupBox1);
+            this.tabPageUi.Controls.Add(this.groupBox2);
+            this.tabPageUi.Controls.Add(this.groupBox3);
+            this.tabPageUi.Location = new System.Drawing.Point(4, 26);
+            this.tabPageUi.Name = "tabPageUi";
+            this.tabPageUi.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageUi.Size = new System.Drawing.Size(598, 361);
+            this.tabPageUi.TabIndex = 1;
+            this.tabPageUi.Text = "User Interface";
+            // 
+            // tabPageMisc
+            // 
+            this.tabPageMisc.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageMisc.Controls.Add(this.chkScrollToLastRow);
+            this.tabPageMisc.Controls.Add(this.txtPdfTitle);
+            this.tabPageMisc.Controls.Add(this.chkCaseInsensitive);
+            this.tabPageMisc.Controls.Add(this.labelPdfTitle);
+            this.tabPageMisc.Controls.Add(this.chkOpenPdf);
+            this.tabPageMisc.Location = new System.Drawing.Point(4, 26);
+            this.tabPageMisc.Name = "tabPageMisc";
+            this.tabPageMisc.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMisc.Size = new System.Drawing.Size(598, 361);
+            this.tabPageMisc.TabIndex = 2;
+            this.tabPageMisc.Text = "Misc";
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 710);
-            this.Controls.Add(this.groupBoxPostgres);
-            this.Controls.Add(this.txtPdfTitle);
-            this.Controls.Add(this.labelPdfTitle);
+            this.ClientSize = new System.Drawing.Size(627, 456);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonPath);
-            this.Controls.Add(this.chkOpenPdf);
-            this.Controls.Add(this.chkCaseInsensitive);
-            this.Controls.Add(this.chkScrollToLastRow);
             this.Controls.Add(this.btLoadDefaults);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.txtFontSize);
-            this.Controls.Add(this.labelFontsize);
-            this.Controls.Add(this.cboFont);
-            this.Controls.Add(this.labelFont);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btOk);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -512,8 +562,13 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBoxPostgres.ResumeLayout(false);
             this.groupBoxPostgres.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPageConnection.ResumeLayout(false);
+            this.tabPageUi.ResumeLayout(false);
+            this.tabPageUi.PerformLayout();
+            this.tabPageMisc.ResumeLayout(false);
+            this.tabPageMisc.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -558,5 +613,9 @@
         private System.Windows.Forms.TextBox txtPort;
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.Button buttonEye;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPageConnection;
+        private System.Windows.Forms.TabPage tabPageUi;
+        private System.Windows.Forms.TabPage tabPageMisc;
     }
 }
