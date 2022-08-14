@@ -8,6 +8,7 @@ using System.Drawing.Text;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using Npgsql;
 
 namespace MaxiBug
 {
@@ -307,6 +308,45 @@ namespace MaxiBug
             {
                 this.txtPassword.PasswordChar = '●';
             }
+        }
+
+        /// <summary>
+        /// Test connection with Postgres server.
+        /// </summary>
+        private void buttonTestConnection_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Program.postgresIpaddress = txtIpaddress.Text;
+                Program.postgresPort = int.Parse(txtPort.Text);
+                Program.postgresUser = txtUsername.Text;
+                Program.postgresPassword = txtPassword.Text;
+                Debug.Print("Postgres user = " + Program.postgresUser);
+
+                NpgsqlConnection.ClearAllPools();
+                string connString = Database.GetConnectionString("postgres");
+
+                using (var conn = new NpgsqlConnection(connString))
+                {
+                    conn.Open();
+
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        this.labelTestConn.Text = "Successfully connected to Postgres server !";
+                        this.labelTestConn.ForeColor = Color.Black;
+                        this.labelTestConn.Visible = true;
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
+            this.labelTestConn.Text = "Could not connect to Postgres server !";
+            this.labelTestConn.ForeColor = Color.Red;
+            this.labelTestConn.Visible = true;
         }
     }
 }

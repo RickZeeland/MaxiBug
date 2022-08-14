@@ -60,6 +60,8 @@
             this.txtPdfTitle = new System.Windows.Forms.TextBox();
             this.labelIpaddress = new System.Windows.Forms.Label();
             this.groupBoxPostgres = new System.Windows.Forms.GroupBox();
+            this.labelTestConn = new System.Windows.Forms.Label();
+            this.buttonTestConnection = new System.Windows.Forms.Button();
             this.buttonEye = new System.Windows.Forms.Button();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
@@ -391,6 +393,8 @@
             // 
             // groupBoxPostgres
             // 
+            this.groupBoxPostgres.Controls.Add(this.labelTestConn);
+            this.groupBoxPostgres.Controls.Add(this.buttonTestConnection);
             this.groupBoxPostgres.Controls.Add(this.buttonEye);
             this.groupBoxPostgres.Controls.Add(this.txtPassword);
             this.groupBoxPostgres.Controls.Add(this.labelPassword);
@@ -402,10 +406,29 @@
             this.groupBoxPostgres.Controls.Add(this.labelIpaddress);
             this.groupBoxPostgres.Location = new System.Drawing.Point(19, 32);
             this.groupBoxPostgres.Name = "groupBoxPostgres";
-            this.groupBoxPostgres.Size = new System.Drawing.Size(516, 140);
+            this.groupBoxPostgres.Size = new System.Drawing.Size(541, 203);
             this.groupBoxPostgres.TabIndex = 16;
             this.groupBoxPostgres.TabStop = false;
             this.groupBoxPostgres.Text = "PostgreSQL";
+            // 
+            // labelTestConn
+            // 
+            this.labelTestConn.Location = new System.Drawing.Point(278, 138);
+            this.labelTestConn.Name = "labelTestConn";
+            this.labelTestConn.Size = new System.Drawing.Size(257, 53);
+            this.labelTestConn.TabIndex = 25;
+            this.labelTestConn.Text = "Could not connect to Postgres server !";
+            this.labelTestConn.Visible = false;
+            // 
+            // buttonTestConnection
+            // 
+            this.buttonTestConnection.Location = new System.Drawing.Point(126, 133);
+            this.buttonTestConnection.Name = "buttonTestConnection";
+            this.buttonTestConnection.Size = new System.Drawing.Size(132, 31);
+            this.buttonTestConnection.TabIndex = 17;
+            this.buttonTestConnection.Text = "Test Connection";
+            this.buttonTestConnection.UseVisualStyleBackColor = true;
+            this.buttonTestConnection.Click += new System.EventHandler(this.buttonTestConnection_Click);
             // 
             // buttonEye
             // 
@@ -617,5 +640,7 @@
         private System.Windows.Forms.TabPage tabPageConnection;
         private System.Windows.Forms.TabPage tabPageUi;
         private System.Windows.Forms.TabPage tabPageMisc;
+        private System.Windows.Forms.Label labelTestConn;
+        private System.Windows.Forms.Button buttonTestConnection;
     }
 }
