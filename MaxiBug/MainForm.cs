@@ -339,12 +339,21 @@ namespace MaxiBug
         /// </summary>
         private void CloseApplication()
         {
-            // Remember the last form position
-            Properties.Settings.Default.FormStartPosition = this.Location;
-            Properties.Settings.Default.FormSize = this.Size;
+            try
+            {
+                // Remember the last form position
+                Properties.Settings.Default.FormStartPosition = this.Location;
+                Properties.Settings.Default.FormSize = this.Size;
 
-            // Save the order of the columns in the issues and tasks DataGridViews
-            ApplicationSettings.Save(ApplicationSettings.SaveSettings.ColumnOrderSort);
+                // Save the order of the columns in the issues and tasks DataGridViews
+                ApplicationSettings.Save(ApplicationSettings.SaveSettings.ColumnOrderSort);
+
+                Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
         }
 
         #region "RecentProject"
@@ -555,6 +564,17 @@ namespace MaxiBug
                 MessageBox.Show(ConnectionString, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 ConnectionString = string.Empty;
                 return false;
+            }
+
+            try
+            {
+                // Set user status to active
+                Database.UpdateUserActive(Program.postgresUser, true);      // Will fail on user table older than v0.8
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+                //MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             Stopwatch stopwatch = new Stopwatch();

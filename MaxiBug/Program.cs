@@ -15,7 +15,7 @@ namespace MaxiBug
         public static string myName = "MaxiBug Issue Tracker";
 
         /// <summary>
-        /// Postgres database name in lower case.
+        /// Postgres database name in lower case, updated in OpenProject().
         /// </summary>
         public static string databaseName = "maxibug1";
 

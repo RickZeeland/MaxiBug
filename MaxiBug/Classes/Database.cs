@@ -57,7 +57,7 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Create database with tables: project, issues, tasks and users.
+        /// Create database with tables: project, issues, images, tasks and users.
         /// Note that the users table is not used for authentication purposes, 
         /// this can be done using Postgres and the Settings for PostgresUser and PostgresPassword.
         /// </summary>
@@ -70,7 +70,7 @@ namespace MaxiBug
 
             if (uri.Contains("amazonaws"))
             {
-                // Heroku empty db must be already created
+                // Heroku online db (empty db must be already created)
                 sql = "set transaction read write; ";
                 sql += $@"INSERT INTO project (datecreated, name, version) VALUES (CURRENT_TIMESTAMP, '{Program.SoftwareProject.Name}', '{Program.SoftwareProject.Version}');";
                 ExecuteNonQuery(ConnectionString, sql);
@@ -84,7 +84,7 @@ namespace MaxiBug
             }
             else
             {
-                // Normal Posgres server
+                // Normal Postgres server
                 result = CreateDatabase(dbName);
             }
 
@@ -154,6 +154,7 @@ namespace MaxiBug
               datecreated timestamp with time zone,
               name VARCHAR(50),
               description text,
+              active boolean,
               issuelock integer,
               tasklock integer
             );";
@@ -168,7 +169,7 @@ namespace MaxiBug
             (
               id serial PRIMARY KEY,
               datecreated timestamp with time zone,
-              name VARCHAR(256),
+              name VARCHAR(300),
               data bytea
             );";
 
@@ -706,6 +707,29 @@ namespace MaxiBug
                 {
                     cmd.Parameters.AddWithValue("issuelock", issueId);
                     cmd.Parameters.AddWithValue("tasklock", taskId);
+                    cmd.Parameters.AddWithValue("name", username ?? string.Empty);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Update user active boolean field in the database.
+        /// </summary>
+        /// <param name="username">The user name</param>
+        /// <param name="active">True to set status to active</param>
+        public static void UpdateUserActive(string username, bool active)
+        {
+            string sql = $@"UPDATE users SET active=@active WHERE name=@name;";
+            string connString = GetConnectionString(Program.databaseName);
+
+            using (var conn = new NpgsqlConnection(connString))
+            {
+                conn.Open();
+
+                using (var cmd = new NpgsqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("active", NpgsqlTypes.NpgsqlDbType.Boolean, active);
                     cmd.Parameters.AddWithValue("name", username ?? string.Empty);
                     cmd.ExecuteNonQuery();
                 }

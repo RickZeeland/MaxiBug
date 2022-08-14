@@ -348,27 +348,34 @@ namespace MaxiBug
         /// </summary>
         private void buttonBrowseImage_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Select Image file";
-            openFileDialog1.Multiselect = false;
-            openFileDialog1.Filter = "Image files (*.jpg,*.png,*.bmp,*.gif)|*.jpg;*.png;*.bmp;*.gif";
-            openFileDialog1.FilterIndex = 0;
-            openFileDialog1.FileName = string.Empty;
-            openFileDialog1.InitialDirectory = Application.StartupPath;         // Open in current directory
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;                    // Make room in the splitcontainer
-                string imageFilename = openFileDialog1.FileName;
-                imageFilename = imageFilename.Replace(Application.StartupPath + @"\", string.Empty);        // Truncate file name if possible
-                this.txtImage.Text = imageFilename;
+                openFileDialog1.Title = "Select Image file";
+                openFileDialog1.Multiselect = false;
+                openFileDialog1.Filter = "Image files (*.jpg,*.png,*.bmp,*.gif)|*.jpg;*.png;*.bmp;*.gif";
+                openFileDialog1.FilterIndex = 0;
+                openFileDialog1.FileName = string.Empty;
+                openFileDialog1.InitialDirectory = Application.StartupPath;         // Open in current directory
 
-                if (File.Exists(imageFilename))
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    this.pictureBox1.Image = Image.FromFile(imageFilename);
-                    this.pictureBox1.Visible = true;
-                    this.txtImage.ForeColor = Color.Black;
-                    CurrentIssue.ImageId = Database.SaveImage(this.pictureBox1.Image, imageFilename);
+                    this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;                    // Make room in the splitcontainer
+                    string imageFilename = openFileDialog1.FileName;
+                    imageFilename = imageFilename.Replace(Application.StartupPath + @"\", string.Empty);        // Truncate file name if possible
+                    this.txtImage.Text = imageFilename;
+
+                    if (File.Exists(imageFilename))
+                    {
+                        this.pictureBox1.Image = Image.FromFile(imageFilename);
+                        this.pictureBox1.Visible = true;
+                        this.txtImage.ForeColor = Color.Black;
+                        CurrentIssue.ImageId = Database.SaveImage(this.pictureBox1.Image, imageFilename);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

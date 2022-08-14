@@ -187,6 +187,16 @@ namespace MaxiBug
                 return false;
             }
 
+            try
+            {
+                // Set user status to active
+                Database.UpdateUserActive(Program.postgresUser, true);      // Will fail on user table older than v0.8
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
@@ -256,8 +266,16 @@ namespace MaxiBug
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Abort running tasks
-            Running = false;
+            try
+            {
+                // Abort running tasks
+                Running = false;
+                Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
         }
     }
 }
