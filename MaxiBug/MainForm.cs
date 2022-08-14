@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaxiBug
@@ -1135,6 +1136,29 @@ namespace MaxiBug
 
             if ((Program.SoftwareProject != null) && (Program.SoftwareProject.Issues != null))
             {
+                //Parallel.ForEach(Program.SoftwareProject.Issues, (issue) =>
+                //{
+                //    Console.WriteLine(issue.Value.Summary);
+
+                //    if (createTestDb)
+                //    {
+                //        //Program.SoftwareProject.AddIssue(issue.Value);               // Create test DB
+                //        Database.SaveIssue(issue.Value);
+                //    }
+
+                //    var issueStatus = Program.SoftwareProject.Issues[issue.Key].Status;
+
+                //    if (!ShowClosedIssues && (issueStatus == IssueStatus.Closed || issueStatus == IssueStatus.Resolved))
+                //    {
+                //        //continue;
+                //    }
+                //    else
+                //    {
+                //        AddIssueToGrid(issue.Value);
+                //        PiechartCountersAdd(issueStatus);
+                //    }
+                //});
+
                 foreach (KeyValuePair<int, Issue> issue in Program.SoftwareProject.Issues)
                 {
                     if (createTestDb)
