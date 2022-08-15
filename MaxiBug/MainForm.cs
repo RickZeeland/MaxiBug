@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -1136,23 +1137,18 @@ namespace MaxiBug
 
             if ((Program.SoftwareProject != null) && (Program.SoftwareProject.Issues != null))
             {
-                //Parallel.ForEach(Program.SoftwareProject.Issues, (issue) =>
+                //// Parallel.ForEach() does not seem to perform faster
+                //bool result = Parallel.ForEach(Program.SoftwareProject.Issues, (issue) =>
                 //    BeginInvoke(new Action(() =>
                 //    {
                 //        var newIssue = issue.Value;
                 //        var issueStatus = Program.SoftwareProject.Issues[issue.Key].Status;
-                //        Console.WriteLine(newIssue.Summary);
+                //        //Console.WriteLine(newIssue.Summary);
                 //        AddIssueToGrid(newIssue);
+                //        PiechartCountersAdd(issueStatus);
+                //    }))).IsCompleted;
 
-                //        if (!ShowClosedIssues && (issueStatus == IssueStatus.Closed || issueStatus == IssueStatus.Resolved))
-                //        {
-                //            //continue;
-                //        }
-                //        else
-                //        {
-                //            PiechartCountersAdd(issueStatus);
-                //        }
-                //    })));
+                //Application.DoEvents();
 
                 foreach (KeyValuePair<int, Issue> issue in Program.SoftwareProject.Issues)
                 {
