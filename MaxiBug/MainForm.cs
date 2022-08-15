@@ -815,7 +815,7 @@ namespace MaxiBug
                 this.Font = ApplicationSettings.AppFont;
                 ApplySettingsToGrids();
 
-                if (oldProjectName != Program.SoftwareProject.Name)
+                if (Program.SoftwareProject != null && oldProjectName != Program.SoftwareProject.Name)
                 {
                     // Project name changed
                     ClearRecentProjects();
