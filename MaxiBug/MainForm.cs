@@ -350,7 +350,10 @@ namespace MaxiBug
                 // Save the order of the columns in the issues and tasks DataGridViews
                 ApplicationSettings.Save(ApplicationSettings.SaveSettings.ColumnOrderSort);
 
-                Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
+                if (Database.Connected)
+                {
+                    Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
+                }
             }
             catch (Exception ex)
             {
@@ -466,6 +469,12 @@ namespace MaxiBug
         /// </summary>
         private void NewProject()
         {
+            if (!Database.TestConnection())
+            {
+                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             //var status = FileSystemOperationStatus.None;
             this.panelPie.Visible = false;
             var frmProject = new ProjectForm(OperationType.New);
@@ -525,6 +534,12 @@ namespace MaxiBug
             if (!string.IsNullOrEmpty(dbName))
             {
                 Program.databaseName = dbName.ToLower();
+            }
+
+            if (!Database.TestConnection())
+            {
+                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
 
             var dbNames = Database.GetDbNames();            // Find existing database names

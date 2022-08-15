@@ -23,6 +23,11 @@ namespace MaxiBug
         public static string ConnectionString { get; set; }
 
         /// <summary>
+        /// True after successful connection.
+        /// </summary>
+        public static bool Connected { get; set; }
+
+        /// <summary>
         /// Get Npgsql connection string.
         /// Keepalive (in seconds) determines when notifications are processed if there is no other activity.
         /// </summary>
@@ -944,6 +949,30 @@ namespace MaxiBug
 
             // Empty array.
             return databaseNames.ToArray();
+        }
+
+        public static bool TestConnection()
+        {
+            bool result = false;
+
+            try
+            {
+                NpgsqlConnection.ClearAllPools();
+                string connString = GetConnectionString("postgres");
+
+                using (var conn = new NpgsqlConnection(connString))
+                {
+                    conn.Open();
+                    result = conn.State == ConnectionState.Open;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+
+            Connected = result;
+            return result;
         }
     }
 }

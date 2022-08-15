@@ -344,20 +344,12 @@ namespace MaxiBug
                 Program.postgresPassword = txtPassword.Text;
                 Debug.Print("Postgres user = " + Program.postgresUser);
 
-                NpgsqlConnection.ClearAllPools();
-                string connString = Database.GetConnectionString("postgres");
-
-                using (var conn = new NpgsqlConnection(connString))
+                if (Database.TestConnection())
                 {
-                    conn.Open();
-
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        this.labelTestConn.Text = "Successfully connected to Postgres server !";
-                        this.labelTestConn.ForeColor = Color.Black;
-                        this.labelTestConn.Visible = true;
-                        return;
-                    }
+                    this.labelTestConn.Text = "Successfully connected to Postgres server !";
+                    this.labelTestConn.ForeColor = Color.Black;
+                    this.labelTestConn.Visible = true;
+                    return;
                 }
             }
             catch (Exception ex)
