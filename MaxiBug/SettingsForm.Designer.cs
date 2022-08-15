@@ -74,6 +74,13 @@
             this.tabPageConnection = new System.Windows.Forms.TabPage();
             this.tabPageUi = new System.Windows.Forms.TabPage();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
+            this.tabPageProject = new System.Windows.Forms.TabPage();
+            this.groupBoxProject = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtDbName = new System.Windows.Forms.TextBox();
+            this.labelDbName = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -82,6 +89,8 @@
             this.tabPageConnection.SuspendLayout();
             this.tabPageUi.SuspendLayout();
             this.tabPageMisc.SuspendLayout();
+            this.tabPageProject.SuspendLayout();
+            this.groupBoxProject.SuspendLayout();
             this.SuspendLayout();
             // 
             // btOk
@@ -406,16 +415,16 @@
             this.groupBoxPostgres.Controls.Add(this.labelIpaddress);
             this.groupBoxPostgres.Location = new System.Drawing.Point(19, 32);
             this.groupBoxPostgres.Name = "groupBoxPostgres";
-            this.groupBoxPostgres.Size = new System.Drawing.Size(541, 203);
+            this.groupBoxPostgres.Size = new System.Drawing.Size(557, 203);
             this.groupBoxPostgres.TabIndex = 16;
             this.groupBoxPostgres.TabStop = false;
             this.groupBoxPostgres.Text = "PostgreSQL";
             // 
             // labelTestConn
             // 
-            this.labelTestConn.Location = new System.Drawing.Point(278, 138);
+            this.labelTestConn.Location = new System.Drawing.Point(272, 138);
             this.labelTestConn.Name = "labelTestConn";
-            this.labelTestConn.Size = new System.Drawing.Size(257, 53);
+            this.labelTestConn.Size = new System.Drawing.Size(273, 53);
             this.labelTestConn.TabIndex = 25;
             this.labelTestConn.Text = "Could not connect to Postgres server !";
             this.labelTestConn.Visible = false;
@@ -508,6 +517,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageConnection);
+            this.tabControl1.Controls.Add(this.tabPageProject);
             this.tabControl1.Controls.Add(this.tabPageUi);
             this.tabControl1.Controls.Add(this.tabPageMisc);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -559,6 +569,77 @@
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
             // 
+            // tabPageProject
+            // 
+            this.tabPageProject.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageProject.Controls.Add(this.groupBoxProject);
+            this.tabPageProject.Location = new System.Drawing.Point(4, 26);
+            this.tabPageProject.Name = "tabPageProject";
+            this.tabPageProject.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProject.Size = new System.Drawing.Size(598, 361);
+            this.tabPageProject.TabIndex = 3;
+            this.tabPageProject.Text = "Project";
+            // 
+            // groupBoxProject
+            // 
+            this.groupBoxProject.Controls.Add(this.label2);
+            this.groupBoxProject.Controls.Add(this.txtDbName);
+            this.groupBoxProject.Controls.Add(this.labelDbName);
+            this.groupBoxProject.Controls.Add(this.txtName);
+            this.groupBoxProject.Controls.Add(this.label1);
+            this.groupBoxProject.Location = new System.Drawing.Point(19, 21);
+            this.groupBoxProject.Name = "groupBoxProject";
+            this.groupBoxProject.Size = new System.Drawing.Size(564, 230);
+            this.groupBoxProject.TabIndex = 0;
+            this.groupBoxProject.TabStop = false;
+            this.groupBoxProject.Text = "Project details";
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(116, 97);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(335, 52);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "* Please use normal characters and underscores for the database name";
+            // 
+            // txtDbName
+            // 
+            this.txtDbName.Location = new System.Drawing.Point(117, 66);
+            this.txtDbName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDbName.MaxLength = 50;
+            this.txtDbName.Name = "txtDbName";
+            this.txtDbName.Size = new System.Drawing.Size(334, 25);
+            this.txtDbName.TabIndex = 17;
+            // 
+            // labelDbName
+            // 
+            this.labelDbName.AutoSize = true;
+            this.labelDbName.Location = new System.Drawing.Point(7, 73);
+            this.labelDbName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDbName.Name = "labelDbName";
+            this.labelDbName.Size = new System.Drawing.Size(102, 17);
+            this.labelDbName.TabIndex = 16;
+            this.labelDbName.Text = "Database name:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(117, 27);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtName.MaxLength = 50;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(334, 25);
+            this.txtName.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 34);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 17);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Project name:";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -591,6 +672,9 @@
             this.tabPageUi.PerformLayout();
             this.tabPageMisc.ResumeLayout(false);
             this.tabPageMisc.PerformLayout();
+            this.tabPageProject.ResumeLayout(false);
+            this.groupBoxProject.ResumeLayout(false);
+            this.groupBoxProject.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -642,5 +726,12 @@
         private System.Windows.Forms.TabPage tabPageMisc;
         private System.Windows.Forms.Label labelTestConn;
         private System.Windows.Forms.Button buttonTestConnection;
+        private System.Windows.Forms.TabPage tabPageProject;
+        private System.Windows.Forms.GroupBox groupBoxProject;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtDbName;
+        private System.Windows.Forms.Label labelDbName;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label label1;
     }
 }

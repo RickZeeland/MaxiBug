@@ -14,6 +14,10 @@ namespace MaxiBug
 {
     public partial class SettingsForm : Form
     {
+        private bool projectExists;
+
+        private string oldProjectName = string.Empty;
+
         public SettingsForm()
         {
             InitializeComponent();
@@ -28,6 +32,17 @@ namespace MaxiBug
             txtPort.Text = Properties.Settings.Default.PostgresPort.ToString();
             txtUsername.Text = Properties.Settings.Default.PostgresUser;
             txtPassword.Text = Properties.Settings.Default.PostgresPassword;
+
+            projectExists = Program.SoftwareProject != null;
+            this.groupBoxProject.Enabled = projectExists;
+
+            if (projectExists)
+            {
+                oldProjectName = Program.SoftwareProject.Name;
+                this.txtName.Text = Program.SoftwareProject.Name;
+                this.txtDbName.Text = Program.databaseName;
+                this.txtDbName.Enabled = false;
+            }
 
             this.Font = ApplicationSettings.AppFont;
 
@@ -224,6 +239,12 @@ namespace MaxiBug
             Program.postgresUser = txtUsername.Text;
             Program.postgresPassword = txtPassword.Text;
             Debug.Print("Postgres user = " + Program.postgresUser);
+
+            if (oldProjectName != this.txtName.Text)
+            {
+                // Save changed project name
+                Program.SoftwareProject.Name = this.txtName.Text;
+            }
 
             // Font and font size
             float size = 0;

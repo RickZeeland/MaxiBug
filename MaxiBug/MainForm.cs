@@ -801,12 +801,28 @@ namespace MaxiBug
         /// </summary>
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string oldProjectName = string.Empty;
+
+            if (Program.SoftwareProject != null && !string.IsNullOrEmpty(Program.SoftwareProject.Name))
+            {
+                oldProjectName = Program.SoftwareProject.Name;
+            }
+
             SettingsForm frmSettings = new SettingsForm();
 
             if (frmSettings.ShowDialog() == DialogResult.OK)
             {
                 this.Font = ApplicationSettings.AppFont;
                 ApplySettingsToGrids();
+
+                if (oldProjectName != Program.SoftwareProject.Name)
+                {
+                    // Project name changed
+                    ClearRecentProjects();
+                    AddRecentProject(Program.SoftwareProject.Name, Program.databaseName);
+                    Database.UpdateProject(Program.SoftwareProject.Name);
+                    this.Text = $"{Program.SoftwareProject.Name} - {Program.myName}";     // Set the main form title
+                }
             }
 
             frmSettings.Dispose();
