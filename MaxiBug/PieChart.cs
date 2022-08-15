@@ -41,6 +41,11 @@ namespace MaxiBug
         /// <param name="add">Amount to add, default 1</param>
         private void PiechartCountersAdd(IssueStatus issueStatus, int add = 1, bool redraw = false)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<IssueStatus, int, bool>(this.PiechartCountersAdd), new object[] { issueStatus, add, redraw });
+            }
+
             switch (issueStatus)
             {
                 case IssueStatus.None:

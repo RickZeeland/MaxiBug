@@ -1137,27 +1137,22 @@ namespace MaxiBug
             if ((Program.SoftwareProject != null) && (Program.SoftwareProject.Issues != null))
             {
                 //Parallel.ForEach(Program.SoftwareProject.Issues, (issue) =>
-                //{
-                //    Console.WriteLine(issue.Value.Summary);
-
-                //    if (createTestDb)
+                //    BeginInvoke(new Action(() =>
                 //    {
-                //        //Program.SoftwareProject.AddIssue(issue.Value);               // Create test DB
-                //        Database.SaveIssue(issue.Value);
-                //    }
+                //        var newIssue = issue.Value;
+                //        var issueStatus = Program.SoftwareProject.Issues[issue.Key].Status;
+                //        Console.WriteLine(newIssue.Summary);
+                //        AddIssueToGrid(newIssue);
 
-                //    var issueStatus = Program.SoftwareProject.Issues[issue.Key].Status;
-
-                //    if (!ShowClosedIssues && (issueStatus == IssueStatus.Closed || issueStatus == IssueStatus.Resolved))
-                //    {
-                //        //continue;
-                //    }
-                //    else
-                //    {
-                //        AddIssueToGrid(issue.Value);
-                //        PiechartCountersAdd(issueStatus);
-                //    }
-                //});
+                //        if (!ShowClosedIssues && (issueStatus == IssueStatus.Closed || issueStatus == IssueStatus.Resolved))
+                //        {
+                //            //continue;
+                //        }
+                //        else
+                //        {
+                //            PiechartCountersAdd(issueStatus);
+                //        }
+                //    })));
 
                 foreach (KeyValuePair<int, Issue> issue in Program.SoftwareProject.Issues)
                 {
@@ -1313,9 +1308,14 @@ namespace MaxiBug
         /// Returns a bitmap image corresponding to a given issue priority.
         /// </summary>
         /// <param name="priority">An issue priority</param>
-        /// <returns>A bitmap image.</returns>
+        /// <returns>A bitmap image</returns>
         private object GetIssuePriorityImage(IssuePriority priority)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Func<IssuePriority, object>(p => this.GetIssuePriorityImage(p)));
+            }
+
             switch (priority)
             {
                 case IssuePriority.High:
@@ -1338,6 +1338,11 @@ namespace MaxiBug
         /// <param name="newIssue">The issue to add to the grid.</param>
         private void AddIssueToGrid(Issue newIssue)
         {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action<Issue>(this.AddIssueToGrid), new object[] { newIssue });
+            }
+
             GridIssues.Rows.Add(new object[] {
                 newIssue.ID.ToString(),
                 GetIssuePriorityImage(newIssue.Priority),
