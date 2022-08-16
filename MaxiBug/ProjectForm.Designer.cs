@@ -145,6 +145,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ProjectForm";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.ProjectForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

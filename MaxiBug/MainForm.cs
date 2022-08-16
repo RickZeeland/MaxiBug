@@ -524,6 +524,29 @@ namespace MaxiBug
         }
 
         /// <summary>
+        /// Show "Loading" or "Searching" form and get the MaxiBug database names.
+        /// </summary>
+        /// <param name="loadingText">The message to display</param>
+        /// <returns>A string array with database names</returns>
+        private string[] OpenProjectGetDbNames(string loadingText)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            var selForm = new SelectionForm(loadingText);               // Show "Loading" or "Searching" form
+            selForm.StartPosition = FormStartPosition.Manual;           // FormStartPosition.CenterParent does not work with show()
+            int x = this.Location.X + (this.Width - selForm.Width) / 2;
+            int y = this.Location.Y + (this.Height - selForm.Height) / 2;
+            selForm.Location = new Point(x, y);                         
+            selForm.Show(this);
+            Application.DoEvents();
+
+            var dbNames = Database.GetDbNames();                        // Get existing database names
+            selForm.Close();
+            this.Cursor = Cursors.Default;
+
+            return dbNames;
+        }
+
+        /// <summary>
         /// Open an existing project.
         /// </summary>
         /// <param name="projectName">The full project name</param>
@@ -531,9 +554,12 @@ namespace MaxiBug
         /// <returns>True on success</returns>
         private bool OpenProject(string projectName = "", string dbName = "")
         {
+            string loadingText = "Searching MaxiBug databases";
+
             if (!string.IsNullOrEmpty(dbName))
             {
                 Program.databaseName = dbName.ToLower();
+                loadingText = $"Loading database {dbName}";
             }
 
             if (!Database.TestConnection())
@@ -542,7 +568,8 @@ namespace MaxiBug
                 return false;
             }
 
-            var dbNames = Database.GetDbNames();            // Find existing database names
+            var dbNames = this.OpenProjectGetDbNames(loadingText);
+
             bool result = false;
 
             if (dbNames.Length < 1)

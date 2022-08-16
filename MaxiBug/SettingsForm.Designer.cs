@@ -56,6 +56,10 @@
             this.chkOpenPdf = new System.Windows.Forms.CheckBox();
             this.buttonPath = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtIpaddress = new System.Windows.Forms.TextBox();
+            this.txtDbName = new System.Windows.Forms.TextBox();
             this.labelPdfTitle = new System.Windows.Forms.Label();
             this.txtPdfTitle = new System.Windows.Forms.TextBox();
             this.labelIpaddress = new System.Windows.Forms.Label();
@@ -63,34 +67,29 @@
             this.labelTestConn = new System.Windows.Forms.Label();
             this.buttonTestConnection = new System.Windows.Forms.Button();
             this.buttonEye = new System.Windows.Forms.Button();
-            this.txtPassword = new System.Windows.Forms.TextBox();
             this.labelPassword = new System.Windows.Forms.Label();
-            this.txtUsername = new System.Windows.Forms.TextBox();
             this.labelUser = new System.Windows.Forms.Label();
             this.txtPort = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
-            this.txtIpaddress = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
-            this.tabPageUi = new System.Windows.Forms.TabPage();
-            this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.tabPageProject = new System.Windows.Forms.TabPage();
             this.groupBoxProject = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtDbName = new System.Windows.Forms.TextBox();
             this.labelDbName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPageUi = new System.Windows.Forms.TabPage();
+            this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBoxPostgres.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
-            this.tabPageUi.SuspendLayout();
-            this.tabPageMisc.SuspendLayout();
             this.tabPageProject.SuspendLayout();
             this.groupBoxProject.SuspendLayout();
+            this.tabPageUi.SuspendLayout();
+            this.tabPageMisc.SuspendLayout();
             this.SuspendLayout();
             // 
             // btOk
@@ -177,6 +176,7 @@
             this.cboFont.Name = "cboFont";
             this.cboFont.Size = new System.Drawing.Size(339, 25);
             this.cboFont.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.cboFont, "The font to use in all MaxiBug forms");
             // 
             // labelFontsize
             // 
@@ -195,6 +195,7 @@
             this.txtFontSize.Name = "txtFontSize";
             this.txtFontSize.Size = new System.Drawing.Size(55, 25);
             this.txtFontSize.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.txtFontSize, "Recommended sizes 8 to 14 points");
             this.txtFontSize.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFontSize_KeyPress);
             // 
             // label5
@@ -373,6 +374,45 @@
             this.buttonPath.UseVisualStyleBackColor = false;
             this.buttonPath.Click += new System.EventHandler(this.buttonPath_Click);
             // 
+            // txtPassword
+            // 
+            this.txtPassword.Location = new System.Drawing.Point(125, 90);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '●';
+            this.txtPassword.Size = new System.Drawing.Size(179, 25);
+            this.txtPassword.TabIndex = 23;
+            this.txtPassword.Text = "abc123";
+            this.toolTip1.SetToolTip(this.txtPassword, "Use normal characters and underscores only");
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.Location = new System.Drawing.Point(126, 58);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.Size = new System.Drawing.Size(179, 25);
+            this.txtUsername.TabIndex = 21;
+            this.toolTip1.SetToolTip(this.txtUsername, "Use normal characters and underscores only");
+            // 
+            // txtIpaddress
+            // 
+            this.txtIpaddress.Location = new System.Drawing.Point(126, 27);
+            this.txtIpaddress.Margin = new System.Windows.Forms.Padding(4);
+            this.txtIpaddress.Name = "txtIpaddress";
+            this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
+            this.txtIpaddress.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.txtIpaddress, "The ip address or URI for the Postgres server");
+            // 
+            // txtDbName
+            // 
+            this.txtDbName.Location = new System.Drawing.Point(132, 76);
+            this.txtDbName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDbName.MaxLength = 50;
+            this.txtDbName.Name = "txtDbName";
+            this.txtDbName.Size = new System.Drawing.Size(334, 25);
+            this.txtDbName.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.txtDbName, "Use normal characters and underscores only");
+            // 
             // labelPdfTitle
             // 
             this.labelPdfTitle.Location = new System.Drawing.Point(251, 124);
@@ -453,16 +493,6 @@
             this.buttonEye.UseVisualStyleBackColor = false;
             this.buttonEye.Click += new System.EventHandler(this.buttonEye_Click);
             // 
-            // txtPassword
-            // 
-            this.txtPassword.Location = new System.Drawing.Point(125, 90);
-            this.txtPassword.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.PasswordChar = '●';
-            this.txtPassword.Size = new System.Drawing.Size(179, 25);
-            this.txtPassword.TabIndex = 23;
-            this.txtPassword.Text = "abc123";
-            // 
             // labelPassword
             // 
             this.labelPassword.Location = new System.Drawing.Point(22, 93);
@@ -471,14 +501,6 @@
             this.labelPassword.Size = new System.Drawing.Size(96, 17);
             this.labelPassword.TabIndex = 22;
             this.labelPassword.Text = "Password";
-            // 
-            // txtUsername
-            // 
-            this.txtUsername.Location = new System.Drawing.Point(126, 58);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(4);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(179, 25);
-            this.txtUsername.TabIndex = 21;
             // 
             // labelUser
             // 
@@ -506,14 +528,6 @@
             this.labelPort.TabIndex = 18;
             this.labelPort.Text = "Port";
             // 
-            // txtIpaddress
-            // 
-            this.txtIpaddress.Location = new System.Drawing.Point(126, 27);
-            this.txtIpaddress.Margin = new System.Windows.Forms.Padding(4);
-            this.txtIpaddress.Name = "txtIpaddress";
-            this.txtIpaddress.Size = new System.Drawing.Size(179, 25);
-            this.txtIpaddress.TabIndex = 17;
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPageConnection);
@@ -536,6 +550,59 @@
             this.tabPageConnection.Size = new System.Drawing.Size(598, 361);
             this.tabPageConnection.TabIndex = 0;
             this.tabPageConnection.Text = "Connection";
+            // 
+            // tabPageProject
+            // 
+            this.tabPageProject.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageProject.Controls.Add(this.groupBoxProject);
+            this.tabPageProject.Location = new System.Drawing.Point(4, 26);
+            this.tabPageProject.Name = "tabPageProject";
+            this.tabPageProject.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageProject.Size = new System.Drawing.Size(598, 361);
+            this.tabPageProject.TabIndex = 3;
+            this.tabPageProject.Text = "Project";
+            // 
+            // groupBoxProject
+            // 
+            this.groupBoxProject.Controls.Add(this.txtDbName);
+            this.groupBoxProject.Controls.Add(this.labelDbName);
+            this.groupBoxProject.Controls.Add(this.txtName);
+            this.groupBoxProject.Controls.Add(this.label1);
+            this.groupBoxProject.Location = new System.Drawing.Point(19, 21);
+            this.groupBoxProject.Name = "groupBoxProject";
+            this.groupBoxProject.Size = new System.Drawing.Size(564, 144);
+            this.groupBoxProject.TabIndex = 0;
+            this.groupBoxProject.TabStop = false;
+            this.groupBoxProject.Text = "Project details";
+            // 
+            // labelDbName
+            // 
+            this.labelDbName.AutoSize = true;
+            this.labelDbName.Location = new System.Drawing.Point(22, 83);
+            this.labelDbName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDbName.Name = "labelDbName";
+            this.labelDbName.Size = new System.Drawing.Size(102, 17);
+            this.labelDbName.TabIndex = 16;
+            this.labelDbName.Text = "Database name:";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(132, 37);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtName.MaxLength = 50;
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(334, 25);
+            this.txtName.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 44);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(87, 17);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Project name:";
             // 
             // tabPageUi
             // 
@@ -569,77 +636,6 @@
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
             // 
-            // tabPageProject
-            // 
-            this.tabPageProject.BackColor = System.Drawing.SystemColors.Control;
-            this.tabPageProject.Controls.Add(this.groupBoxProject);
-            this.tabPageProject.Location = new System.Drawing.Point(4, 26);
-            this.tabPageProject.Name = "tabPageProject";
-            this.tabPageProject.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProject.Size = new System.Drawing.Size(598, 361);
-            this.tabPageProject.TabIndex = 3;
-            this.tabPageProject.Text = "Project";
-            // 
-            // groupBoxProject
-            // 
-            this.groupBoxProject.Controls.Add(this.label2);
-            this.groupBoxProject.Controls.Add(this.txtDbName);
-            this.groupBoxProject.Controls.Add(this.labelDbName);
-            this.groupBoxProject.Controls.Add(this.txtName);
-            this.groupBoxProject.Controls.Add(this.label1);
-            this.groupBoxProject.Location = new System.Drawing.Point(19, 21);
-            this.groupBoxProject.Name = "groupBoxProject";
-            this.groupBoxProject.Size = new System.Drawing.Size(564, 230);
-            this.groupBoxProject.TabIndex = 0;
-            this.groupBoxProject.TabStop = false;
-            this.groupBoxProject.Text = "Project details";
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(116, 97);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(335, 52);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "* Please use normal characters and underscores for the database name";
-            // 
-            // txtDbName
-            // 
-            this.txtDbName.Location = new System.Drawing.Point(117, 66);
-            this.txtDbName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDbName.MaxLength = 50;
-            this.txtDbName.Name = "txtDbName";
-            this.txtDbName.Size = new System.Drawing.Size(334, 25);
-            this.txtDbName.TabIndex = 17;
-            // 
-            // labelDbName
-            // 
-            this.labelDbName.AutoSize = true;
-            this.labelDbName.Location = new System.Drawing.Point(7, 73);
-            this.labelDbName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelDbName.Name = "labelDbName";
-            this.labelDbName.Size = new System.Drawing.Size(102, 17);
-            this.labelDbName.TabIndex = 16;
-            this.labelDbName.Text = "Database name:";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(117, 27);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtName.MaxLength = 50;
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(334, 25);
-            this.txtName.TabIndex = 15;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 34);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 17);
-            this.label1.TabIndex = 14;
-            this.label1.Text = "Project name:";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -660,6 +656,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -668,13 +665,13 @@
             this.groupBoxPostgres.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPageConnection.ResumeLayout(false);
+            this.tabPageProject.ResumeLayout(false);
+            this.groupBoxProject.ResumeLayout(false);
+            this.groupBoxProject.PerformLayout();
             this.tabPageUi.ResumeLayout(false);
             this.tabPageUi.PerformLayout();
             this.tabPageMisc.ResumeLayout(false);
             this.tabPageMisc.PerformLayout();
-            this.tabPageProject.ResumeLayout(false);
-            this.groupBoxProject.ResumeLayout(false);
-            this.groupBoxProject.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -728,7 +725,6 @@
         private System.Windows.Forms.Button buttonTestConnection;
         private System.Windows.Forms.TabPage tabPageProject;
         private System.Windows.Forms.GroupBox groupBoxProject;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDbName;
         private System.Windows.Forms.Label labelDbName;
         private System.Windows.Forms.TextBox txtName;
