@@ -8,7 +8,8 @@ using System.Windows.Forms;
 namespace MaxiBug
 {
     /// <summary>
-    /// Pie chart with modified ModernUI.Charting.dll by Angelo Cresta:
+    /// This is not a form, but a partial class of MainForm that has a 
+    /// panel with a modified ModernUI.Charting.dll by Angelo Cresta:
     /// https://www.codeproject.com/Articles/5299801/A-Control-to-Display-Pie-and-Doughtnut-Charts-with
     /// It can be dragged with the mouse and rotated using the mousewheel.
     /// </summary>
@@ -124,7 +125,7 @@ namespace MaxiBug
                 modernPieChart1.FocusedItemStyle.SurfaceAlphaTransparency = 0.75F;
                 modernPieChart1.FocusedItemStyle.SurfaceBrightnessFactor = 0.3F;
                 modernPieChart1.PieStyle.Thickness = 30;
-                modernPieChart1.Radius = 140;
+                modernPieChart1.Radius = this.panelPie.Width / 3;
                 panelPie.Visible = true;
             }
             catch

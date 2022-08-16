@@ -60,8 +60,8 @@ namespace MaxiBug
                 this.Icon = Properties.Resources.Minibug;
                 this.Text = Program.myName;
                 this.MinimumSize = new Size(478, 303);
-                //this.modernPieChart1.Size = new Size(400, 300);                     // Do not scale Pie chart with font size
-                this.panelPie.Location = new Point(this.Width - 600, this.Height - 400);
+                //this.panelPie.Size = new Size(this.Width / 3, this.Height / 3);
+                this.panelPie.Location = new Point(this.Width - this.panelPie.Width - 100, this.Height - this.panelPie.Height - 100);
 
                 // Initialization of the Issues and Tasks grids
                 InitializeGridIssues();
@@ -856,6 +856,11 @@ namespace MaxiBug
             {
                 this.Font = ApplicationSettings.AppFont;
                 ApplySettingsToGrids();
+
+                if (this.panelPie.Visible)
+                {
+                    this.ShowPieChart();
+                }
 
                 if (Program.SoftwareProject != null && oldProjectName != Program.SoftwareProject.Name)
                 {
