@@ -2,13 +2,6 @@
 // Licensed under the MIT license.
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaxiBug
@@ -43,27 +36,22 @@ namespace MaxiBug
         public ExportForm()
         {
             InitializeComponent();
-
             this.Font = ApplicationSettings.AppFont;
-
             HasIssues = ((Program.SoftwareProject.Issues != null) && (Program.SoftwareProject.Issues.Count > 0)) ? true : false;
             HasTasks = ((Program.SoftwareProject.Tasks != null) && (Program.SoftwareProject.Tasks.Count > 0)) ? true : false;
-
             IssuesFilename = $"{Program.SoftwareProject.Name} - Issues";
             TasksFilename = $"{Program.SoftwareProject.Name} - Tasks";
-            FilesLocation = Program.SoftwareProject.Location;
+            //FilesLocation = Program.SoftwareProject.Location;
+            FilesLocation = Application.StartupPath;
         }
 
         private void ExportForm_Load(object sender, EventArgs e)
         {
             // Suspend the layout logic for the form, while the application is initializing
             this.SuspendLayout();
-
             this.AcceptButton = btExport;
             this.CancelButton = btCancel;
-
             lblFormTitle.Width = this.ClientRectangle.Width;
-
             txtIssuesFilename.MaxLength = 251;
             txtTasksFilename.MaxLength = 251;
             txtLocation.Text = FilesLocation;
@@ -148,7 +136,6 @@ namespace MaxiBug
             {
                 btExport.Enabled = (!string.IsNullOrWhiteSpace(txtTasksFilename.Text) && !string.IsNullOrWhiteSpace(txtLocation.Text)) ? true : false;
             }
-
         }
 
         /// <summary>
