@@ -16,6 +16,7 @@ MaxiBug is a simple issue tracker and to-do list, it is a Windows desktop multi-
 
 MaxiBug uses a Postgres database (9.4 or higher) to store data.
 
+An image can be attached to an issue, drag & drop is also supported.
 Attached images are stored in the database.
 
 <img src="MaxiBug/Resources/Clipboard_64x64.png" alt="Clipboard button">
@@ -117,6 +118,8 @@ Settings in action:
 <img src="Screenshots/settings.gif" alt="Edit settings">
 
 ## Sorting
+
+The videos below are from the original MiniBug application and look slightly different in MaxiBug.
 
 You can sort the grid rows in two ways:
 
