@@ -944,7 +944,7 @@ namespace MaxiBug
             catch (Exception ex)
             {
                 databaseNames.Clear();
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
 
             // Empty array.

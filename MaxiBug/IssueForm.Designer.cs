@@ -270,6 +270,7 @@
             this.txtImage.Size = new System.Drawing.Size(458, 22);
             this.txtImage.TabIndex = 22;
             this.txtImage.Text = "Test_Image.jpg";
+            this.toolTip1.SetToolTip(this.txtImage, "You can also drag and drop an image on this form");
             // 
             // labelImage
             // 
@@ -279,6 +280,7 @@
             this.labelImage.Size = new System.Drawing.Size(127, 21);
             this.labelImage.TabIndex = 23;
             this.labelImage.Text = "Attached image file:";
+            this.toolTip1.SetToolTip(this.labelImage, "You can also drag and drop an image on this form");
             // 
             // openFileDialog1
             // 
@@ -400,6 +402,7 @@
             // 
             // IssueForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
@@ -436,6 +439,8 @@
             this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IssueForm_FormClosed);
             this.Load += new System.EventHandler(this.IssueForm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.IssueForm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.IssueForm_DragEnter);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

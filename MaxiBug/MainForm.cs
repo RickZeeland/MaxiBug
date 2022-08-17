@@ -102,7 +102,7 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -144,7 +144,7 @@ namespace MaxiBug
 
             if (!result)
             {
-                MessageBox.Show("Could not load recent project", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Could not load recent project", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 ClearRecentProjects();
             }
         }
@@ -469,7 +469,7 @@ namespace MaxiBug
         {
             if (!Database.TestConnection())
             {
-                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return;
             }
 
@@ -507,7 +507,7 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return;
             }
 
@@ -518,7 +518,7 @@ namespace MaxiBug
             AddRecentProject(Program.SoftwareProject.Name, Program.SoftwareProject.DbName);
 
             SetControlsState();
-            MessageBox.Show($"Created {Program.SoftwareProject.Name}", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Created {Program.SoftwareProject.Name}", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         /// <summary>
@@ -562,7 +562,7 @@ namespace MaxiBug
 
             if (!Database.TestConnection())
             {
-                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Could not connect to the Postgres server!", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return false;
             }
 
@@ -572,7 +572,7 @@ namespace MaxiBug
 
             if (dbNames.Length < 1)
             {
-                MessageBox.Show("No database found, please use 'New Project'", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("No database found, please use 'New Project'", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
             else if (string.IsNullOrEmpty(dbName))
             {
@@ -603,7 +603,7 @@ namespace MaxiBug
 
             if (ConnectionString.StartsWith("Error"))
             {
-                MessageBox.Show(ConnectionString, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ConnectionString, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 ConnectionString = string.Empty;
                 return false;
             }
@@ -643,7 +643,7 @@ namespace MaxiBug
             {
                 // Error, abort the project
                 this.Cursor = Cursors.Default;
-                MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 newProject = null;
                 return false;
             }
@@ -1462,7 +1462,7 @@ namespace MaxiBug
 
             if (!string.IsNullOrEmpty(userlock))
             {
-                MessageBox.Show($"Issue is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Issue is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                 return;
             }
             else
@@ -1532,7 +1532,7 @@ namespace MaxiBug
                 string msgIssues = (GridIssues.SelectedRows.Count == 1) ? "issue" : "issues";
 
                 // Confirm this operation
-                if (MessageBox.Show($"Are you sure you want to delete the selected {msgIssues}?", $"Delete {msgIssues}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                if (MessageBox.Show($"Are you sure you want to delete the selected {msgIssues}?", $"Delete {msgIssues}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) == DialogResult.OK)
                 {
                     // Iterate all the selected rows in the grid
                     foreach (DataGridViewRow row in GridIssues.SelectedRows)
@@ -2128,7 +2128,7 @@ namespace MaxiBug
 
                 if (!string.IsNullOrEmpty(userlock))
                 {
-                    MessageBox.Show($"Task is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Task is locked by {userlock} \nplease try again later ...", Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
                     return;
                 }
                 else
@@ -2173,7 +2173,7 @@ namespace MaxiBug
             {
                 string msgTasks = (GridTasks.SelectedRows.Count == 1) ? "task" : "tasks";
 
-                if (MessageBox.Show($"Are you sure you want to delete the selected {msgTasks}?", $"Delete {msgTasks}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                if (MessageBox.Show($"Are you sure you want to delete the selected {msgTasks}?", $"Delete {msgTasks}", MessageBoxButtons.OKCancel, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) == DialogResult.OK)
                 {
                     // Iterate all the selected rows in the grid
                     foreach (DataGridViewRow row in GridTasks.SelectedRows)

@@ -220,7 +220,9 @@ namespace MaxiBug
         private void btLoadDefaults_Click(object sender, EventArgs e)
         {
             // Ask for confirmation before proceeding
-            if (MessageBox.Show("Are you sure you want to load the default settings?\nYour settings definitions will be discarded.", "Load Default Settings", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            string message = "Are you sure you want to load the default settings?\nYour settings definitions will be discarded.";
+
+            if (MessageBox.Show(message, "Load Default Settings", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly) == DialogResult.Yes)
             {
                 ApplicationSettings.SetDefaultValues();
 

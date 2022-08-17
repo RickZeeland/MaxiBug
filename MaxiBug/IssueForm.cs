@@ -51,6 +51,11 @@ namespace MaxiBug
         /// </summary>
         private List<ComboBoxItem> ModifiedByList = new List<ComboBoxItem>();
 
+        /// <summary>
+        /// Id of an image in the database images table.
+        /// </summary>
+        private int imageId = 0;
+
         public IssueForm(OperationType operation, MaxiBug.Issue issue = null)
         {
             InitializeComponent();
@@ -215,6 +220,7 @@ namespace MaxiBug
             this.txtImage.Text = CurrentIssue.ImageFilename;
             this.txtImage.ForeColor = Color.Black;
 
+            // If there is an attached image, display it
             if (CurrentIssue.ImageId > 0)
             {
                 this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;
@@ -223,32 +229,7 @@ namespace MaxiBug
             }
             else if (!string.IsNullOrEmpty(CurrentIssue.ImageFilename))
             {
-                // If there is an attached image, display it
-                string fullFilename = CurrentIssue.ImageFilename;
-                string filename = Path.GetFileName(fullFilename);
-
-                if (!File.Exists(fullFilename))
-                {
-                    // Try to find image in the current apllication directory
-                    if (Directory.Exists("Images"))
-                    {
-                        filename = @"Images\" + filename;
-                    }
-
-                    fullFilename = Path.Combine(Application.StartupPath, filename);
-                }
-
-                if (File.Exists(fullFilename))
-                {
-                    this.txtImage.Text = fullFilename.Replace(Application.StartupPath + @"\", string.Empty);
-                    this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;
-                    this.pictureBox1.Image = Image.FromFile(fullFilename);
-                    this.pictureBox1.Visible = true;
-                }
-                else
-                {
-                    this.txtImage.ForeColor = Color.Red;            // Not found, display file name in red
-                }
+                this.LoadImage(CurrentIssue.ImageFilename);
             }
 
             lblID.Text = CurrentIssue.ID.ToString();
@@ -304,6 +285,7 @@ namespace MaxiBug
                 CurrentIssue.CreatedBy = cboCreatedBy.Text;
                 CurrentIssue.ModifiedBy = cboModifiedBy.Text;
                 CurrentIssue.ImageFilename = this.txtImage.Text;
+                CurrentIssue.ImageId = this.imageId;
 
                 AddUser(CurrentIssue.CreatedBy);
                 AddUser(CurrentIssue.ModifiedBy);
@@ -330,7 +312,7 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
         }
 
@@ -359,23 +341,54 @@ namespace MaxiBug
 
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;                    // Make room in the splitcontainer
-                    string imageFilename = openFileDialog1.FileName;
-                    imageFilename = imageFilename.Replace(Application.StartupPath + @"\", string.Empty);        // Truncate file name if possible
-                    this.txtImage.Text = imageFilename;
-
-                    if (File.Exists(imageFilename))
-                    {
-                        this.pictureBox1.Image = Image.FromFile(imageFilename);
-                        this.pictureBox1.Visible = true;
-                        this.txtImage.ForeColor = Color.Black;
-                        CurrentIssue.ImageId = Database.SaveImage(this.pictureBox1.Image, imageFilename);
-                    }
+                    LoadImage(openFileDialog1.FileName, true);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
+
+        /// <summary>
+        /// Load an image in the PictureBox and optionally save in database.
+        /// </summary>
+        /// <param name="imageFilename">The image file name</param>
+        /// <param name="saveInDatabase">True to save in database (default is false)</param>
+        private void LoadImage(string imageFilename, bool saveInDatabase = false)
+        {
+            string fullFilename = imageFilename;
+            string filename = Path.GetFileName(fullFilename);
+
+            if (!File.Exists(fullFilename))
+            {
+                // Try to find image in the current application directory
+                if (Directory.Exists("Images"))
+                {
+                    filename = @"Images\" + filename;
+                }
+
+                fullFilename = Path.Combine(Application.StartupPath, filename);
+            }
+
+            imageFilename = fullFilename.Replace(Application.StartupPath + @"\", string.Empty);            // Truncate file name if possible
+            this.txtImage.Text = imageFilename;
+
+            if (File.Exists(imageFilename))
+            {
+                this.txtImage.ForeColor = Color.Black;
+                this.splitContainer1.SplitterDistance = this.splitContainer1.Height / 2;                    // Make room in the splitcontainer
+                this.pictureBox1.Image = Image.FromFile(imageFilename);
+                this.pictureBox1.Visible = true;
+
+                if (saveInDatabase)
+                {
+                    this.imageId = Database.SaveImage(this.pictureBox1.Image, imageFilename);
+                }
+            }
+            else
+            {
+                this.txtImage.ForeColor = Color.Red;            // Not found, display file name in red
             }
         }
 
@@ -483,7 +496,7 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
 
             this.Enabled = true;
@@ -679,7 +692,34 @@ namespace MaxiBug
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+            }
+        }
+
+        /// <summary>
+        /// Note: drag and drop does not work in Visual Studio.
+        /// </summary>
+        private void IssueForm_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        /// <summary>
+        /// Note: drag and drop does not work in Visual Studio.
+        /// </summary>
+        private void IssueForm_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files != null)
+            {
+                //foreach (string file in files)
+                //{
+                //    // Keep Messagebox on top of other applications
+                //    MessageBox.Show(file, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+                //}
+
+                this.LoadImage(files[0], true);
             }
         }
     }

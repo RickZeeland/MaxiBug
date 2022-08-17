@@ -73,7 +73,7 @@ namespace MaxiBug
             }
 
             // More than one instance
-            MessageBox.Show("Only one instance allowed to run!", myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show("Only one instance allowed to run!", myName, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             return false;
         }
     }
