@@ -222,8 +222,6 @@ namespace MaxiBug
             // The user can edit the project settings only if the current project != null
             bool projectExists = Program.SoftwareProject != null;
 
-            editProjectToolStripMenuItem.Enabled = projectExists;
-
             // The user can export the project only if the current project != null AND there are issues OR tasks
             exportToolStripMenuItem.Enabled = false;
 
@@ -727,35 +725,6 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Edit the current project settings.
-        /// </summary>
-        private void EditProjectSettings()
-        {
-            try
-            {
-                ProjectForm frmProject = new ProjectForm(OperationType.Edit, Program.SoftwareProject.Name);
-
-                if (frmProject.ShowDialog() == DialogResult.OK)
-                {
-                    this.Cursor = Cursors.WaitCursor;
-                    this.Text = $"{frmProject.ProjectName} - {Program.myName}";     // Set the main form title
-                    Program.SoftwareProject.Name = frmProject.ProjectName;
-                    Database.UpdateProject(frmProject.ProjectName);
-                    ClearRecentProjects();
-                    AddRecentProject(frmProject.ProjectName, Program.databaseName);
-                }
-
-                frmProject.Dispose();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-            this.Cursor = Cursors.Default;
-        }
-
-        /// <summary>
         /// Export the current project.
         /// </summary>
         private void ExportProject()
@@ -812,14 +781,6 @@ namespace MaxiBug
         private void openProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenProject();
-        }
-
-        /// <summary>
-        /// Edit the current project settings.
-        /// </summary>
-        private void editProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EditProjectSettings();
         }
 
         /// <summary>
