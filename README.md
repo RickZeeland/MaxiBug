@@ -95,9 +95,22 @@ Next you can start adding issues and tasks:
 
 ## Settings
 
-The user can modify some settings (File > Settings) in order to customize the look and feel of the application:
+The user can modify the settings (File > Settings) for the Postgres connection:
 
-<img src="Screenshots/settings.png" alt="Edit settings">
+<img src="Screenshots/settings.png" alt="Edit postgres settings">
+
+Change the project name:
+
+<img src="Screenshots/settings_project.png" alt="Edit project settings">
+
+Customize the look and feel of the application:
+
+<img src="Screenshots/settings_ui.png" alt="Edit user interface settings">
+
+Change some other settings:
+
+<img src="Screenshots/settings_misc.png" alt="Edit misc settings">
+
 
 Settings in action:
 
