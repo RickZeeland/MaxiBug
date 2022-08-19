@@ -89,7 +89,7 @@ Next you can start adding issues and tasks:
 
 <img src="Screenshots/issue.png" alt="Edit issue">
 
-Note: it's possible to jump to other issues by double-clicking on an issue number.
+Note: it's possible to jump to other issues by double-clicking on an issue number in the description field.
 
 ## Tasks
 
