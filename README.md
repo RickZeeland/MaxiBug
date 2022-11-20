@@ -4,9 +4,10 @@
 ![Visual Studio Badge](https://img.shields.io/badge/Visual%20Studio-5C2D91?logo=visualstudio&logoColor=fff&style=flat-square)
 ![Postgres Badge](https://badgen.net/badge/icon/postgresql?icon=postgresql&label)
 
-This is a fork of MiniBug2 for VS2022 and .NET 4.8.
+This is a fork of [MiniBug2](https://github.com/RickZeeland/MiniBug-2) for VS2022 and .NET 4.8.
 
 Some of the changes:
+- Multi-user instead of single-user
 - Uses a PostgreSQL database
 
 ------------------------------------
