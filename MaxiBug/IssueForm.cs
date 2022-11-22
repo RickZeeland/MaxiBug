@@ -723,6 +723,9 @@ namespace MaxiBug
             }
         }
 
+        /// <summary>
+        /// Get the Git history for the directory selected by user filtered by issue number.
+        /// </summary>
         private void buttonGitSync_Click(object sender, EventArgs e)
         {
 

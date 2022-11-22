@@ -363,5 +363,21 @@ namespace MaxiBug
             this.labelTestConn.ForeColor = Color.Red;
             this.labelTestConn.Visible = true;
         }
+
+        /// <summary>
+        /// Select the default Git working copy folder.
+        /// </summary>
+        private void buttonGitFolder_Click(object sender, EventArgs e)
+        {
+            var folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
+            folderBrowserDialog1.SelectedPath = Environment.SpecialFolder.Personal.ToString();
+            folderBrowserDialog1.ShowNewFolderButton = false;
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtDefault.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
     }
 }

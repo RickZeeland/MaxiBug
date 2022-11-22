@@ -60,6 +60,7 @@
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtIpaddress = new System.Windows.Forms.TextBox();
             this.txtDbName = new System.Windows.Forms.TextBox();
+            this.buttonGitFolder = new System.Windows.Forms.Button();
             this.labelPdfTitle = new System.Windows.Forms.Label();
             this.txtPdfTitle = new System.Windows.Forms.TextBox();
             this.labelIpaddress = new System.Windows.Forms.Label();
@@ -79,6 +80,12 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageUi = new System.Windows.Forms.TabPage();
+            this.tabPageGit = new System.Windows.Forms.TabPage();
+            this.labelGitHeader = new System.Windows.Forms.Label();
+            this.labelGitInfo = new System.Windows.Forms.Label();
+            this.txtGitCommand = new System.Windows.Forms.TextBox();
+            this.txtDefault = new System.Windows.Forms.TextBox();
+            this.labelDefault = new System.Windows.Forms.Label();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,6 +96,7 @@
             this.tabPageProject.SuspendLayout();
             this.groupBoxProject.SuspendLayout();
             this.tabPageUi.SuspendLayout();
+            this.tabPageGit.SuspendLayout();
             this.tabPageMisc.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -413,6 +421,23 @@
             this.txtDbName.TabIndex = 17;
             this.toolTip1.SetToolTip(this.txtDbName, "Use normal characters and underscores only");
             // 
+            // buttonGitFolder
+            // 
+            this.buttonGitFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonGitFolder.BackColor = System.Drawing.Color.Transparent;
+            this.buttonGitFolder.FlatAppearance.BorderSize = 0;
+            this.buttonGitFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGitFolder.Font = new System.Drawing.Font("Wingdings", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.buttonGitFolder.Location = new System.Drawing.Point(538, 117);
+            this.buttonGitFolder.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonGitFolder.Name = "buttonGitFolder";
+            this.buttonGitFolder.Size = new System.Drawing.Size(38, 30);
+            this.buttonGitFolder.TabIndex = 13;
+            this.buttonGitFolder.Text = "1";
+            this.toolTip1.SetToolTip(this.buttonGitFolder, "Git working directory");
+            this.buttonGitFolder.UseVisualStyleBackColor = false;
+            this.buttonGitFolder.Click += new System.EventHandler(this.buttonGitFolder_Click);
+            // 
             // labelPdfTitle
             // 
             this.labelPdfTitle.Location = new System.Drawing.Point(251, 124);
@@ -533,6 +558,7 @@
             this.tabControl1.Controls.Add(this.tabPageConnection);
             this.tabControl1.Controls.Add(this.tabPageProject);
             this.tabControl1.Controls.Add(this.tabPageUi);
+            this.tabControl1.Controls.Add(this.tabPageGit);
             this.tabControl1.Controls.Add(this.tabPageMisc);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
@@ -621,6 +647,67 @@
             this.tabPageUi.TabIndex = 1;
             this.tabPageUi.Text = "User Interface";
             // 
+            // tabPageGit
+            // 
+            this.tabPageGit.Controls.Add(this.labelGitHeader);
+            this.tabPageGit.Controls.Add(this.labelGitInfo);
+            this.tabPageGit.Controls.Add(this.txtGitCommand);
+            this.tabPageGit.Controls.Add(this.buttonGitFolder);
+            this.tabPageGit.Controls.Add(this.txtDefault);
+            this.tabPageGit.Controls.Add(this.labelDefault);
+            this.tabPageGit.Location = new System.Drawing.Point(4, 26);
+            this.tabPageGit.Name = "tabPageGit";
+            this.tabPageGit.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGit.Size = new System.Drawing.Size(598, 361);
+            this.tabPageGit.TabIndex = 4;
+            this.tabPageGit.Text = "Git command";
+            this.tabPageGit.UseVisualStyleBackColor = true;
+            // 
+            // labelGitHeader
+            // 
+            this.labelGitHeader.AutoSize = true;
+            this.labelGitHeader.Location = new System.Drawing.Point(20, 22);
+            this.labelGitHeader.Name = "labelGitHeader";
+            this.labelGitHeader.Size = new System.Drawing.Size(484, 34);
+            this.labelGitHeader.TabIndex = 17;
+            this.labelGitHeader.Text = "Git command to retrieve Git history for an issue with a regular expression (RegEx" +
+    ")\r\nWith the -E option, POSIX ERE syntax is enforced";
+            // 
+            // labelGitInfo
+            // 
+            this.labelGitInfo.AutoSize = true;
+            this.labelGitInfo.Location = new System.Drawing.Point(111, 162);
+            this.labelGitInfo.Name = "labelGitInfo";
+            this.labelGitInfo.Size = new System.Drawing.Size(320, 136);
+            this.labelGitInfo.TabIndex = 16;
+            this.labelGitInfo.Text = "Note: {path} will be substituted with the chosen folder\r\nand {issue_id} with the " +
+    "issue number\r\n\r\nThe example will find commits with tags like:\r\n[axod: 123]\r\n[axo" +
+    "f: 123]\r\n[AXOT: 123]\r\netc.";
+            // 
+            // txtGitCommand
+            // 
+            this.txtGitCommand.Location = new System.Drawing.Point(23, 73);
+            this.txtGitCommand.Name = "txtGitCommand";
+            this.txtGitCommand.Size = new System.Drawing.Size(508, 25);
+            this.txtGitCommand.TabIndex = 15;
+            this.txtGitCommand.Text = "git -C \"{path}\" log -i -E --grep=\"\\[(axo.: {issue_id})\\]\"";
+            // 
+            // txtDefault
+            // 
+            this.txtDefault.Location = new System.Drawing.Point(114, 117);
+            this.txtDefault.Name = "txtDefault";
+            this.txtDefault.Size = new System.Drawing.Size(417, 25);
+            this.txtDefault.TabIndex = 1;
+            // 
+            // labelDefault
+            // 
+            this.labelDefault.AutoSize = true;
+            this.labelDefault.Location = new System.Drawing.Point(20, 120);
+            this.labelDefault.Name = "labelDefault";
+            this.labelDefault.Size = new System.Drawing.Size(88, 17);
+            this.labelDefault.TabIndex = 0;
+            this.labelDefault.Text = "Default folder";
+            // 
             // tabPageMisc
             // 
             this.tabPageMisc.BackColor = System.Drawing.SystemColors.Control;
@@ -670,6 +757,8 @@
             this.groupBoxProject.PerformLayout();
             this.tabPageUi.ResumeLayout(false);
             this.tabPageUi.PerformLayout();
+            this.tabPageGit.ResumeLayout(false);
+            this.tabPageGit.PerformLayout();
             this.tabPageMisc.ResumeLayout(false);
             this.tabPageMisc.PerformLayout();
             this.ResumeLayout(false);
@@ -729,5 +818,12 @@
         private System.Windows.Forms.Label labelDbName;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TabPage tabPageGit;
+        private System.Windows.Forms.Button buttonGitFolder;
+        private System.Windows.Forms.TextBox txtDefault;
+        private System.Windows.Forms.Label labelDefault;
+        private System.Windows.Forms.Label labelGitInfo;
+        private System.Windows.Forms.TextBox txtGitCommand;
+        private System.Windows.Forms.Label labelGitHeader;
     }
 }
