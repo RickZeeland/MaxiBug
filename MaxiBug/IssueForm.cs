@@ -722,5 +722,10 @@ namespace MaxiBug
                 this.LoadImage(files[0], true);
             }
         }
+
+        private void buttonGitSync_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

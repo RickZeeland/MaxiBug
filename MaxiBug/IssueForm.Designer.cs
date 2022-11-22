@@ -57,6 +57,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonCopy = new System.Windows.Forms.Button();
             this.buttonPdf = new System.Windows.Forms.Button();
+            this.buttonGitSync = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.groupBoxDescription = new System.Windows.Forms.GroupBox();
             this.panelTemp = new System.Windows.Forms.Panel();
@@ -64,6 +65,10 @@
             this.labelCreatedBy = new System.Windows.Forms.Label();
             this.cboCreatedBy = new System.Windows.Forms.ComboBox();
             this.cboModifiedBy = new System.Windows.Forms.ComboBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.txtGitHistory = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -71,6 +76,9 @@
             this.splitContainer1.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.groupBoxDescription.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -192,7 +200,7 @@
             this.txtDescription.Location = new System.Drawing.Point(0, 0);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(873, 283);
+            this.txtDescription.Size = new System.Drawing.Size(844, 251);
             this.txtDescription.TabIndex = 17;
             this.txtDescription.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtDescription_MouseDoubleClick);
             // 
@@ -303,8 +311,8 @@
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(873, 345);
-            this.splitContainer1.SplitterDistance = 283;
+            this.splitContainer1.Size = new System.Drawing.Size(844, 306);
+            this.splitContainer1.SplitterDistance = 251;
             this.splitContainer1.TabIndex = 24;
             // 
             // buttonCopy
@@ -331,6 +339,21 @@
             this.buttonPdf.UseVisualStyleBackColor = false;
             this.buttonPdf.Click += new System.EventHandler(this.buttonPdf_Click);
             // 
+            // buttonGitSync
+            // 
+            this.buttonGitSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonGitSync.FlatAppearance.BorderSize = 0;
+            this.buttonGitSync.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonGitSync.ForeColor = System.Drawing.Color.DarkGray;
+            this.buttonGitSync.Image = global::MaxiBug.Properties.Resources.sync_32x32;
+            this.buttonGitSync.Location = new System.Drawing.Point(834, 298);
+            this.buttonGitSync.Name = "buttonGitSync";
+            this.buttonGitSync.Size = new System.Drawing.Size(39, 38);
+            this.buttonGitSync.TabIndex = 19;
+            this.toolTip1.SetToolTip(this.buttonGitSync, "Get Git history for this issue");
+            this.buttonGitSync.UseVisualStyleBackColor = true;
+            this.buttonGitSync.Click += new System.EventHandler(this.buttonGitSync_Click);
+            // 
             // panelBottom
             // 
             this.panelBottom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -352,19 +375,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxDescription.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.groupBoxDescription.Controls.Add(this.splitContainer1);
-            this.groupBoxDescription.Location = new System.Drawing.Point(7, 148);
+            this.groupBoxDescription.Location = new System.Drawing.Point(9, 0);
             this.groupBoxDescription.Name = "groupBoxDescription";
-            this.groupBoxDescription.Size = new System.Drawing.Size(893, 372);
+            this.groupBoxDescription.Size = new System.Drawing.Size(864, 333);
             this.groupBoxDescription.TabIndex = 26;
             this.groupBoxDescription.TabStop = false;
-            this.groupBoxDescription.Text = "&Description:";
             // 
             // panelTemp
             // 
             this.panelTemp.BackColor = System.Drawing.Color.Yellow;
-            this.panelTemp.Location = new System.Drawing.Point(-7, 148);
+            this.panelTemp.Location = new System.Drawing.Point(6, 6);
             this.panelTemp.Name = "panelTemp";
-            this.panelTemp.Size = new System.Drawing.Size(214, 372);
+            this.panelTemp.Size = new System.Drawing.Size(139, 330);
             this.panelTemp.TabIndex = 28;
             this.panelTemp.Visible = false;
             // 
@@ -400,6 +422,52 @@
             this.cboModifiedBy.Size = new System.Drawing.Size(233, 21);
             this.cboModifiedBy.TabIndex = 35;
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(7, 152);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(887, 368);
+            this.tabControl1.TabIndex = 36;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.groupBoxDescription);
+            this.tabPage1.Controls.Add(this.panelTemp);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(879, 342);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Description";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.buttonGitSync);
+            this.tabPage2.Controls.Add(this.txtGitHistory);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(879, 342);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Git history";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // txtGitHistory
+            // 
+            this.txtGitHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtGitHistory.Location = new System.Drawing.Point(3, 3);
+            this.txtGitHistory.Multiline = true;
+            this.txtGitHistory.Name = "txtGitHistory";
+            this.txtGitHistory.Size = new System.Drawing.Size(873, 336);
+            this.txtGitHistory.TabIndex = 18;
+            // 
             // IssueForm
             // 
             this.AllowDrop = true;
@@ -413,7 +481,6 @@
             this.Controls.Add(this.labelCreatedBy);
             this.Controls.Add(this.buttonPdf);
             this.Controls.Add(this.buttonCopy);
-            this.Controls.Add(this.groupBoxDescription);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.lblDateModified);
             this.Controls.Add(this.lblDateCreated);
@@ -431,7 +498,7 @@
             this.Controls.Add(this.lblDateCreatedTitle);
             this.Controls.Add(this.lblID);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.panelTemp);
+            this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "IssueForm";
@@ -451,6 +518,10 @@
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             this.groupBoxDescription.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,5 +564,10 @@
         private System.Windows.Forms.Label labelCreatedBy;
         private System.Windows.Forms.ComboBox cboCreatedBy;
         private System.Windows.Forms.ComboBox cboModifiedBy;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TextBox txtGitHistory;
+        private System.Windows.Forms.Button buttonGitSync;
     }
 }
