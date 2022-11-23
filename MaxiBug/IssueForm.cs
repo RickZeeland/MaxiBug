@@ -724,12 +724,25 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Get the Git history for the directory selected by user filtered by issue number.
-        /// See: SettingsForm, tab Git Command.
+        /// Get the Git history for the issue number.
+        /// For default settings see: SettingsForm, tab Git Command.
         /// </summary>
         private void buttonGitSync_Click(object sender, EventArgs e)
         {
+            Form gitForm = new GitForm(CurrentIssue.ID);
+            gitForm.ShowDialog();
 
+            string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
+
+            if (File.Exists(gitTempFile))
+            {
+                this.txtGitHistory.Text = File.ReadAllText(gitTempFile);
+
+                if (!this.txtGitHistory.Text.Contains("\r"))
+                {
+                    this.txtGitHistory.Text.Replace("\n", "\r\n");          // Replace newline by carriage returns
+                }
+            }
         }
     }
 }

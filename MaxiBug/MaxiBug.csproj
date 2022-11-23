@@ -144,6 +144,12 @@
     <Compile Include="FeedbackForm.Designer.cs">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GitForm.Designer.cs">
+      <DependentUpon>GitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ImportExportFeedbackForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FeedbackForm.resx">
       <DependentUpon>FeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GitForm.resx">
+      <DependentUpon>GitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportExportFeedbackForm.resx">
       <DependentUpon>ImportExportFeedbackForm.cs</DependentUpon>
