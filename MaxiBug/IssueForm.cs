@@ -217,6 +217,7 @@ namespace MaxiBug
             txtVersion.Text = CurrentIssue.Version;
             txtTargetVersion.Text = CurrentIssue.TargetVersion;
             txtDescription.Text = CurrentIssue.Description;
+            txtGitHistory.Text = CurrentIssue.GitHistory;
             this.txtImage.Text = CurrentIssue.ImageFilename;
             this.txtImage.ForeColor = Color.Black;
 
@@ -274,6 +275,7 @@ namespace MaxiBug
                 CurrentIssue.Priority = ((IssuePriority)((MaxiBug.ComboBoxItem)cboPriority.SelectedItem).Value);
                 CurrentIssue.Version = txtVersion.Text;
                 CurrentIssue.TargetVersion = txtTargetVersion.Text;
+                CurrentIssue.GitHistory = txtGitHistory.Text;
                 CurrentIssue.Description = txtDescription.Text;
 
                 if (Operation == OperationType.New)
@@ -740,7 +742,7 @@ namespace MaxiBug
 
                 if (!this.txtGitHistory.Text.Contains("\r"))
                 {
-                    this.txtGitHistory.Text.Replace("\n", "\r\n");          // Replace newline by carriage returns
+                    this.txtGitHistory.Text = this.txtGitHistory.Text.Replace("\n", "\r\n");          // Replace newline by carriage returns
                 }
             }
         }

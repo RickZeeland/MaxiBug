@@ -129,6 +129,7 @@ namespace MaxiBug
               status smallint,
               summary VARCHAR(200),
               description text,
+              githistory text,
               imagefilename VARCHAR(300),
               image_id integer
             );";
@@ -217,6 +218,48 @@ namespace MaxiBug
         }
 
         /// <summary>
+        /// Update database when needed, if fields like githistory do not exist add them.
+        /// </summary>
+        /// <param name="connectionString">The postgres connection string</param>
+        public static void UpdateDatabase(string connectionString)
+        {
+            try
+            {
+                using (var conn = new NpgsqlConnection(connectionString))
+                {
+                    conn.Open();
+                    var updateCommand = conn.CreateCommand();
+
+                    // Check if 'active' field already exists
+                    updateCommand.CommandText = @"SELECT TRUE FROM pg_attribute WHERE attrelid = 'users'::regclass AND attname = 'active' AND NOT attisdropped AND attnum > 0;";
+                    var fieldExists = updateCommand.ExecuteScalar();
+
+                    if (fieldExists == null)
+                    {
+                        // Add column to table
+                        updateCommand.CommandText = @"ALTER TABLE users ADD COLUMN active boolean";
+                        updateCommand.ExecuteNonQuery();
+                    }
+
+                    // Check if 'githistory' field already exists
+                    updateCommand.CommandText = @"SELECT TRUE FROM pg_attribute WHERE attrelid = 'issues'::regclass AND attname = 'githistory' AND NOT attisdropped AND attnum > 0;";
+                    fieldExists = updateCommand.ExecuteScalar();
+
+                    if (fieldExists == null)
+                    {
+                        // Add column to table
+                        updateCommand.CommandText = @"ALTER TABLE issues ADD COLUMN githistory text DEFAULT ''";
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Create table if it does not exist.
         /// </summary>
         /// <param name="tablename">The tablename in lower case.</param>
@@ -300,6 +343,8 @@ namespace MaxiBug
 
             try
             {
+                UpdateDatabase(connectionString);
+
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
                     string query = "SELECT name FROM project;";         // Get the full project name
@@ -323,8 +368,23 @@ namespace MaxiBug
                 using (var conn = new NpgsqlConnection(connectionString))
                 {
                     softwareProject.IssueIdCounter = 0;
-                    string query = "SELECT * FROM issues;";
                     conn.Open();
+
+                    // Update fields if needed
+                    var updateCommand = conn.CreateCommand();
+
+                    // Check if 'githistory' column already exists
+                    updateCommand.CommandText = @"SELECT TRUE FROM pg_attribute WHERE attrelid = 'issues'::regclass AND attname = 'githistory' AND NOT attisdropped AND attnum > 0;";
+                    var fieldExists = updateCommand.ExecuteScalar();
+
+                    if (fieldExists == null)
+                    {
+                        // Add column to table
+                        updateCommand.CommandText = @"ALTER TABLE issues ADD COLUMN githistory text DEFAULT ''";
+                        updateCommand.ExecuteNonQuery();
+                    }
+
+                    string query = "SELECT * FROM issues;";
 
                     using (var cmd = new NpgsqlCommand(query, conn))
                     using (var reader = cmd.ExecuteReader())
@@ -356,6 +416,11 @@ namespace MaxiBug
                             if (!reader.IsDBNull(reader.GetOrdinal("image_id")))
                             {
                                 issue.ImageId = reader.GetInt32(reader.GetOrdinal("image_id"));
+                            }
+
+                            if (!reader.IsDBNull(reader.GetOrdinal("githistory")))
+                            {
+                                issue.GitHistory = reader.GetString(reader.GetOrdinal("githistory"));
                             }
 
                             softwareProject.IssueIdCounter = Math.Max(issue.ID, softwareProject.IssueIdCounter);
@@ -529,7 +594,7 @@ namespace MaxiBug
         public static int SaveIssue(Issue newIssue)
         {
             string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, imagefilename, image_id) " +
-                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@imagefilename,@image_id) " +
+                        "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@githistory,@imagefilename,@image_id) " +
                         "RETURNING id;";
 
             string connString = GetConnectionString(Program.databaseName);
@@ -550,6 +615,7 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("status", (short)newIssue.Status);
                     cmd.Parameters.AddWithValue("summary", newIssue.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", newIssue.Description ?? string.Empty);
+                    cmd.Parameters.AddWithValue("githistory", newIssue.GitHistory ?? string.Empty);
                     cmd.Parameters.AddWithValue("imagefilename", newIssue.ImageFilename ?? string.Empty);
                     cmd.Parameters.AddWithValue("image_id", newIssue.ImageId);
                     var result = cmd.ExecuteScalar();
@@ -725,19 +791,26 @@ namespace MaxiBug
         /// <param name="active">True to set status to active</param>
         public static void UpdateUserActive(string username, bool active)
         {
-            string sql = $@"UPDATE users SET active=@active WHERE name=@name;";
-            string connString = GetConnectionString(Program.databaseName);
-
-            using (var conn = new NpgsqlConnection(connString))
+            try
             {
-                conn.Open();
+                string sql = $@"UPDATE users SET active=@active WHERE name=@name;";
+                string connString = GetConnectionString(Program.databaseName);
 
-                using (var cmd = new NpgsqlCommand(sql, conn))
+                using (var conn = new NpgsqlConnection(connString))
                 {
-                    cmd.Parameters.AddWithValue("active", NpgsqlTypes.NpgsqlDbType.Boolean, active);
-                    cmd.Parameters.AddWithValue("name", username ?? string.Empty);
-                    cmd.ExecuteNonQuery();
+                    conn.Open();
+
+                    using (var cmd = new NpgsqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("active", NpgsqlTypes.NpgsqlDbType.Boolean, active);
+                        cmd.Parameters.AddWithValue("name", username ?? string.Empty);
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Debug.Print(ex.Message);
             }
         }
 
@@ -748,7 +821,7 @@ namespace MaxiBug
         public static void UpdateIssue(Issue issue)
         {
             string sql = $@"UPDATE issues SET datecreated=@datecreated, datemodified=@datemodified, createdby=@createdby, modifiedby=@modifiedby, version=@version, " +
-                        "targetversion=@targetversion, priority=@priority, status=@status, summary=@summary, description=@description, imagefilename=@imagefilename, image_id=@image_id " +
+                        "targetversion=@targetversion, priority=@priority, status=@status, summary=@summary, description=@description, githistory=@githistory, imagefilename=@imagefilename, image_id=@image_id " +
                         "WHERE id=@id;";
 
             string connString = GetConnectionString(Program.databaseName);
@@ -769,6 +842,7 @@ namespace MaxiBug
                     cmd.Parameters.AddWithValue("status", (short)issue.Status);
                     cmd.Parameters.AddWithValue("summary", issue.Summary ?? string.Empty);
                     cmd.Parameters.AddWithValue("description", issue.Description ?? string.Empty);
+                    cmd.Parameters.AddWithValue("githistory", issue.GitHistory ?? string.Empty);
                     cmd.Parameters.AddWithValue("imagefilename", issue.ImageFilename ?? string.Empty);
                     cmd.Parameters.AddWithValue("image_id", issue.ImageId);
                     cmd.Parameters.AddWithValue("id", issue.ID);

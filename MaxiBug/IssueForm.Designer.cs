@@ -465,6 +465,7 @@
             this.txtGitHistory.Location = new System.Drawing.Point(3, 3);
             this.txtGitHistory.Multiline = true;
             this.txtGitHistory.Name = "txtGitHistory";
+            this.txtGitHistory.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtGitHistory.Size = new System.Drawing.Size(873, 336);
             this.txtGitHistory.TabIndex = 18;
             // 

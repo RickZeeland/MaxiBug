@@ -187,20 +187,13 @@ namespace MaxiBug
                 return false;
             }
 
-            try
-            {
-                // Set user status to active
-                Database.UpdateUserActive(Program.postgresUser, true);      // Will fail on user table older than v0.8
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-            }
-
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
             string message = Database.LoadProject(ConnectionString, ref newProject);
+
+            // Set user status to active
+            Database.UpdateUserActive(Program.postgresUser, true);
 
             if (!string.IsNullOrEmpty(message))
             {
@@ -266,16 +259,9 @@ namespace MaxiBug
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                // Abort running tasks
-                Running = false;
-                Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-            }
+            // Abort running tasks
+            Running = false;
+            Database.UpdateUserActive(Program.postgresUser, false);
         }
     }
 }

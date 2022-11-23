@@ -350,7 +350,7 @@ namespace MaxiBug
 
                 if (Database.Connected)
                 {
-                    Database.UpdateUserActive(Program.postgresUser, false);         // Will fail on user table before v0.8
+                    Database.UpdateUserActive(Program.postgresUser, false);
                 }
             }
             catch (Exception ex)
@@ -608,17 +608,6 @@ namespace MaxiBug
                 return false;
             }
 
-            try
-            {
-                // Set user status to active
-                Database.UpdateUserActive(Program.postgresUser, true);      // Will fail on user table older than v0.8
-            }
-            catch (Exception ex)
-            {
-                Debug.Print(ex.Message);
-                //MessageBox.Show(ex.Message, Program.myName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             this.Cursor = Cursors.WaitCursor;
@@ -638,6 +627,9 @@ namespace MaxiBug
                 //if (status != FileSystemOperationStatus.OK)
                 //    ShowProjectErrorFeedback(status);
             }
+
+            // Set user status to active
+            Database.UpdateUserActive(Program.postgresUser, true);
 
             if (!string.IsNullOrEmpty(message))
             {

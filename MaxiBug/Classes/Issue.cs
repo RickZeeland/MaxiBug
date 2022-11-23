@@ -83,6 +83,11 @@ namespace MaxiBug
         public string Description { get; set; } = string.Empty;
 
         /// <summary>
+        /// Gets or sets the Git history of this issue.
+        /// </summary>
+        public string GitHistory { get; set; } = string.Empty;
+
+        /// <summary>
         /// Gets or sets the date/time this issue was created.
         /// </summary>
         public DateTime DateCreated { get; set; }
@@ -134,12 +139,13 @@ namespace MaxiBug
         /// <summary>
         /// Creates a new issue.
         /// </summary>
-        public Issue(IssueStatus status, IssuePriority priority, string summary, string description, string version, string targetVersion)
+        public Issue(IssueStatus status, IssuePriority priority, string summary, string description, string version, string targetVersion, string githistory = "")
         {
             Status = status;
             Priority = priority;
             Summary = summary;
             Description = description;
+            GitHistory = githistory;
             Version = version;
             TargetVersion = targetVersion;
             this.ImageFilename = string.Empty;
@@ -157,6 +163,7 @@ namespace MaxiBug
             clonedInstance.Priority = this.Priority;
             clonedInstance.Summary = this.Summary;
             clonedInstance.Description = this.Description;
+            clonedInstance.GitHistory = this.GitHistory;
             clonedInstance.Version = this.Version;
             clonedInstance.TargetVersion = this.TargetVersion;
             clonedInstance.DateCreated = clonedInstance.DateModified = DateTime.Now;
