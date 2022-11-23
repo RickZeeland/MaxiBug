@@ -437,6 +437,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.SystemColors.Control;
             this.tabPage1.Controls.Add(this.groupBoxDescription);
             this.tabPage1.Controls.Add(this.panelTemp);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -445,7 +446,6 @@
             this.tabPage1.Size = new System.Drawing.Size(879, 342);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Description";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 

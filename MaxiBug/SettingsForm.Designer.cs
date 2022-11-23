@@ -87,6 +87,7 @@
             this.txtGitFolder = new System.Windows.Forms.TextBox();
             this.labelDefault = new System.Windows.Forms.Label();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -649,6 +650,7 @@
             // 
             // tabPageGit
             // 
+            this.tabPageGit.Controls.Add(this.linkLabel1);
             this.tabPageGit.Controls.Add(this.labelGitHeader);
             this.tabPageGit.Controls.Add(this.labelGitInfo);
             this.tabPageGit.Controls.Add(this.txtGitCommand);
@@ -692,10 +694,10 @@
             this.txtGitCommand.TabIndex = 15;
             this.txtGitCommand.Text = "git -C \"{path}\" log -i -E --grep=\"\\[(axo.: {issue_id})\\]\"";
             // 
-            // txtDefault
+            // txtGitFolder
             // 
             this.txtGitFolder.Location = new System.Drawing.Point(114, 117);
-            this.txtGitFolder.Name = "txtDefault";
+            this.txtGitFolder.Name = "txtGitFolder";
             this.txtGitFolder.Size = new System.Drawing.Size(417, 25);
             this.txtGitFolder.TabIndex = 1;
             // 
@@ -723,6 +725,18 @@
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
             // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(111, 312);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(76, 17);
+            this.linkLabel1.TabIndex = 28;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Git log help";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -741,7 +755,7 @@
             this.Name = "SettingsForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Settings";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.SettingsForm_Load);
@@ -825,5 +839,6 @@
         private System.Windows.Forms.Label labelGitInfo;
         private System.Windows.Forms.TextBox txtGitCommand;
         private System.Windows.Forms.Label labelGitHeader;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

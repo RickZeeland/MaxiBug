@@ -389,5 +389,22 @@ namespace MaxiBug
                 txtGitFolder.Text = folderBrowserDialog1.SelectedPath;
             }
         }
+
+        /// <summary>
+        /// Show git log help in browser.
+        /// </summary>
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                //this.WindowState = FormWindowState.Minimized;
+                this.TopMost = false;
+                Process.Start(@"https://git-scm.com/docs/git-log");
+            }
+            catch
+            {
+                Debug.Print("linkLabel1_LinkClicked() error");
+            }
+        }
     }
 }

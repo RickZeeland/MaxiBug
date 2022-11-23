@@ -100,5 +100,21 @@ namespace MaxiBug
         {
             this.Close();
         }
+
+        /// <summary>
+        /// Show git log help in browser.
+        /// </summary>
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.TopMost = false;
+                Process.Start(@"https://git-scm.com/docs/git-log");
+            }
+            catch
+            {
+                Debug.Print("linkLabel1_LinkClicked() error");
+            }
+        }
     }
 }
