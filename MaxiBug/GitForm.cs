@@ -59,7 +59,7 @@ namespace MaxiBug
         /// </summary>
         private void btOk_Click(object sender, EventArgs e)
         {
-            //string gitCommand = "/C dir";
+            this.Cursor = Cursors.WaitCursor;
             string gitCommand = this.txtGitCommand.Text.Replace("{path}", this.txtGitFolder.Text);
             string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
 
@@ -89,15 +89,23 @@ namespace MaxiBug
 
                 process.StartInfo = startInfo;
                 process.Start();
-                process.WaitForExit(10000);     // Time out after one minute
+                process.WaitForExit(30000);     // Time out after 30 seconds
             }
 
+            this.Cursor= Cursors.Default;
             Debug.Print("Created: " + gitTempFile);
             this.Close();
         }
 
         private void btCancel_Click(object sender, EventArgs e)
         {
+            string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
+
+            if (File.Exists(gitTempFile))
+            {
+                File.Delete(gitTempFile);
+            }
+
             this.Close();
         }
 
