@@ -9,6 +9,7 @@ This is a fork of [MiniBug2](https://github.com/RickZeeland/MiniBug-2) for VS202
 Some of the changes:
 - Multi-user instead of single-user
 - Uses a PostgreSQL database
+- Git support
 
 ------------------------------------
 MaxiBug is a simple issue tracker and to-do list, it is a Windows desktop multi-user application. 
@@ -90,6 +91,8 @@ Next you can start adding issues and tasks:
 
 <img src="Screenshots/issue.png" alt="Edit issue">
 
+By selecting the "Git history" tab and pressing the sync button at the bottom-right, the Git history for an issue can be retrieved.
+This will only work if Git for Windows is installed and a working copy of the repository is present on your system.
 Note: it's possible to jump to other issues by double-clicking on an issue number in the description field.
 
 ## Tasks
