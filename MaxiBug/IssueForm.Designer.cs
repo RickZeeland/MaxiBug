@@ -233,7 +233,7 @@
             this.lblDateCreated.BackColor = System.Drawing.Color.LightCyan;
             this.lblDateCreated.Location = new System.Drawing.Point(235, 13);
             this.lblDateCreated.Name = "lblDateCreated";
-            this.lblDateCreated.Size = new System.Drawing.Size(120, 13);
+            this.lblDateCreated.Size = new System.Drawing.Size(156, 13);
             this.lblDateCreated.TabIndex = 3;
             this.lblDateCreated.Text = "label10";
             // 
@@ -242,7 +242,7 @@
             this.lblDateModified.BackColor = System.Drawing.Color.LightCyan;
             this.lblDateModified.Location = new System.Drawing.Point(534, 13);
             this.lblDateModified.Name = "lblDateModified";
-            this.lblDateModified.Size = new System.Drawing.Size(120, 13);
+            this.lblDateModified.Size = new System.Drawing.Size(156, 13);
             this.lblDateModified.TabIndex = 5;
             this.lblDateModified.Text = "label11";
             // 

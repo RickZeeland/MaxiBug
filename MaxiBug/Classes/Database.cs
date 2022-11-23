@@ -593,7 +593,7 @@ namespace MaxiBug
         /// <returns>Returns the new serial id</returns>
         public static int SaveIssue(Issue newIssue)
         {
-            string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, imagefilename, image_id) " +
+            string sql = $@"INSERT INTO issues (datecreated, datemodified, createdby, modifiedby, version, targetversion, priority, status, summary, description, githistory, imagefilename, image_id) " +
                         "VALUES (@datecreated,@datemodified,@createdby,@modifiedby,@version,@targetversion,@priority,@status,@summary,@description,@githistory,@imagefilename,@image_id) " +
                         "RETURNING id;";
 
