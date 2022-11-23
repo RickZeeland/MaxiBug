@@ -91,10 +91,17 @@ Next you can start adding issues and tasks:
 
 <img src="Screenshots/issue.png" alt="Edit issue">
 
+Note: it's possible to jump to other issues by double-clicking on an issue number in the description field.  
+
 By selecting the "Git history" tab and pressing the sync button at the bottom-right, the Git history for an issue can be retrieved.  
 This will only work if Git for Windows is installed and a working copy of the repository is present on your system.  
-Note: it's possible to jump to other issues by double-clicking on an issue number in the description field.
 
+<img src="Screenshots/issue_git.png" alt="Git form">
+
+Example git command (can also be executed from DOS):  
+
+ git -C "C:\Projects\Test_Repo" log -i -E --grep="\[(axo.: 10)\]"  
+ 
 ## Tasks
 
 <img src="Screenshots/task.png" alt="Edit task">
