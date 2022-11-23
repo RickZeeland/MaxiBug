@@ -28,6 +28,7 @@ namespace MaxiBug
         {
             this.txtGitFolder.Text = ApplicationSettings.GitFolder;
             this.txtGitCommand.Text = ApplicationSettings.GitCommand.Replace("{issue_id}", id.ToString());
+            this.labelGitInfoAxo.Visible = this.txtGitCommand.Text.Contains("axo.:");                       // Show or hide default axosoft examples
         }
 
         /// <summary>
@@ -61,7 +62,13 @@ namespace MaxiBug
             //string gitCommand = "/C dir";
             string gitCommand = this.txtGitCommand.Text.Replace("{path}", this.txtGitFolder.Text);
             string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
-            gitCommand += " >> " + gitTempFile;
+
+            if (File.Exists(gitTempFile))
+            {
+                File.Delete(gitTempFile);
+            }
+
+            gitCommand += " > " + gitTempFile;
             Debug.Print(gitCommand);
 
             if (!gitCommand.StartsWith(@"/C"))
@@ -74,8 +81,8 @@ namespace MaxiBug
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
                     Arguments = gitCommand,
-                    //WindowStyle = ProcessWindowStyle.Hidden,
-                    //CreateNoWindow = true,
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    CreateNoWindow = true,
                     UseShellExecute = false,
                     FileName = "cmd.exe"
                 };

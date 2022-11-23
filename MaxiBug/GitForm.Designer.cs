@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GitForm));
             this.labelGitHeader = new System.Windows.Forms.Label();
             this.labelGitInfo = new System.Windows.Forms.Label();
             this.txtGitCommand = new System.Windows.Forms.TextBox();
@@ -37,6 +36,7 @@
             this.labelDefault = new System.Windows.Forms.Label();
             this.btCancel = new System.Windows.Forms.Button();
             this.btOk = new System.Windows.Forms.Button();
+            this.labelGitInfoAxo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelGitHeader
@@ -54,9 +54,10 @@
             this.labelGitInfo.AutoSize = true;
             this.labelGitInfo.Location = new System.Drawing.Point(12, 156);
             this.labelGitInfo.Name = "labelGitInfo";
-            this.labelGitInfo.Size = new System.Drawing.Size(498, 136);
+            this.labelGitInfo.Size = new System.Drawing.Size(501, 34);
             this.labelGitInfo.TabIndex = 22;
-            this.labelGitInfo.Text = resources.GetString("labelGitInfo.Text");
+            this.labelGitInfo.Text = "Note: defaults can be set in settings.\r\n{path} will be substituted with the chose" +
+    "n folder and {issue_id} with the issue number.";
             // 
             // txtGitCommand
             // 
@@ -121,11 +122,22 @@
             this.btOk.UseVisualStyleBackColor = true;
             this.btOk.Click += new System.EventHandler(this.btOk_Click);
             // 
+            // labelGitInfoAxo
+            // 
+            this.labelGitInfoAxo.AutoSize = true;
+            this.labelGitInfoAxo.Location = new System.Drawing.Point(12, 200);
+            this.labelGitInfoAxo.Name = "labelGitInfoAxo";
+            this.labelGitInfoAxo.Size = new System.Drawing.Size(265, 85);
+            this.labelGitInfoAxo.TabIndex = 26;
+            this.labelGitInfoAxo.Text = "The example will find commits with tags like:\r\n[axod: 123]\r\n[axof: 123]\r\n[AXOT: 1" +
+    "23]\r\netc.";
+            // 
             // GitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(570, 340);
+            this.Controls.Add(this.labelGitInfoAxo);
             this.Controls.Add(this.btCancel);
             this.Controls.Add(this.btOk);
             this.Controls.Add(this.labelGitHeader);
@@ -135,7 +147,7 @@
             this.Controls.Add(this.txtGitFolder);
             this.Controls.Add(this.labelDefault);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "GitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Retrieve Git history";
@@ -155,5 +167,6 @@
         private System.Windows.Forms.Label labelDefault;
         private System.Windows.Forms.Button btCancel;
         private System.Windows.Forms.Button btOk;
+        private System.Windows.Forms.Label labelGitInfoAxo;
     }
 }

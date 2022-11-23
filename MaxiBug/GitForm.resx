@@ -117,14 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="labelGitInfo.Text" xml:space="preserve">
-    <value>Note: defaults can be set in settings.
-{path} will be substituted with the chosen folder and {issue_id} with the issue number
-
-The example will find commits with tags like:
-[axod: 123]
-[axof: 123]
-[AXOT: 123]
-etc.</value>
-  </data>
 </root>
