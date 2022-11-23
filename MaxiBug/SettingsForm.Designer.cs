@@ -84,7 +84,7 @@
             this.labelGitHeader = new System.Windows.Forms.Label();
             this.labelGitInfo = new System.Windows.Forms.Label();
             this.txtGitCommand = new System.Windows.Forms.TextBox();
-            this.txtDefault = new System.Windows.Forms.TextBox();
+            this.txtGitFolder = new System.Windows.Forms.TextBox();
             this.labelDefault = new System.Windows.Forms.Label();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
             this.groupBox1.SuspendLayout();
@@ -653,7 +653,7 @@
             this.tabPageGit.Controls.Add(this.labelGitInfo);
             this.tabPageGit.Controls.Add(this.txtGitCommand);
             this.tabPageGit.Controls.Add(this.buttonGitFolder);
-            this.tabPageGit.Controls.Add(this.txtDefault);
+            this.tabPageGit.Controls.Add(this.txtGitFolder);
             this.tabPageGit.Controls.Add(this.labelDefault);
             this.tabPageGit.Location = new System.Drawing.Point(4, 26);
             this.tabPageGit.Name = "tabPageGit";
@@ -694,10 +694,10 @@
             // 
             // txtDefault
             // 
-            this.txtDefault.Location = new System.Drawing.Point(114, 117);
-            this.txtDefault.Name = "txtDefault";
-            this.txtDefault.Size = new System.Drawing.Size(417, 25);
-            this.txtDefault.TabIndex = 1;
+            this.txtGitFolder.Location = new System.Drawing.Point(114, 117);
+            this.txtGitFolder.Name = "txtDefault";
+            this.txtGitFolder.Size = new System.Drawing.Size(417, 25);
+            this.txtGitFolder.TabIndex = 1;
             // 
             // labelDefault
             // 
@@ -820,7 +820,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage tabPageGit;
         private System.Windows.Forms.Button buttonGitFolder;
-        private System.Windows.Forms.TextBox txtDefault;
+        private System.Windows.Forms.TextBox txtGitFolder;
         private System.Windows.Forms.Label labelDefault;
         private System.Windows.Forms.Label labelGitInfo;
         private System.Windows.Forms.TextBox txtGitCommand;

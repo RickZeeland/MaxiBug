@@ -78,6 +78,16 @@ namespace MaxiBug
         public static string PdfTitle = "MaxiBug issue";
 
         /// <summary>
+        /// The Git command to retrieve the Git history for the directory selected by user filtered by issue number.
+        /// </summary>
+        public static string GitCommand = "git -C \"{path}\" log -i -E --grep=\"\\[(axo.: {issue_id})\\]\"";
+
+        /// <summary>
+        /// The Git working directory selected by the user.
+        /// </summary>
+        public static string GitFolder = string.Empty;
+
+        /// <summary>
         /// Application font name and size.
         /// </summary>
         public static Font AppFont = new Font("Segoe UI", 10);
@@ -222,6 +232,16 @@ namespace MaxiBug
             Program.postgresUser = Properties.Settings.Default.PostgresUser;
             Program.postgresPassword = Properties.Settings.Default.PostgresPassword;
 
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.GitFolder))
+            {
+                GitFolder = Properties.Settings.Default.GitFolder;
+            }
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.GitCommand))
+            {
+                GitCommand = Properties.Settings.Default.GitCommand;
+            }
+
             // Load the settings for the issues DataGridView columns
             if (Properties.Settings.Default.GridIssuesColumnsSettings != null)
             {
@@ -331,6 +351,8 @@ namespace MaxiBug
                 Properties.Settings.Default.SearchCaseInsensitive = SearchCaseInsensitive;
                 Properties.Settings.Default.OpenPdf = OpenPdf;
                 Properties.Settings.Default.PdfTitle = PdfTitle;
+                Properties.Settings.Default.GitFolder = GitFolder;
+                Properties.Settings.Default.GitCommand = GitCommand;
             }
 
             // Save some settings for the issues and tasks DataGridView columns
@@ -404,6 +426,8 @@ namespace MaxiBug
             SearchCaseInsensitive = false;
             OpenPdf = false;
             PdfTitle = "MaxiBug issue";
+            GitFolder = string.Empty;
+            GitCommand = "git -C \"{path}\" log -i -E --grep=\"\\[(axo.: {issue_id})\\]\"";
         }
     }
 }

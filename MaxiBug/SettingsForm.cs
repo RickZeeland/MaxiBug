@@ -134,6 +134,8 @@ namespace MaxiBug
             chkCaseInsensitive.Checked = ApplicationSettings.SearchCaseInsensitive;
             chkOpenPdf.Checked = ApplicationSettings.OpenPdf;
             txtPdfTitle.Text = ApplicationSettings.PdfTitle;
+            txtGitFolder.Text = ApplicationSettings.GitFolder;
+            txtGitCommand.Text = ApplicationSettings.GitCommand;
         }
 
         #region ControlEvents
@@ -284,6 +286,8 @@ namespace MaxiBug
             ApplicationSettings.SearchCaseInsensitive = chkCaseInsensitive.Checked;
             ApplicationSettings.OpenPdf = chkOpenPdf.Checked;
             ApplicationSettings.PdfTitle = txtPdfTitle.Text;
+            ApplicationSettings.GitFolder = txtGitFolder.Text;
+            ApplicationSettings.GitCommand = txtGitCommand.Text;
 
             // Persist the new settings
             ApplicationSettings.Save();
@@ -370,13 +374,19 @@ namespace MaxiBug
         private void buttonGitFolder_Click(object sender, EventArgs e)
         {
             var folderBrowserDialog1 = new FolderBrowserDialog();
-            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.Desktop;
-            folderBrowserDialog1.SelectedPath = Environment.SpecialFolder.Personal.ToString();
+            folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
             folderBrowserDialog1.ShowNewFolderButton = false;
+
+            if (string.IsNullOrEmpty(txtGitFolder.Text))
+            {
+                txtGitFolder.Text = Environment.SpecialFolder.MyDocuments.ToString();
+            }
+
+            folderBrowserDialog1.SelectedPath = txtGitFolder.Text;
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                txtDefault.Text = folderBrowserDialog1.SelectedPath;
+                txtGitFolder.Text = folderBrowserDialog1.SelectedPath;
             }
         }
     }

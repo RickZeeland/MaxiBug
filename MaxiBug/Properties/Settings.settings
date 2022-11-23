@@ -80,5 +80,11 @@
     <Setting Name="PostgresPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5432</Value>
     </Setting>
+    <Setting Name="GitFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GitCommand" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -344,14 +344,14 @@
             this.buttonGitSync.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGitSync.FlatAppearance.BorderSize = 0;
             this.buttonGitSync.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonGitSync.ForeColor = System.Drawing.Color.DarkGray;
+            this.buttonGitSync.ForeColor = System.Drawing.Color.LightGray;
             this.buttonGitSync.Image = global::MaxiBug.Properties.Resources.sync_32x32;
             this.buttonGitSync.Location = new System.Drawing.Point(834, 298);
             this.buttonGitSync.Name = "buttonGitSync";
             this.buttonGitSync.Size = new System.Drawing.Size(39, 38);
             this.buttonGitSync.TabIndex = 19;
-            this.toolTip1.SetToolTip(this.buttonGitSync, "Get Git history for this issue");
-            this.buttonGitSync.UseVisualStyleBackColor = true;
+            this.toolTip1.SetToolTip(this.buttonGitSync, "Retrieve Git history for this issue");
+            this.buttonGitSync.UseVisualStyleBackColor = false;
             this.buttonGitSync.Click += new System.EventHandler(this.buttonGitSync_Click);
             // 
             // panelBottom
