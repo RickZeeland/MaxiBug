@@ -101,7 +101,9 @@ This will only work if Git for Windows is installed and a working copy of the re
 Example git command (can also be executed from DOS):  
 
  git -C "C:\Projects\Test_Repo" log -i -E --grep="\[(axo.: 10)\]"  
- 
+
+Clicking the [Git log help](https://git-scm.com/docs/git-log) link will open the browser with the Git log help page.
+
 ## Tasks
 
 <img src="Screenshots/task.png" alt="Edit task">
