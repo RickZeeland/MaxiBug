@@ -106,7 +106,9 @@ Example git command to search in tags:
 ```
   git -C "C:\Projects\Test_Repo" tag --list "Release*"
 ```
-Clicking the [Git log help](https://git-scm.com/docs/git-log) link will open the browser with the Git log help page.
+Clicking the [Git log help](https://git-scm.com/docs/git-log) link will open the browser with the Git log help page.  
+
+If you get a Git error about not being the owner of the directory, it might help running MaxiBug as administrator.
 
 ## Tasks
 
