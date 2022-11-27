@@ -53,7 +53,7 @@
             // labelGitInfo
             // 
             this.labelGitInfo.AutoSize = true;
-            this.labelGitInfo.Location = new System.Drawing.Point(60, 158);
+            this.labelGitInfo.Location = new System.Drawing.Point(60, 151);
             this.labelGitInfo.Name = "labelGitInfo";
             this.labelGitInfo.Size = new System.Drawing.Size(287, 34);
             this.labelGitInfo.TabIndex = 22;
@@ -126,18 +126,18 @@
             // labelGitInfoAxo
             // 
             this.labelGitInfoAxo.AutoSize = true;
-            this.labelGitInfoAxo.Location = new System.Drawing.Point(60, 202);
+            this.labelGitInfoAxo.Location = new System.Drawing.Point(60, 195);
             this.labelGitInfoAxo.Name = "labelGitInfoAxo";
-            this.labelGitInfoAxo.Size = new System.Drawing.Size(265, 85);
+            this.labelGitInfoAxo.Size = new System.Drawing.Size(250, 85);
             this.labelGitInfoAxo.TabIndex = 26;
-            this.labelGitInfoAxo.Text = "The example will find commits with tags like:\r\n[axod: 123]\r\n[axof: 123]\r\n[AXOT: 1" +
-    "23]\r\netc.";
+            this.labelGitInfoAxo.Text = "The example will find commits containing:\r\n[axod: 123]\r\n[axof: 123]\r\n[AXOT: 123]\r" +
+    "\netc.";
             // 
             // linkLabel1
             // 
             this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(60, 303);
+            this.linkLabel1.Location = new System.Drawing.Point(60, 296);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(76, 17);
             this.linkLabel1.TabIndex = 27;
