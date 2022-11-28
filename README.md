@@ -110,6 +110,13 @@ Clicking the [Git log help](https://git-scm.com/docs/git-log) link will open the
 
 If you get a Git error about not being the owner of the directory, it might help running MaxiBug as administrator.
 
+It is also possible to get the Git history from GitHub, a classic [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic) needs to be created first on GitHub.
+
+<img src="Screenshots/issue_github.png" alt="Git form">
+
+In the example all comments containing the string "Bumped" will be retrieved.  
+Note that the User name field is not used at the moment.
+
 ## Tasks
 
 <img src="Screenshots/task.png" alt="Edit task">
