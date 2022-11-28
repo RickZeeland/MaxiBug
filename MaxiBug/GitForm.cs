@@ -170,7 +170,7 @@ namespace MaxiBug
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(api_url);
 
-            client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("MaxiBug", "1.1.1"));
+            client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("MaxiBug", Application.ProductVersion));
             client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", auth_token);
 
