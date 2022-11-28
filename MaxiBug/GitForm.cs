@@ -179,7 +179,7 @@ namespace MaxiBug
             string content = await response.Content.ReadAsStringAsync();
 
             // Deserialize the JSON string and save to fullFileName
-            var dynamicObject = JsonConvert.DeserializeObject<dynamic>(content)!;
+            dynamic dynamicObject = JsonConvert.DeserializeObject<dynamic>(content);
             var items = dynamicObject.items;
             var sb = new StringBuilder();
 
