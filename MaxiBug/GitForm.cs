@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MaxiBug
@@ -31,9 +36,15 @@ namespace MaxiBug
         /// </summary>
         private void InitForm()
         {
+            // Local tabpage
             this.txtGitFolder.Text = ApplicationSettings.GitFolder;
             this.txtGitCommand.Text = ApplicationSettings.GitCommand.Replace("{issue_id}", ID.ToString());
             this.labelGitInfoAxo.Visible = this.txtGitCommand.Text.Contains("axo.:");                       // Show or hide default axosoft examples
+
+            //// GitHub tabpage
+            //this.txtGitHubUserName.Text = string.Empty;
+            //this.txtGitHubToken.Text = string.Empty;
+            //this.txtGitHubRepo.Text = string.Empty;
         }
 
         /// <summary>
@@ -59,32 +70,34 @@ namespace MaxiBug
         }
 
         /// <summary>
-        /// Run Git log command and save to a temporary text file.
+        /// Run Git log or GitHub API command and save to a temporary text file.
         /// </summary>
-        private void btOk_Click(object sender, EventArgs e)
+        private async void btOk_Click(object sender, EventArgs e)
         {
             this.Cursor = Cursors.WaitCursor;
 
             try
             {
-                string gitCommand = this.txtGitCommand.Text.Replace("{path}", this.txtGitFolder.Text);
-                gitCommand = gitCommand.Replace("{issue_id}", ID.ToString());
-                string gitTempFile = "\"" + Path.Combine(Application.StartupPath, "git_temp.txt") + "\"";
+                string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
 
-                if (!string.IsNullOrEmpty(gitTempFile) && File.Exists(gitTempFile))
+                if (File.Exists(gitTempFile))
                 {
                     File.Delete(gitTempFile);
                 }
 
-                if (gitCommand.Contains("api.github.com"))
+                if (this.tabControlGit.SelectedIndex == 0)          // Local
+                {
+                    // Working directory search, replace the {path} and {issue_id} placeholders
+                    gitTempFile = "\"" + gitTempFile + "\"";
+                    string gitCommand = this.txtGitCommand.Text.Replace("{path}", this.txtGitFolder.Text);
+                    gitCommand = gitCommand.Replace("{issue_id}", ID.ToString());
+                    this.RunGitCommand(gitCommand, gitTempFile);
+                }
+                else if (!string.IsNullOrEmpty(this.txtGitHubUserName.Text) && !string.IsNullOrEmpty(this.txtGitHubRepo.Text))
                 {
                     // TODO: GitHub authentication
-                    this.DownloadFromGitHub(gitCommand, gitTempFile, 0, "");
-                }
-                else
-                {
-                    // Working directory search
-                    this.RunGitCommand(gitCommand, gitTempFile);
+                    string gitCommand = this.txtGitHubRepo.Text.Replace("{issue_id}", ID.ToString());
+                    await Task.Run(() => DownloadFromGitHub(gitCommand, gitTempFile, this.txtGitHubUserName.Text, this.txtGitHubToken.Text));
                 }
 
                 Debug.Print("Created: " + gitTempFile);
@@ -145,40 +158,47 @@ namespace MaxiBug
         /// </summary>
         /// <param name="api_url">e.g. "api.github.com/search/commits?q=repo:RickZeeland/MaxiBug+Bumped"</param>
         /// <param name="fullFileName">Full path to git_temp.txt</param>
-        /// <param name="userId">GitHub user id</param>
+        /// <param name="userName">GitHub user name (not used at the moment)</param>
         /// <param name="auth_token">GitHub authentication token</param>
-        private void DownloadFromGitHub(string api_url, string fullFileName, int userId, string auth_token)
+        private async Task DownloadFromGitHub(string api_url, string fullFileName, string userName, string auth_token)
         {
             if (!api_url.StartsWith(@"https://"))
             {
                 api_url = @"https://" + api_url;
             }
 
-            this.TopMost = false;
-            Process.Start(api_url);                // Test in browser (which takes care of authentication)
-            return;
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(api_url);
 
-            //var uri = new Uri(api_url);
-            //var client = new WebClient();
+            client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue("MaxiBug", "1.1.1"));
+            client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Token", auth_token);
 
-            ////using var client = new HttpClient();
-            ////var result = await client.GetAsync(gitCommand);
+            var response = await client.GetAsync(api_url);
+            response.EnsureSuccessStatusCode();
+            string content = await response.Content.ReadAsStringAsync();
 
-            //// Add a user agent header as the requested URI contains a query.
-            //client.Headers.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            // Deserialize the JSON string and save to fullFileName
+            var dynamicObject = JsonConvert.DeserializeObject<dynamic>(content)!;
+            var items = dynamicObject.items;
+            var sb = new StringBuilder();
 
-            //if (!string.IsNullOrEmpty(auth_token))
-            //{
-            //    client.Headers.Add("auth_token", auth_token);
-            //    client.QueryString.Add("userId", userId.ToString());
-            //}
+            foreach (var item in items)
+            {
+                var commit = item.commit;
+                string message = commit.message;
+                string committerName = commit.committer.name;
+                string committerDate = commit.committer.date;
+                Debug.Print($"{committerDate} {committerName}");
+                Debug.Print(message);
+                Debug.Print("");
 
-            //client.DownloadFile(uri, fullFileName);
+                sb.AppendLine($"{committerDate} {committerName}");
+                sb.AppendLine(message);
+                sb.AppendLine();
+            }
 
-            ////using Stream data = client.OpenRead(api_url);
-            ////using StreamReader reader = new StreamReader(data);
-            ////string s = reader.ReadToEnd();
-            ////Debug.Print(s);
+            File.WriteAllText(fullFileName, sb.ToString());
         }
 
         private void btCancel_Click(object sender, EventArgs e)
@@ -205,7 +225,23 @@ namespace MaxiBug
             }
             catch
             {
-                Debug.Print("linkLabel1_LinkClicked() error");
+                Debug.Print("GitForm linkLabel1_LinkClicked() error");
+            }
+        }
+
+        /// <summary>
+        /// Show GitHub personal access token help in browser.
+        /// </summary>
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            try
+            {
+                this.TopMost = false;
+                Process.Start(@"https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token#creating-a-personal-access-token-classic");
+            }
+            catch
+            {
+                Debug.Print("GitForm linkLabel2_LinkClicked() error");
             }
         }
     }

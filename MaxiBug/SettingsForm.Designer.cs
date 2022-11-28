@@ -81,13 +81,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageUi = new System.Windows.Forms.TabPage();
             this.tabPageGit = new System.Windows.Forms.TabPage();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelGitHeader = new System.Windows.Forms.Label();
             this.labelGitInfo = new System.Windows.Forms.Label();
             this.txtGitCommand = new System.Windows.Forms.TextBox();
             this.txtGitFolder = new System.Windows.Forms.TextBox();
             this.labelDefault = new System.Windows.Forms.Label();
             this.tabPageMisc = new System.Windows.Forms.TabPage();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -650,6 +650,7 @@
             // 
             // tabPageGit
             // 
+            this.tabPageGit.BackColor = System.Drawing.SystemColors.Control;
             this.tabPageGit.Controls.Add(this.linkLabel1);
             this.tabPageGit.Controls.Add(this.labelGitHeader);
             this.tabPageGit.Controls.Add(this.labelGitInfo);
@@ -663,7 +664,18 @@
             this.tabPageGit.Size = new System.Drawing.Size(598, 361);
             this.tabPageGit.TabIndex = 4;
             this.tabPageGit.Text = "Git command";
-            this.tabPageGit.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel1
+            // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(111, 311);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(76, 17);
+            this.linkLabel1.TabIndex = 28;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Git log help";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // labelGitHeader
             // 
@@ -678,13 +690,13 @@
             // labelGitInfo
             // 
             this.labelGitInfo.AutoSize = true;
-            this.labelGitInfo.Location = new System.Drawing.Point(111, 162);
+            this.labelGitInfo.Location = new System.Drawing.Point(111, 155);
             this.labelGitInfo.Name = "labelGitInfo";
             this.labelGitInfo.Size = new System.Drawing.Size(320, 136);
             this.labelGitInfo.TabIndex = 16;
             this.labelGitInfo.Text = "Note: {path} will be substituted with the chosen folder\r\nand {issue_id} with the " +
-    "issue number\r\n\r\nThe example will find commits with tags like:\r\n[axod: 123]\r\n[axo" +
-    "f: 123]\r\n[AXOT: 123]\r\netc.";
+    "issue number\r\n\r\nThe example will find commits containing:\r\n[axod: 123]\r\n[axof: 1" +
+    "23]\r\n[AXOT: 123]\r\netc.";
             // 
             // txtGitCommand
             // 
@@ -724,18 +736,6 @@
             this.tabPageMisc.Size = new System.Drawing.Size(598, 361);
             this.tabPageMisc.TabIndex = 2;
             this.tabPageMisc.Text = "Misc";
-            // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(111, 312);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(76, 17);
-            this.linkLabel1.TabIndex = 28;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Git log help";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // SettingsForm
             // 
