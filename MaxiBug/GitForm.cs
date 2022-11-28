@@ -78,7 +78,7 @@ namespace MaxiBug
 
             try
             {
-                string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");
+                string gitTempFile = Path.Combine(Application.StartupPath, "git_temp.txt");         // Used by IssueForm
 
                 if (File.Exists(gitTempFile))
                 {
@@ -95,7 +95,7 @@ namespace MaxiBug
                 }
                 else if (!string.IsNullOrEmpty(this.txtGitHubUserName.Text) && !string.IsNullOrEmpty(this.txtGitHubRepo.Text))
                 {
-                    // TODO: GitHub authentication
+                    // GitHub API with token authentication
                     string gitCommand = this.txtGitHubRepo.Text.Replace("{issue_id}", ID.ToString());
                     await Task.Run(() => DownloadFromGitHub(gitCommand, gitTempFile, this.txtGitHubUserName.Text, this.txtGitHubToken.Text));
                 }
@@ -242,6 +242,21 @@ namespace MaxiBug
             catch
             {
                 Debug.Print("GitForm linkLabel2_LinkClicked() error");
+            }
+        }
+
+        /// <summary>
+        /// Toggle password char.
+        /// </summary>
+        private void buttonEye_Click(object sender, EventArgs e)
+        {
+            if (this.txtGitHubToken.PasswordChar == '●')
+            {
+                this.txtGitHubToken.PasswordChar = '\0';
+            }
+            else
+            {
+                this.txtGitHubToken.PasswordChar = '●';
             }
         }
     }

@@ -41,6 +41,7 @@
             this.tabControlGit = new System.Windows.Forms.TabControl();
             this.tabPageGitLocal = new System.Windows.Forms.TabPage();
             this.tabPageGitHub = new System.Windows.Forms.TabPage();
+            this.buttonEye = new System.Windows.Forms.Button();
             this.labelGitHubRepo = new System.Windows.Forms.Label();
             this.txtGitHubRepo = new System.Windows.Forms.TextBox();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
@@ -189,6 +190,7 @@
             // tabPageGitHub
             // 
             this.tabPageGitHub.BackColor = System.Drawing.SystemColors.Control;
+            this.tabPageGitHub.Controls.Add(this.buttonEye);
             this.tabPageGitHub.Controls.Add(this.labelGitHubRepo);
             this.tabPageGitHub.Controls.Add(this.txtGitHubRepo);
             this.tabPageGitHub.Controls.Add(this.linkLabel2);
@@ -202,6 +204,20 @@
             this.tabPageGitHub.Size = new System.Drawing.Size(565, 298);
             this.tabPageGitHub.TabIndex = 1;
             this.tabPageGitHub.Text = "GitHub";
+            // 
+            // buttonEye
+            // 
+            this.buttonEye.BackColor = System.Drawing.Color.Transparent;
+            this.buttonEye.FlatAppearance.BorderSize = 0;
+            this.buttonEye.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEye.Font = new System.Drawing.Font("Webdings", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
+            this.buttonEye.Location = new System.Drawing.Point(525, 59);
+            this.buttonEye.Name = "buttonEye";
+            this.buttonEye.Size = new System.Drawing.Size(32, 27);
+            this.buttonEye.TabIndex = 25;
+            this.buttonEye.Text = "N";
+            this.buttonEye.UseVisualStyleBackColor = false;
+            this.buttonEye.Click += new System.EventHandler(this.buttonEye_Click);
             // 
             // labelGitHubRepo
             // 
@@ -233,17 +249,17 @@
             // 
             // txtGitHubToken
             // 
-            this.txtGitHubToken.Location = new System.Drawing.Point(144, 59);
+            this.txtGitHubToken.Location = new System.Drawing.Point(122, 59);
             this.txtGitHubToken.Name = "txtGitHubToken";
-            this.txtGitHubToken.Size = new System.Drawing.Size(399, 25);
+            this.txtGitHubToken.PasswordChar = '●';
+            this.txtGitHubToken.Size = new System.Drawing.Size(397, 25);
             this.txtGitHubToken.TabIndex = 3;
-            this.txtGitHubToken.UseSystemPasswordChar = true;
             // 
             // txtGitHubUserName
             // 
-            this.txtGitHubUserName.Location = new System.Drawing.Point(144, 24);
+            this.txtGitHubUserName.Location = new System.Drawing.Point(122, 24);
             this.txtGitHubUserName.Name = "txtGitHubUserName";
-            this.txtGitHubUserName.Size = new System.Drawing.Size(399, 25);
+            this.txtGitHubUserName.Size = new System.Drawing.Size(397, 25);
             this.txtGitHubUserName.TabIndex = 2;
             this.txtGitHubUserName.Text = "myname@gmail.com";
             // 
@@ -314,5 +330,6 @@
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Label labelGitHubRepo;
         private System.Windows.Forms.TextBox txtGitHubRepo;
+        private System.Windows.Forms.Button buttonEye;
     }
 }
