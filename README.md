@@ -39,6 +39,10 @@ As Postgres caches data, testing gives varied results.
 - Some user defined settings
 - Export issues and tasks to CSV format
 
+## Database diagram
+
+<img src="Screenshots/db_diagram.png" alt="DB diagram">
+
 ## Class diagram
 
 An overview of the main classes and enumerations:
