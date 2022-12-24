@@ -17,6 +17,7 @@ CREATE TABLE issues
   status smallint,
   summary VARCHAR(200),
   description text,
+  githistory text,
   imagefilename VARCHAR(300),
   image_id integer,
 );
@@ -43,6 +44,7 @@ CREATE TABLE users
   description text,
   issuelock integer,
   tasklock integer,
+  active boolean,
 );
 
 CREATE TABLE images
